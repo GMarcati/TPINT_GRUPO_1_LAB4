@@ -4,25 +4,35 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<!-- Las siguientes tres lineas son para incluir bootstrap -->
-	<title>Pantalla principal</title>
+	<title>Nueva transferencia</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 </head>
-
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 1em;">
-  		<span class="navbar-brand mb-0 h1">Banco Sarasa</span>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 1em;">
+  		<span class="navbar-brand mb-0 h1">nombreUsuario</span>
 	</nav>
 
-	<div class="container body-content" style="margin-top: 1em;">
-		<div class="jumbotron">
-		  <h1 class="display-4">Bienvenido a banco Sarasa!</h1>
-		  <p class="lead">Queremos ser tu banco. Un banco para tus ideas.</p>
-		  <hr class="my-4">
-		  <p>El mejor lugar donde pedir tus prestamos con los interes mas bajos y con muchas cuotas.</p>
-		  <a class="btn btn-primary btn-lg" href="Login.jsp" role="button">Ingresar</a>
+	<div class="container body-content"><br />
+		<div class="jumbotron jumbotron-fluid text-center rounded-pill">
+			<div class="container">
+				<h1 class="display-4">Transferir</h1>
+			</div>
+		</div>
+		<hr />
+		<div class="form-group">
+			<label for="exampleInputEmail1">Cuenta destino</label> <input
+				type="text" class="form-control small" Style="width: 500px">
+		</div>
+		<div class="form-group">
+			<label for="exampleInputEmail1">Monto</label> <input type="text"
+				class="form-control small" Style="width: 500px">
+		</div>
+		<a href="Principal.jsp" class="btn btn-primary">Volver</a>
+		<div>
+
+			<br />
 		</div>
 	</div>
 </body>
