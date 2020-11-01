@@ -13,12 +13,13 @@
 </head>
 <body>
 
-
+<jsp:include page="MenuCliente.jsp"></jsp:include>
 <!-- Aca va el form direccionando al servlet -->
 
 <div class="container body-content" style="margin-top: 1em;">
-<div><h2>MOVIMIENTOS: Clientexxxxxxxxx</h2><!-- Ingresar USUARIO SESION --><br></div>
-<label>Busqueda por Montos: </label> 	
+<div><center><h2>MOVIMIENTOS </h2></center><!-- Ingresar USUARIO SESION --></div>
+<div><h4>CUENTA: 99999999</h4><!-- Ingresar USUARIO SESION --></div>
+<label>Busqueda por fecha: </label> 	
 <div class="input-group mb-3">
   <div class="input-group-prepend">
     

@@ -13,6 +13,8 @@
 
 <!-- Aca va el form direccionando al servlet -->
 
+<jsp:include page="MenuCliente.jsp"></jsp:include>
+
 <div class="container body-content" style="margin-top: 1em;">
 <div><h2>ALTA CLIENTE</h2><br></div>
 <div>
