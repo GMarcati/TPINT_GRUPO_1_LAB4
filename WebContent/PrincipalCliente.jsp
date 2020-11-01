@@ -24,7 +24,7 @@
 	 	<input type="button" value="Ir a cuenta" class="btn btn-outline-primary" style="width: 450px; margin:10px"> <br>
 	 	<input type="button" value="Transferir" class="btn btn-outline-primary" style="width: 450px; margin:10px"> <br>
 	 	<input type="button" value="Solicitar préstamo" class="btn btn-outline-primary" style="width: 450px; margin:10px"><br>
-	 	<input type="button" value="Préstamos activos" class="btn btn-outline-primary" style="width: 450px; margin:10px"> <br>
+	 	<input type="button" value="Abonar cuota" class="btn btn-outline-primary" style="width: 450px; margin:10px"> <br>
 	 	<input type="button" value="Mis datos" class="btn btn-outline-primary" style="width: 450px; margin:10px"> <br>
 	 </div>
 </body>
