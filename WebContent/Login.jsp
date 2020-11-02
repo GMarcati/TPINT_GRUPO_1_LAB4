@@ -11,8 +11,10 @@
 <title>Login</title>
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 1em;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 1em;">
+    	<div class="container body-content">
   		<span class="navbar-brand mb-0 h1">Banco Sarasa</span>
+  		</div>
 	</nav>
 
         <div class="container body-content">

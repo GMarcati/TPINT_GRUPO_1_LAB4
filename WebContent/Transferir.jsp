@@ -11,7 +11,12 @@
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 1em;">
+		<div class="container body-content">
   		<span class="navbar-brand mb-0 h1">nombreUsuario</span>
+  		<span class="navbar-text">
+   	   	<a class="nav-item" href="PrincipalCliente.jsp">Menu cliente</a>
+    	</span>
+  		</div>
 	</nav>
 
 	<div class="container body-content"><br />
@@ -22,18 +27,22 @@
 		</div>
 		<hr />
 		<div class="form-group">
-			<label for="exampleInputEmail1">Cuenta destino</label> <input
+			<label for="exampleInputEmail1">Transfiriendo desde:</label> <input
 				type="text" class="form-control small" Style="width: 500px">
 		</div>
 		<div class="form-group">
-			<label for="exampleInputEmail1">Monto</label> <input type="text"
+			<label for="exampleInputEmail1">CBU destino:</label> <input
+				type="text" class="form-control small" Style="width: 500px">
+		</div>
+		<div class="form-group">
+			<label for="exampleInputEmail1">Monto:</label> <input type="text"
 				class="form-control small" Style="width: 500px">
 		</div>
-		<a href="Principal.jsp" class="btn btn-primary">Volver</a>
-		<div>
+		<a href="Transferir.jsp" class="btn btn-primary">Transferir</a>
+		
 
 			<br />
-		</div>
+		
 	</div>
 </body>
 </html>

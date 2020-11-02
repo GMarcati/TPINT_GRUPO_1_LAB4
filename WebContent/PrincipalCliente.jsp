@@ -11,21 +11,30 @@
 </head>
 
 <body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 1em;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 1em;">
+    	<div class="container body-content">
   		<span class="navbar-brand mb-0 h1">nombreUsuario</span>
+  		 <span class="navbar-text">
+   	   	<a class="nav-item" href="#">Cerrar sesion</a>
+    	</span>
+  		</div>
 	</nav>
 	
+	<div class="container body-content" style="margin-top: 1em;">
 	<h2 style="margin-left:70px; margin-top: 50px">
 		Banco Sarasa,<br>
 		SU banco.
 	</h2> <br>
 	
 	 <div style="margin-left: 40px">
-	 	<input type="button" value="Ir a cuenta" class="btn btn-outline-primary" style="width: 450px; margin:10px"> <br>
-	 	<input type="button" value="Transferir" class="btn btn-outline-primary" style="width: 450px; margin:10px"> <br>
-	 	<input type="button" value="Solicitar préstamo" class="btn btn-outline-primary" style="width: 450px; margin:10px"><br>
-	 	<input type="button" value="Abonar cuota" class="btn btn-outline-primary" style="width: 450px; margin:10px"> <br>
-	 	<input type="button" value="Mis datos" class="btn btn-outline-primary" style="width: 450px; margin:10px"> <br>
+	 	<a href="ListaCuentasCliente.jsp" class="btn btn-outline-primary" style="width: 450px; margin:10px">Cuentas</a> <br>
+	 	<a href="Transferir.jsp" class="btn btn-outline-primary" style="width: 450px; margin:10px">Transferir</a> <br>
+	 	<a href="SolicitarPrestamo.jsp" class="btn btn-outline-primary" style="width: 450px; margin:10px">Solicitar préstamo</a> <br>
+	 	<a href="ListaPrestamosCliente.jsp" class="btn btn-outline-primary" style="width: 450px; margin:10px">Ver préstamos adquiridos</a> <br>
+	 	<a href="DatosPersonales.jsp" class="btn btn-outline-primary" style="width: 450px; margin:10px">Mis datos</a> <br>
 	 </div>
+	 </div>
+	 
+	 
 </body>
 </html>

@@ -13,14 +13,26 @@
 
 <!-- Aca va el form direccionando al servlet -->
 
-<jsp:include page="MenuCliente.jsp"></jsp:include>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container body-content">
+		<span class="navbar-brand mb-0 h1">Banco Sarasa</span>
+        
+    	<span class="navbar-text">
+   	   	<a class="nav-item" href="PrincipalAdministrador.jsp">Menu admin</a>
+    	</span>
+  		</div>
+  		
+  
+</nav>
+
 
 <div class="container body-content" style="margin-top: 1em;">
 <div><h2>ALTA CLIENTE</h2><br></div>
 <div>
  
     
-  
+  <label>Usuario: </label><input type="text" name="txtUsuario" class="form-control" placeholder="Ej: THerrera " aria-label="Ej: THerrera" aria-describedby="basic-addon1"><br>
+  <label>Constraseña: </label><input type="text" name="txtPass" class="form-control" placeholder="Ej: b4nc0s4r4s4 " aria-label="Ej: b4nc0s4r4s4" aria-describedby="basic-addon1"><br>
   <label>DNI: </label><input type="text" name="txtDni" class="form-control" placeholder="Ej: 25358754 - ingrese el dni sin puntos " aria-label="Ej: 25358754 - ingrese el dni sin puntos" aria-describedby="basic-addon1"><br>
   <label>CUIL: </label><input type="text" name="txtCuil" class="form-control" placeholder="Ej: 30253587542 - ingreso el CUIL sin barra " aria-label="Ej: 30253587542 - ingreso el CUIL sin barra" aria-describedby="basic-addon1"><br>
   <label>Nombre: </label><input type="text" name="txtNombre" class="form-control" placeholder="Ej: Pepito" aria-label="Ej: Pepito" aria-describedby="basic-addon1"><br>
