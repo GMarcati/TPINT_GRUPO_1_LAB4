@@ -14,7 +14,7 @@ public class Conexion
 		try
 		{
 			Class.forName("com.mysql.jdbc.Driver");
-			this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/agenda","root","root");
+			this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/ejemplolab4","root","root");
 			this.connection.setAutoCommit(false);
 		}
 		catch(Exception e)
@@ -22,7 +22,6 @@ public class Conexion
 			e.printStackTrace();
 		}
 	}
-	
 	
 	public static Conexion getConexion()   
 	{								

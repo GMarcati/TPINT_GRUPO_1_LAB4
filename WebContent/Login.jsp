@@ -10,15 +10,16 @@
 
 <title>Login</title>
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 1em;">
     	<div class="container body-content">
-  		<span class="navbar-brand mb-0 h1">Banco Sarasa</span>
+  			<span class="navbar-brand mb-0 h1">Banco Sarasa</span>
   		</div>
 	</nav>
 
-        <div class="container body-content">
-            <br />
+	<form action="servletLogin" method="get">
+		<div class="container body-content"> <br />
             <div class="jumbotron jumbotron-fluid text-center rounded-pill">
                 <div class="container">
                     <h1 class="display-4">Iniciar sesión</h1>
@@ -27,18 +28,15 @@
             <hr />
             <div class="form-group">
                 <label for="exampleInputEmail1">Usuario</label>
-                <input type="text" class="form-control small" Style="width: 500px">
+                <input type="text" name="txtUsuario" class="form-control small" Style="width: 500px">
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Contraseña</label>
-                <input type="password" class="form-control" Style="width: 500px">
+                <input type="password" name="txtContra" class="form-control" Style="width: 500px">
             </div>
-            <a href="Principal.jsp" class="btn btn-primary">Volver al inicio</a>
-            <div>
-
-                <br />
-			</div>
-			</div>
-
+            <input type="submit" value="Ingresar" name="btnIngresar">
+		</div>
+	</form>
+        
 </body>
 </html>

@@ -1,7 +1,9 @@
-/dao/
 /daoImpl/
-/entidad/
-/excepcion/
+/Negocio/
+/Dominio/
+/Excepciones/
+/Servlet/
+/dominio/
+/excepciones/
 /negocio/
-/negocioImpl/
-/presentacion/
+/servlet/
