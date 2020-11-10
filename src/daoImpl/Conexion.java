@@ -2,51 +2,76 @@ package daoImpl;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Conexion 
 {
-	public static Conexion instancia;
-	private Connection connection;
+	private String host = "jdbc:mysql://localhost:3306/";
+	private String user = "root";
+	private String pass = "root";
+	private String dbName = "tpintegrador_bd";
+
+	protected Connection connection;
 	
-	private Conexion()
+	public Connection Open()
 	{
 		try
 		{
 			Class.forName("com.mysql.jdbc.Driver");
-			this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/ejemplolab4","root","root");
-			this.connection.setAutoCommit(false);
+			this.connection = DriverManager.getConnection(host+dbName, user, pass);
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
-	}
-	
-	public static Conexion getConexion()   
-	{								
-		if(instancia == null)
-		{
-			instancia = new Conexion();
-		}
-		return instancia;
-	}
-
-	public Connection getSQLConexion() 
-	{
 		return this.connection;
 	}
 	
-	public void cerrarConexion()
+	public ResultSet query(String query)
 	{
-		try 
+		Statement st;
+		ResultSet rs=null;
+		try
 		{
-			this.connection.close();
+			st= connection.createStatement();
+			rs= st.executeQuery(query);
 		}
-		catch (SQLException e) 
+		catch(SQLException e)
 		{
 			e.printStackTrace();
 		}
-		instancia = null;
+		return rs;
+	}
+	
+	public boolean execute(String query)
+	{
+		Statement st;
+		boolean save = true;
+		try {
+			st = connection.createStatement();
+		    st.executeUpdate(query);
+		}
+		catch(SQLException e)
+		{
+			save = false;
+			e.printStackTrace();
+		}
+		return save;
+	}
+	
+	public boolean close()
+	{
+		boolean ok=true;
+		try {
+			connection.close();
+		}
+		catch(Exception e)
+		{
+			ok= false;
+			e.printStackTrace();
+		}
+		return ok;
 	}
 }
