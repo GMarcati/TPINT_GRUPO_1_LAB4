@@ -8,7 +8,7 @@ public interface CuentaNeg {
 
 	//public List<Cuenta> obtenerTodos();
 	//public Cuenta obtenerUno(int id);
-	public boolean insertar(Cuenta cat);
+	public boolean insertar(Cuenta cuenta);
 	//public boolean editar(Cuenta cat);
 	//public boolean borrar(int id);
 	

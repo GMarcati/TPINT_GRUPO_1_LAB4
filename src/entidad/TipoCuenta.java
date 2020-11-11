@@ -13,6 +13,12 @@ public class TipoCuenta {
 
 
 
+		public TipoCuenta() {
+			
+		}
+
+
+
 		public int getIdTipoCuenta() {
 			return idTipoCuenta;
 		}

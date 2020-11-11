@@ -20,6 +20,15 @@
   		
   		
 	</nav>
+	
+	 	<%
+		if (request.getAttribute("estadoCuenta") != null) {
+	%>
+		<script>alert("Login realizado con exito")</script>
+	<%
+		}
+	%>
+	
 	<div class="container body-content" style="margin-top: 1em;">
 	<h2 style="margin-left:70px; margin-top: 50px">
 	Bienvenido admin,<br>
