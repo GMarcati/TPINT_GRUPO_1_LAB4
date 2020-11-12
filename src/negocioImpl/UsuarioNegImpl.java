@@ -9,21 +9,24 @@ public class UsuarioNegImpl implements UsuarioNeg{
 	private UsuarioDao usuarioDao = new UsuarioDaoImpl();
 	
 	
-	public UsuarioNegImpl(UsuarioDao usuarioDao) {
-		
+	public UsuarioNegImpl(UsuarioDao usuarioDao) 
+	{
 		this.usuarioDao = usuarioDao;
+	}
+	
+	public UsuarioNegImpl() 
+	{
 		
 	}
 	
-	public UsuarioNegImpl() {
-		
-		
-	}
-	
-	public boolean ingresar(String nombre, String apellido) {
-		
+	public boolean ingresar(String nombre, String apellido) 
+	{
 		return usuarioDao.ingresar(nombre, apellido);
-		
+	}
+	
+	public boolean altaUsuario()
+	{
+		return false;
 	}
 	
 }

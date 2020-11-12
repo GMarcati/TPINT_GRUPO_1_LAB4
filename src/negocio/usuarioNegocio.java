@@ -54,4 +54,11 @@ public class usuarioNegocio
 			return resultado;
 		}
 	}
+	
+	//METODO PARA AGREGAR EL USUARIO A LA BASE DE DATOS
+	public boolean altaUsuario()
+	{
+		return true;
+	}
+	
 }

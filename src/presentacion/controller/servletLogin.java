@@ -27,8 +27,6 @@ public class servletLogin extends HttpServlet
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-
-		int filas=1;
 		boolean estado=true;
 				
 		if(request.getParameter("btnIngresar")!=null) //si se presiono el boton ingresar en el login

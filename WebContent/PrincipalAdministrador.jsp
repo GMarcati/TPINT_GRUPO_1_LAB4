@@ -12,16 +12,12 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 1em;">
     	<div class="container body-content">
-  		<span class="navbar-brand mb-0 h1">Banco Sarasa</span>
-  		<span class="navbar-text">
-   	   	<a class="nav-item" href="#">Cerrar sesion</a>
-    	</span>
+  			<span class="navbar-brand mb-0 h1">Banco Sarasa</span>
+  				<span class="navbar-text"><a class="nav-item" href="#">Cerrar sesion</a></span>
   		</div>
-  		
-  		
 	</nav>
 	
-	 	<%
+	<%
 		if (request.getAttribute("estadoCuenta") != null) {
 	%>
 		<script>alert("Login realizado con exito")</script>
@@ -30,22 +26,21 @@
 	%>
 	
 	<div class="container body-content" style="margin-top: 1em;">
-	<h2 style="margin-left:70px; margin-top: 50px">
-	Bienvenido admin,<br>
-	¿Que desea realizar?</h2>
-	 <br>
+		<h2 style="margin-left:70px; margin-top: 50px">
+			Bienvenido admin,<br>
+			¿Que desea realizar?
+		</h2><br>
 	 
-	 <div style="margin-left: 40px">
-	 	<a href="AltaCliente.jsp" class="btn btn-outline-primary" style="width: 450px; margin:10px">Alta cliente</a> <br>
-	 	<a href="ListaEliminarClientes.jsp" class="btn btn-outline-primary" style="width: 450px; margin:10px">Modificar/Dar de baja cliente</a> <br>
-		<a href="AltaCuenta.jsp" class="btn btn-outline-primary" style="width: 450px; margin:10px">Alta cuenta</a> <br>
-		<a href="ListaEliminarCuentas.jsp" class="btn btn-outline-primary" style="width: 450px; margin:10px">Modificar/Dar de baja cuenta</a> <br>
-		<a href="AsignarCuentaACliente.jsp" class="btn btn-outline-primary" style="width: 450px; margin:10px">Asignar cuenta a cliente</a> <br>
-		<a href="ListaPrestamos.jsp" class="btn btn-outline-primary" style="width: 450px; margin:10px">Autorizar préstamos</a> <br>
-		<a href="VerInformes.jsp" class="btn btn-outline-primary" style="width: 450px; margin:10px">Ver informes</a> <br>
-		
-	 </div>
-	 </div>
+		<div style="margin-left: 40px">
+		 	<a href="AltaCliente.jsp" class="btn btn-outline-primary" style="width: 450px; margin:10px">Alta cliente</a> <br>
+		 	<a href="ListaEliminarClientes.jsp" class="btn btn-outline-primary" style="width: 450px; margin:10px">Modificar/Dar de baja cliente</a> <br>
+			<a href="AltaCuenta.jsp" class="btn btn-outline-primary" style="width: 450px; margin:10px">Alta cuenta</a> <br>
+			<a href="ListaEliminarCuentas.jsp" class="btn btn-outline-primary" style="width: 450px; margin:10px">Modificar/Dar de baja cuenta</a> <br>
+			<a href="AsignarCuentaACliente.jsp" class="btn btn-outline-primary" style="width: 450px; margin:10px">Asignar cuenta a cliente</a> <br>
+			<a href="ListaPrestamos.jsp" class="btn btn-outline-primary" style="width: 450px; margin:10px">Autorizar préstamos</a> <br>
+			<a href="VerInformes.jsp" class="btn btn-outline-primary" style="width: 450px; margin:10px">Ver informes</a> <br>
+		</div>
+	</div>
 <!-- Desde aca vamos a poder redireccionar para realizar ABM de clientes y en esta pagina vamos a poder ver el listado-->
 	
 

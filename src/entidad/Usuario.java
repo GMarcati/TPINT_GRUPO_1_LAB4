@@ -1,15 +1,15 @@
 package entidad;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Usuario 
 {
-	private int idUsuario;
+	private long idUsuario;
 	private String usuario;
 	private String contrasenia;
 	private TipoUsuario tipoUsuario;
-	private int dni;
-	private int cuil;
+	private String dni;
+	private String cuil;
 	private String nombre;
 	private String apellido;
 	private String sexo;
@@ -23,12 +23,12 @@ public class Usuario
 	private Estado estado;
 	
 	//getters y setters
-	public int getIdUsuario() 
+	public long getIdUsuario() 
 	{
 		return idUsuario;
 	}
 	
-	public void setIdUsuario(int idUsuario) 
+	public void setIdUsuario(long idUsuario) 
 	{
 		this.idUsuario = idUsuario;
 	}
@@ -63,22 +63,22 @@ public class Usuario
 		this.tipoUsuario = tipoUsuario;
 	}
 	
-	public int getDni() 
+	public String getDni() 
 	{
 		return dni;
 	}
 	
-	public void setDni(int dni)
+	public void setDni(String dni)
 	{
 		this.dni = dni;
 	}
 	
-	public int getCuil() 
+	public String getCuil() 
 	{
 		return cuil;
 	}
 	
-	public void setCuil(int cuil) 
+	public void setCuil(String cuil) 
 	{
 		this.cuil = cuil;
 	}
@@ -194,7 +194,7 @@ public class Usuario
 	}
 
 	//constructores
-	public Usuario(int idUsuario, String usuario, String contrasenia, TipoUsuario tipoUsuario, int dni, int cuil,
+	public Usuario(int idUsuario, String usuario, String contrasenia, TipoUsuario tipoUsuario, String dni, String cuil,
 			String nombre, String apellido, String sexo, Date fechaNac, String direccion, Localidad localidad,
 			Nacionalidad nacionalidad, Provincia provincia, String mail, String telefono, Estado estado)
 	{
