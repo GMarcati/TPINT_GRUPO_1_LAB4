@@ -35,10 +35,8 @@
                 <input type="password" name="txtContra" class="form-control" Style="width: 500px">
             </div>
             
-            
             <input class="btn btn-primary btn-lg" type="submit" value="Ingresar" name="btnIngresar">
 		</div>
 	</form>
-        
 </body>
 </html>

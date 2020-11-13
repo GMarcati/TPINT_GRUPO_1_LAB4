@@ -111,6 +111,5 @@
 			<input class="btn btn-primary" style="margin-bottom: 20px" type="submit" name="btnAceptar" value="Aceptar">
 		</div>
 	</form>
-
 </body>
 </html>

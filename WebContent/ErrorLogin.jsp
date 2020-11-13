@@ -11,30 +11,25 @@
 <title>Error Login</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 1em;">
-    	<div class="container body-content">
-  			<span class="navbar-brand mb-0 h1">Banco Sarasa</span>
-  		</div>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark"style="margin-bottom: 1em;">
+		<div class="container body-content">
+			<span class="navbar-brand mb-0 h1">Banco Sarasa</span>
+		</div>
 	</nav>
-	
-	
-        <div class="container body-content">
-            <br />
-            <div class="jumbotron jumbotron-fluid  text-center rounded-pill">
-                <div class="container">
-                    <h1 class="display-4">ERROR!</h1>
-                    <p><%= session.getAttribute("Error") %></p>
-                    <a href="Login.jsp" class="btn btn-primary">Volver al login</a>
-                </div>
 
-            </div>
-            <hr />
-            <footer>
-                <p>&copy; 2020 - Banco Sarasa</p>
-            </footer>
-        </div>
+	<div class="container body-content"><br />
+		<div class="jumbotron jumbotron-fluid  text-center rounded-pill">
+			<div class="container">
+				<h1 class="display-4">ERROR!</h1>
+				<p><%= session.getAttribute("Error") %></p>
+				<a href="Login.jsp" class="btn btn-primary">Volver al login</a>
+			</div>
 
-
-
+		</div>
+		<hr />
+		<footer>
+			<p>&copy; 2020 - Banco Sarasa</p>
+		</footer>
+	</div>
 </body>
 </html>
