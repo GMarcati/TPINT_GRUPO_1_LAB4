@@ -1,3 +1,8 @@
+<%@page import="entidad.Cuenta"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -11,7 +16,16 @@
 
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<%
+		List<Cuenta> listaC =  new ArrayList<Cuenta>();
+		if (request.getAttribute("listaCuenta") != null) {
+			System.out.print("pasa");
+			listaC = (ArrayList<Cuenta>) request.getAttribute("listaCuenta");
+		}
+	%>
+
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container body-content">
 		<span class="navbar-brand mb-0 h1">Banco Sarasa</span>
         
@@ -19,17 +33,22 @@
    	   	<a class="nav-item" href="PrincipalAdministrador.jsp">Menu admin</a>
     	</span>
   		</div>
-  		
-  
-</nav>
+	</nav>
+		
+	
+
+<form action="servletCuenta" method="get">
+
 <div class="container-fluid" style="margin-top: 1em;">
-<div><h2>LISTADO DE CUENTAS</h2><!-- Ingresar USUARIO SESION --><br></div>
-<label>Busqueda por nro de cuenta: </label> 	
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-  </div>
+	<div><h2>LISTADO DE CUENTAS</h2><!-- Ingresar USUARIO SESION --><br></div>
+	<label>Busqueda por TODAS LAS CUENTAS: </label><input type="submit" name="btnTodasCuentas" value="Aceptar"><br>
+
+	<label>Busqueda por nro de cuenta: </label> 	
+		<div class="input-group mb-3">
+  			<div class="input-group-prepend">
+ 	</div>
 	<input type="text" name="txtNroCuenta" class="form-control" placeholder="Ej: 213213242" aria-label="Username" aria-describedby="basic-addon1">
-	<input type="submit" name="btnAceptar" value="Aceptar">
+	<input type="submit" name="btnPorCuenta" value="Aceptar">
 </div><br>
 
 <label>Busqueda por tipo de cuenta: </label> 	
@@ -37,7 +56,7 @@
   <div class="input-group-prepend">
   </div>
 	<input type="text" name="txtTipoCuenta" class="form-control" placeholder="Ej: Cuenta Corriente" aria-label="Username" aria-describedby="basic-addon1">
-	<input type="submit" name="btnAceptar" value="Aceptar">
+	<input type="submit" name="btnTipoCuenta" value="Aceptar">
 </div><br>
 
 
@@ -46,9 +65,11 @@
   <div class="input-group-prepend">
   </div>
 	<input type="text" name="txtCBU" class="form-control" placeholder="Ej: 20252525257" aria-label="Username" aria-describedby="basic-addon1">
-	<input type="submit" name="btnAceptar" value="Aceptar">
+	<input type="submit" name="btnPorCBU" value="Aceptar">
 </div><br>
-
+</form>
+ 
+	
 <table class="table">
   <thead>
     <tr>
@@ -58,44 +79,38 @@
       <th scope="col">FechaCreacion</th>
       <th scope="col">CBU</th>
       <th scope="col">Saldo</th>
+      <th scope="col">Estado</th>
       <th scope="col">Accion</th>
       <th scope="col"></th>
     </tr>
   </thead>
+  
+  		<%	
+			for(Cuenta c : listaC) {
+		%>
+  
   <tbody>
     <tr>
-      <th scope="row">1</th>
-      <td>213213242</td>
-      <td>Cuenta Corriente</td>
-      <td>25/02/1985</td>
-      <td>20252525257</td>
-      <td>$25000</td>
-      <td><a href="ModificarCuenta.jsp?id" class="btn btn-primary" >Modificar</a> <br></td>
-      <td><a href="ListaEliminarCuentas.jsp?id" class="btn btn-danger" >Eliminar</a> <br></td>
+     		 <td><%=c.getIdCuenta()%></td>
+     		 <td><%=c.getNumeroCuenta()%></td>
+     		 <td><%=c.getTipoCuenta().getDescripcion()%></td>
+     		 <td><%=c.getFechaCreacion()%></td>
+     		 <td><%=c.getCBU()%></td>
+     		 <td><%=c.getSaldo()%></td>
+     		 <td><%=c.getEstado().getDescripcion()%></td>
+     		 
+     		 <td><a href="ModificarCuenta.jsp?id" class="btn btn-primary" >Modificar</a> <br></td>
+     		 <td><a href="ListaEliminarCuentas.jsp?id" class="btn btn-danger" >Eliminar</a> <br></td>
+
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>2245242</td>
-      <td>Cuenta Sueldo</td>
-      <td>10/05/1995</td>
-      <td>20252525257</td>
-      <td>$50000</td>
-      <td><a href="ModificarCuenta.jsp?id" class="btn btn-primary" >Modificar</a> <br></td>
-      <td><a href="ListaEliminarCuentas.jsp?id" class="btn btn-danger" >Eliminar</a> <br></td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>5050505</td>
-      <td>Cuenta Fondo Desempleo</td>
-      <td>28/03/2010</td>
-      <td>20252525257</td>
-      <td>$70000</td>
-      <td><a href="ModificarCuenta.jsp?id" class="btn btn-primary" >Modificar</a> <br></td>
-      <td><a href="ListaEliminarCuentas.jsp?id" class="btn btn-danger" >Eliminar</a> <br></td>
-    </tr>
+    	<%
+			}
+		%>
+    
   </tbody>
 </table>
 </div>
+
 
 </body>
 </html>

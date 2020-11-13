@@ -1,8 +1,9 @@
 package presentacion.controller;
 
 import java.io.IOException;
-import java.sql.Date;
+//import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,10 +12,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.CuentaDao;
 import entidad.Cuenta;
 import entidad.TipoCuenta;
 import negocio.CuentaNeg;
 import negocioImpl.CuentaNegImpl;
+
 
 /**
  * Servlet implementation class servletCuenta
@@ -38,11 +41,9 @@ public class servletCuenta extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
+		//*********************** INSERTAR CUENTA**************************************//
 		if(request.getParameter("btnAceptar")!=null) {
 			
-			
-				
 				Cuenta cuenta = new Cuenta();
 				boolean estado=true;
 				
@@ -65,10 +66,13 @@ public class servletCuenta extends HttpServlet {
 		    	RequestDispatcher dispatcher = request.getRequestDispatcher("/AltaCuenta.jsp");
 				dispatcher.forward(request, response);
 				
-				
-			
-			
-			
+		//*********************** LISTAR CUENTA**************************************//		
+		if(request.getParameter("btnTodasCuentas")!=null)
+			{	
+					request.setAttribute("listaCuenta", cuentaNeg.ListarCuentas());	
+					RequestDispatcher dispatcher1 = request.getRequestDispatcher("/ListaEliminarCuentas.jsp");
+					dispatcher1.forward(request, response);
+			}
 		}
 		
 		
