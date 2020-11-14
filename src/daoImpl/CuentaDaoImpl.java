@@ -32,14 +32,14 @@ public class CuentaDaoImpl implements CuentaDao{
 		List<Cuenta> ListadoCuenta = new ArrayList<Cuenta>();
 		 try
 		 {
-			 String query = "SELECT cuentas.idCuenta, cuentas.numeroCuenta, tipoCuentas.idTipoCuenta, tipoCuentas.descripcion, cuentas.fechaCreacion, cuentas.CBU, cuentas.saldo, estados.idEstado, estados.descripcion FROM cuentas inner join tipoCuentas on ( cuentas.idTipoCuenta = tipoCuentas.idTipoCuenta ) inner join on ( cuentas.idEstado = estados.idEstado )"; 
-			 //String query = "Select idCuenta, numeroCuenta, CBU, saldo from cuentas"; 
+			 String query = "SELECT cuentas.idCuenta, cuentas.numeroCuenta, tipoCuentas.idTipoCuenta, tipoCuentas.descripcion, cuentas.saldo, cuentas.idEstado FROM cuentas inner join tipoCuentas on cuentas.idTipoCuenta=tipoCuentas.idTipoCuenta where cuentas.idEstado='1'"; 
+			 //String query = "SELECT cuentas.idCuenta, cuentas.numeroCuenta, cuentas.saldo FROM cuentas"; 
 			 ResultSet rs = cn.query(query);
 			 while(rs.next())
 			 {
 				 	Cuenta x = new Cuenta();
 				 	x.setIdCuenta(rs.getLong("cuentas.idCuenta"));
-				 	x.setNumeroCuenta(rs.getLong("cuenta.numeroCuenta"));
+				 	x.setNumeroCuenta(rs.getLong("cuentas.numeroCuenta"));
 				 	TipoCuenta tCuenta = new TipoCuenta();
 				 	tCuenta.setIdTipoCuenta(rs.getInt("tipoCuentas.idTipoCuenta"));
 				 	tCuenta.setDescripcion(rs.getString("tipoCuentas.descripcion"));
@@ -57,10 +57,18 @@ public class CuentaDaoImpl implements CuentaDao{
 				 		e.printStackTrace();
 				 	}*/
 				 	
+<<<<<<< Updated upstream
 				 	x.setCBU(rs.getLong("cuentas.CBU"));
 				 	x.setSaldo(rs.getFloat("cuentas.saldo")); //ver
 
 				 	x.setEstado(rs.getBoolean("estado.idEstado"));
+=======
+				 	//x.setCBU(rs.getLong("cuentas.CBU"));
+				 	x.setSaldo(rs.getDouble("cuentas.saldo")); //ver
+	
+				 	x.setEstado(rs.getInt("cuentas.idEstado"));
+		
+>>>>>>> Stashed changes
 				 	ListadoCuenta.add(x);
 			 }
 		 }
@@ -78,13 +86,13 @@ public class CuentaDaoImpl implements CuentaDao{
 
 	
 
-	public Cuenta obtenerUno(int id) {
+	public Cuenta obtenerUno(long id) {
 		cn = new Conexion();
 		cn.Open();
 		Cuenta cue = new Cuenta();
 		try
 		 {
-			String query = "SELECT cuentas.idCuenta, cuentas.numeroCuenta, tipoCuentas.idTipoCuenta, tipoCuentas.descripcion, cuentas.fechaCreacion, cuentas.CBU, cuentas.saldo, estados.idEstado, estados.descripcion FROM cuentas inner join tipoCuentas on ( cuentas.idTipoCuenta = tipoCuentas.idTipoCuenta ) inner join on ( cuentas.idEstado = estados.idEstado )  where estados.descripcion='Falso' && cuentas.idCuenta="+id;
+			String query = "SELECT cuentas.idCuenta, cuentas.numeroCuenta, tipoCuentas.idTipoCuenta, tipoCuentas.descripcion, cuentas.CBU, cuentas.saldo, estados.idEstado, estados.descripcion FROM cuentas inner join tipoCuentas on ( cuentas.idTipoCuenta = tipoCuentas.idTipoCuenta ) inner join on ( cuentas.idEstado = estados.idEstado )  where estados.descripcion='Falso' && cuentas.idCuenta="+id;
 			 ResultSet rs= cn.query(query);
 			 rs.next();
 			 
@@ -109,10 +117,15 @@ public class CuentaDaoImpl implements CuentaDao{
 			 	}*/
 			 	
 			 	x.setCBU(rs.getLong("cuentas.CBU"));
+<<<<<<< Updated upstream
 			 	x.setSaldo(rs.getFloat("cuentas.saldo")); //ver
 
 			 	x.setEstado(rs.getBoolean("estado.idEstado"));
 
+=======
+			 	x.setSaldo(rs.getDouble("cuentas.saldo")); //ver
+			 	x.setEstado(rs.getInt("cuentas.idEstado"));
+>>>>>>> Stashed changes
 			 
 		 }
 		 catch(Exception e)
@@ -173,11 +186,11 @@ public class CuentaDaoImpl implements CuentaDao{
 		return estado;
 	}
 	
-	public boolean borrar(int id) {
+	public boolean borrar(long id) {
 		boolean estado=true;
 		cn = new Conexion();
 		cn.Open();		 
-		String query = "UPDATE cuenta SET estado=0 WHERE idCuenta="+id;
+		String query = "UPDATE cuentas SET idEstado='0' WHERE idCuenta="+id;
 		try
 		 {
 			estado=cn.execute(query);

@@ -9,9 +9,9 @@ public interface CuentaDao {
 
 
 	public List<Cuenta> obtenerTodos();
-	public Cuenta obtenerUno(int id);
+	public Cuenta obtenerUno(long id);
 	public boolean insertar(Cuenta cuenta);
 	public boolean editar(Cuenta cuenta);
-	public boolean borrar(int id);
+	public boolean borrar(long id);
 	
 }

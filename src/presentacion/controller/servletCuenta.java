@@ -65,7 +65,7 @@ public class servletCuenta extends HttpServlet {
 		    	request.setAttribute("estadoCuenta", estado);
 		    	RequestDispatcher dispatcher = request.getRequestDispatcher("/AltaCuenta.jsp");
 				dispatcher.forward(request, response);
-				
+		}
 		//*********************** LISTAR CUENTA**************************************//		
 		if(request.getParameter("btnTodasCuentas")!=null)
 			{	
@@ -77,14 +77,24 @@ public class servletCuenta extends HttpServlet {
 		
 		
 		
-	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		
+		if(request.getParameter("btnEliminar")!=null)
+		{
+			boolean estado=true;
+			Long id = Long.parseLong(request.getParameter("idCuenta").toString()) ;
+			estado=cuentaNeg.borrar(id);
+			
+			request.setAttribute("listaCuenta", cuentaNeg.ListarCuentas());	
+			
+			RequestDispatcher rd = request.getRequestDispatcher("/ListaEliminarCuentas.jsp");   
+	        rd.forward(request, response);
+			
+		}
 		
 	}
 
