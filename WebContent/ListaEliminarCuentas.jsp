@@ -16,14 +16,6 @@
 
 </head>
 <body>
-	<%
-		List<Cuenta> listaC =  new ArrayList<Cuenta>();
-		if (request.getAttribute("listaCuenta") != null) {
-			System.out.print("pasa");
-			listaC = (ArrayList<Cuenta>) request.getAttribute("listaCuenta");
-		}
-	%>
-
 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"  style="margin-bottom: 1em;">
         <div class="container">
@@ -71,7 +63,7 @@
 <form action="servletCuenta" method="get">
 
 <div class="container-fluid" style="margin-top: 5em;">
-	<div><h2>LISTADO DE CUENTAS</h2><!-- Ingresar USUARIO SESION --><br></div>
+	<div><h2>LISTADO DE CUENTAS</h2><<br></div>
 	<label>Busqueda por TODAS LAS CUENTAS: </label><input type="submit" name="btnTodasCuentas" value="Aceptar"><br>
 
 	<label>Busqueda por nro de cuenta: </label> 	
@@ -99,6 +91,14 @@
 	<input type="submit" name="btnPorCBU" value="Aceptar">
 </div><br>
 </form>
+
+ 	<%
+		List<Cuenta> listaC =  new ArrayList<Cuenta>();
+		if (request.getAttribute("listaCuenta") != null) {
+			System.out.print("pasa");
+			listaC = (ArrayList<Cuenta>) request.getAttribute("listaCuenta");
+		}
+	%>
  
 	
 <table class="table">
@@ -107,8 +107,6 @@
       <th scope="col">IdCuenta</th>
       <th scope="col">NroCuenta</th>
       <th scope="col">TipoCuenta</th>
-      <th scope="col">FechaCreacion</th>
-      <th scope="col">CBU</th>
       <th scope="col">Saldo</th>
       <th scope="col">Estado</th>
       <th scope="col">Accion</th>
@@ -116,23 +114,22 @@
     </tr>
   </thead>
   
-  		<%	
+<%	
 			for(Cuenta c : listaC) {
 		%>
   
   <tbody>
     <tr>
-     		 <td><%=c.getIdCuenta()%></td>
+    <form action="servletCuenta" method="post">
+     		 <td><%=c.getIdCuenta()%></td> <input type="hidden" name="idCuenta" value="<%=c.getIdCuenta()%>"> </td>
      		 <td><%=c.getNumeroCuenta()%></td>
-     		 <td><%=c.getTipoCuenta().getDescripcion()%></td>
-     		 <td><%=c.getFechaCreacion()%></td>
-     		 <td><%=c.getCBU()%></td>
+			 <td><%=c.getTipoCuenta().getDescripcion()%></td>
      		 <td><%=c.getSaldo()%></td>
      		 <td><%=c.getEstado()%></td>
      		 
-     		 <td><a href="ModificarCuenta.jsp?id" class="btn btn-primary" >Modificar</a> <br></td>
-     		 <td><a href="ListaEliminarCuentas.jsp?id" class="btn btn-danger" >Eliminar</a> <br></td>
-
+     		 <td><input type="submit" class="btn btn-primary" name="btnModificar" value="Modificar"></td>
+     		 <td><input type="submit" class="btn btn-danger" name="btnEliminar" value="Eliminar"></td>
+	</form>  
     </tr>
     	<%
 			}

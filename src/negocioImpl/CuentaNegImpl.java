@@ -32,7 +32,7 @@ public class CuentaNegImpl implements CuentaNeg {
 	}
 
 	@Override
-	public Cuenta obtenerUno(int id) {
+	public Cuenta obtenerUno(long id) {
 		return cuentaDao.obtenerUno(id);
 	}
 
@@ -42,7 +42,7 @@ public class CuentaNegImpl implements CuentaNeg {
 	}
 
 	@Override
-	public boolean borrar(int id) {
+	public boolean borrar(long id) {
 		return cuentaDao.borrar(id);
 	}
 

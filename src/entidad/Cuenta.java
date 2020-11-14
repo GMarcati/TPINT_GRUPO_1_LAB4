@@ -14,7 +14,7 @@ public class Cuenta {
 		private LocalDate fechaCreacion;
 		private long CBU;
 		private double saldo;
-		private boolean estado;
+		private int estado;
 		
 		public Cuenta() {
 			
@@ -40,8 +40,9 @@ public class Cuenta {
 			return CBU;
 		}
 		
+
 		public Cuenta(long idCuenta, long numeroCuenta, TipoCuenta tipoCuenta, LocalDate fechaCreacion, long cBU,
-				double saldo, boolean estado) {
+				double saldo, int estado) {
 			super();
 			this.idCuenta = idCuenta;
 			this.numeroCuenta = numeroCuenta;
@@ -49,6 +50,21 @@ public class Cuenta {
 			this.fechaCreacion = fechaCreacion;
 			CBU = cBU;
 			this.saldo = saldo;
+			this.estado = estado;
+		}
+
+		@Override
+		public String toString() {
+			return "Cuenta [idCuenta=" + idCuenta + ", numeroCuenta=" + numeroCuenta + ", tipoCuenta=" + tipoCuenta
+					+ ", fechaCreacion=" + fechaCreacion + ", CBU=" + CBU + ", saldo=" + saldo + ", estado=" + estado
+					+ "]";
+		}
+
+		public int getEstado() {
+			return estado;
+		}
+
+		public void setEstado(int estado) {
 			this.estado = estado;
 		}
 
@@ -100,22 +116,7 @@ public class Cuenta {
 			this.saldo = saldo;
 		}
 
-		public boolean getEstado() {
-			return estado;
-		}
 
-		public void setEstado(boolean estado) {
-			this.estado = estado;
-		}
-
-		@Override
-		public String toString() {
-			return "Cuenta [idCuenta=" + idCuenta + ", numeroCuenta=" + numeroCuenta + ", tipoCuenta=" + tipoCuenta
-					+ ", fechaCreacion=" + fechaCreacion + ", CBU=" + CBU + ", saldo=" + saldo + ", estado=" + estado
-					+ "]";
-		}
-		
-		
 		
 		
 		
