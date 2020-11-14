@@ -1,3 +1,9 @@
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="entidad.Usuario"%>
+<%@page import="entidad.Localidad"%>
+<%@page import="entidad.Nacionalidad"%>
+<%@page import="entidad.Provincia"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -11,72 +17,139 @@
 <title>Modificar Cliente</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<div class="container body-content">
-		<span class="navbar-brand mb-0 h1">Banco Sarasa</span>
-        
-    	<span class="navbar-text">
-   	   	<a class="nav-item" href="PrincipalAdministrador.jsp">Menu admin</a>
-    	</span>
-  		</div>
-  		
-  
-</nav>
 
-<div class="container body-content" style="margin-top: 1em;">
+	<%
+		Usuario usuario = new Usuario();
+		if (request.getAttribute("usuarioFiltrado") != null) {
+			usuario = (Usuario)request.getAttribute("usuarioFiltrado");
+		}
+	%>
+			<%
+		List<Nacionalidad> listaNac = new ArrayList<Nacionalidad>();
+		if (request.getAttribute("listaNacionalidad") != null) {
+			listaNac = (List<Nacionalidad>) request.getAttribute("listaNacionalidad");
+		}
+		%>
+		<%
+		List<Provincia> listaProv = new ArrayList<Provincia>();
+		if (request.getAttribute("listaProvincia") != null) {
+			listaProv = (List<Provincia>) request.getAttribute("listaProvincia");
+		}
+		%>
+		<%
+		List<Localidad> listaLocal = new ArrayList<Localidad>();
+		if (request.getAttribute("listaLocalidad") != null) {
+			listaLocal = (List<Localidad>) request.getAttribute("listaLocalidad");
+		}
+		%>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"  style="margin-bottom: 1em;">
+        <div class="container">
+
+			<span class="navbar-brand mb-0 h1">Banco Sarasa</span>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+				<li class="nav-text dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				Menu admin
+				</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="AltaCliente.jsp" >Alta cliente</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="servletUsuario?listadoU">Listar/Modificar/Dar de baja cliente</a> 
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="AltaCuenta.jsp" >Alta cuenta</a> 
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="ListaEliminarCuentas.jsp" >Listar/Modificar/Dar de baja cuenta</a> 
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="AsignarCuentaACliente.jsp">Asignar cuenta a cliente</a> 
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="ListaPrestamos.jsp">Autorizar préstamos</a> 
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="VerInformes.jsp" >Ver informes</a> 
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="Logoff.jsp" >Cerrar sesion</a> 
+					</div>
+				</li>
+						 					
+                </ul>
+
+
+            </div>
+        </div>
+
+    </nav>
+
+<form method="get" action="servletUsuario">
+<div class="container body-content" style="margin-top: 5em;">
 <div><h2>MODIFICAR CLIENTE</h2><br></div>
 <div>
  
     
-  <label>Constraseña: </label><input type="text" name="txtPass" class="form-control" placeholder="Ej: b4nc0s4r4s4 " aria-label="Ej: b4nc0s4r4s4" aria-describedby="basic-addon1"><br>
-  <label>DNI: </label><input type="text" name="txtDni" class="form-control" placeholder="Ej: 25358754 - ingrese el dni sin puntos " aria-label="Ej: 25358754 - ingrese el dni sin puntos" aria-describedby="basic-addon1"><br>
-  <label>CUIL: </label><input type="text" name="txtCuil" class="form-control" placeholder="Ej: 30253587542 - ingreso el CUIL sin barra " aria-label="Ej: 30253587542 - ingreso el CUIL sin barra" aria-describedby="basic-addon1"><br>
-  <label>Nombre: </label><input type="text" name="txtNombre" class="form-control" placeholder="Ej: Pepito" aria-label="Ej: Pepito" aria-describedby="basic-addon1"><br>
-  <label>Apellido: </label><input type="text" name="txtApellido" class="form-control" placeholder="Ej: Cibrian" aria-label="Ej: Cibrian" aria-describedby="basic-addon1"><br>
-  <fieldset class="form-group">
-    <div class="row">
-      <legend class="col-form-label col-sm-2 pt-0">Sexo: </legend>
-      <div class="col-sm-10">
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="gridRadios" id="RdSexo" value="option1" checked>
-          <label class="form-check-label" for="gridRadios1">
-            Masculino
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="gridRadios" id="RdSexo" value="option2">
-          <label class="form-check-label" for="gridRadios2">
-            Femenino
-          </label>
-        </div>
-      </div>
-    </div>
-  </fieldset>
-   <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Nacionalidad: 	</label>
-  <select class="custom-select my-1 mr-sm-2" id="cbxNacionalidad">
-    <option selected>Eliga el Pais...</option>
-    <option value="1">Argentina</option>
-    <option value="2">Brasil</option>
-    <option value="3">Bolivia</option>
-    <option value="4">Chile</option>
-    <option value="5">Paraguay</option>
-    <option value="6">Uruguay</option>
-    <option value="7">Colombia</option>
-    <option value="8">Ecuador</option>
-    <option value="9">Mexico</option>
-    <option value="10">EEUU</option>
-    <option value="11">Canada</option>
-  </select>
-        
-  <label>Fecha de Nacimiento</label><input type="text" name="txtFechaNac" class="form-control" placeholder="Ej: 20/05/1890" aria-label="Ej: 20/05/1890" aria-describedby="basic-addon1"><br>
-  <label>Direccion</label><input type="text" name="txtDireccion" class="form-control" placeholder="Ej: Av. Libertador 2254" aria-label="Ej: Av. Libertador 2254" aria-describedby="basic-addon1"><br>
-  <label>Localidad</label><input type="text" name="txtLocalidad" class="form-control" placeholder="Ej: General Pacheco" aria-label="Ej: General Pacheco" aria-describedby="basic-addon1"><br>
-  <label>Provincia: </label><input type="text" name="txtProvincia" class="form-control" placeholder="Ej: Buenos Aires" aria-label="Ej: Buenos Aires" aria-describedby="basic-addon1"><br>
-  <label>Mail: </label><input type="text" name="txtMail" class="form-control" placeholder="Ej: pepitocibrian@gmail.com" aria-label="Ej: pepitocibrian@gmail.com" aria-describedby="basic-addon1"><br>
-  <label>Telefono: </label><input type="text" name="txtTelefono" class="form-control" placeholder="Ej: 116620458578" aria-label="Ej: 116620458578" aria-describedby="basic-addon1"><br>
-  <input type="submit" name="btnAceptar" value="Aceptar">
+  <label>Constraseña: </label><input type="text" name="txtPass" class="form-control" value="<%=usuario.getContrasenia()%>" ><br>
+  <label>DNI: </label><input type="text" name="txtDni" class="form-control" value="<%=usuario.getDni()%>"><br>
+  <label>CUIL: </label><input type="text" name="txtCuil" class="form-control" value="<%=usuario.getCuil()%>"><br>
+  <label>Nombre: </label><input type="text" name="txtNombre" class="form-control" value="<%=usuario.getNombre()%>"><br>
+  <label>Apellido: </label><input type="text" name="txtApellido" class="form-control" value="<%=usuario.getApellido()%>"><br>
+  <label>Sexo: </label><input type="text" name="txtSexo" class="form-control" value="<%=usuario.getSexo()%>"><br>
+  
+  <label>Nacionalidad:</label>
+  <select class="form-control">
+  
+  <% 
+  
+  for(Nacionalidad nacionalidad : listaNac){    
+   %>
+   <option value="<%=nacionalidad.getIdNacionalidad() %>"> <%=nacionalidad.getDescripcion() %> </option>
+   <%
+   } %>
+  
+  
+  </select><br>
+  
+    <label>Provincia:</label>
+  <select class="form-control">
+  
+  <% 
+  
+  for(Provincia provincia : listaProv){    
+   %>
+   <option value="<%=provincia.getIdProvincia() %>"> <%=provincia.getDescripcion() %> </option>
+   <%
+   } %>
+  
+  
+  </select><br>
+    <label>Localidad:</label>
+  <select class="form-control">
+  
+  <% 
+  
+  for(Localidad localidad : listaLocal){    
+   %>
+   <option value="<%=localidad.getIdLocalidad() %>"> <%=localidad.getDescripcion() %> </option>
+   <%
+   } %>
+  
+  
+  </select><br>
+  
+  <label>Fecha de Nacimiento</label><input type="text" name="txtFechaNac" class="form-control" value="<%=usuario.getFechaNac()%>"><br>
+  <label>Direccion</label><input type="text" name="txtDireccion" class="form-control" value="<%=usuario.getDireccion()%>"><br>
+  <label>Mail: </label><input type="text" name="txtMail" class="form-control"  value="<%=usuario.getMail()%>"><br>
+  <label>Telefono: </label><input type="text" name="txtTelefono" class="form-control" value="<%=usuario.getTelefono()%>"><br>
+  <input type="submit" name="btnAceptar" value="Aceptar" class="btn btn-primary">
  </div>
   </div>
+  </form>
+  
+<div style="margin-top: 5em;">
+
+</div>
 
 </body>
 </html>

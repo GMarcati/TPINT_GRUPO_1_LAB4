@@ -1,3 +1,9 @@
+<%@page import="entidad.Usuario"%>
+<%@page import="entidad.Localidad"%>
+<%@page import="entidad.Nacionalidad"%>
+<%@page import="entidad.Provincia"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -17,130 +23,156 @@
 	integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
 	crossorigin="anonymous"></script>
 
+<!-- DATATABLE -->
+<!-- CSS para datatable -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+<!-- Javascript para datatable -->
+<script src="https://code.jquery.com/jquery-3.5.1.js">  </script>
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">  </script>
+ 
+ <script>
+ $(document).ready( function () {
+ $('#table_id').DataTable({
+  "language": {
+                "url": "http://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+            }
+ 
+ }
+ 
+ );
+
+ } );
+ </script>
+
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	<div class="container body-content">
-		<span class="navbar-brand mb-0 h1">Banco Sarasa</span> <span
-			class="navbar-text"> <a class="nav-item"
-			href="PrincipalAdministrador.jsp">Menu admin</a>
-		</span>
-	</div>
+
+	<%
+		List<Usuario> listaU = new ArrayList<Usuario>();
+		if (request.getAttribute("listaUsuario") != null) {
+			listaU = (List<Usuario>) request.getAttribute("listaUsuario");
+		}
+	%>
+	
+	<%
+	if (request.getAttribute("usuarioEliminado") != null) 
+	{%>
+
+		<script>alert("Usuario eliminado con exito")</script>
+			
+	<% }
+	%>
+	
+	usuarioEliminado
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"  style="margin-bottom: 1em;">
+        <div class="container">
+
+			<span class="navbar-brand mb-0 h1">Banco Sarasa</span>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+				<li class="nav-text dropdown">
+				<a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				Menu admin
+				</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="AltaCliente.jsp" >Alta cliente</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="servletUsuario?listadoU">Listar/Modificar/Dar de baja cliente</a> 
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="AltaCuenta.jsp" >Alta cuenta</a> 
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="ListaEliminarCuentas.jsp" >Listar/Modificar/Dar de baja cuenta</a> 
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="AsignarCuentaACliente.jsp">Asignar cuenta a cliente</a> 
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="ListaPrestamos.jsp">Autorizar préstamos</a> 
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="VerInformes.jsp" >Ver informes</a> 
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="Logoff.jsp" >Cerrar sesion</a> 
+					</div>
+				</li>
+						 					
+                </ul>
 
 
-	</nav>
+            </div>
+        </div>
+
+    </nav>
 	<!-- Hacer MENU ADMIN -->
 	<!-- Aca va el form direccionando al servlet -->
 
 	<div class="container-fluid" style="margin-top: 1em;">
 		<div>
 			<h2>LISTADO DE CLIENTES</h2>
-			<!-- Ingresar USUARIO SESION -->
 			<br>
-		</div>
-		<label>Busqueda nro de cliente: </label>
-		<div class="input-group mb-3">
-			<div class="input-group-prepend"></div>
-			<input type="text" name="txtNroCuenta" class="form-control"
-				placeholder="Ej: 0202215151" aria-label="Username"
-				aria-describedby="basic-addon1"> <input type="submit"
-				name="btnAceptar" value="Aceptar">
-		</div>
-		<br> <label>Busqueda por Apellido: </label>
-		<div class="input-group mb-3">
-			<div class="input-group-prepend"></div>
-			<input type="text" name="txtApellido" class="form-control"
-				placeholder="Ej: Cibrian" aria-label="Username"
-				aria-describedby="basic-addon1"> <input type="submit"
-				name="btnAceptar" value="Aceptar">
 		</div>
 		<br>
 
-		<table class="table">
-			<thead>
-				<tr>
-					<th scope="col">IdCliente</th>
-					<th scope="col">IdUsuario</th>
-					<th scope="col">IdCuenta</th>
-					<th scope="col">Dni</th>
-					<th scope="col">Cuil</th>
-					<th scope="col">Nombre</th>
-					<th scope="col">Apellido</th>
-					<th scope="col">Sexo</th>
-					<th scope="col">Fecha Nac.</th>
-					<th scope="col">Direcion</th>
-					<th scope="col">Localidad</th>
-					<th scope="col">Provincia</th>
-					<th scope="col">Mail</th>
-					<th scope="col">Telefo</th>
-					<th scope="col">Accion</th>
-					<th scope="col"></th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th scope="row">1</th>
-					<td>213213242</td>
-					<td>123213</td>
-					<td>25252525</td>
-					<td>20252525257</td>
-					<td>Juan</td>
-					<td>Pepe</td>
-					<td>M</td>
-					<td>20/08/2000</td>
-					<td>CalleFalse 1234</td>
-					<td>Tigre</td>
-					<td>Bs As</td>
-					<td>pepe@gmail.com</td>
-					<td>01115656565</td>
-					<td><a href="ModificarCliente.jsp?id" class="btn btn-primary">Modificar</a>
-						<br></td>
-					<td><a href="ListaEliminarClientes.jsp?id"
-						class="btn btn-danger">Eliminar</a> <br></td>
-				</tr>
-				<tr>
-					<th scope="row">2</th>
-					<td>5050505</td>
-					<td>2024020</td>
-					<td>25252525</td>
-					<td>20252525257</td>
-					<td>Mario</td>
-					<td>Iglesias</td>
-					<td>M</td>
-					<td>05/10/1980</td>
-					<td>Canada 3545</td>
-					<td>Tortuguitas</td>
-					<td>Bs As</td>
-					<td>mario@gmail.com</td>
-					<td>01115651515</td>
-					<td><a href="ModificarCliente.jsp?id" class="btn btn-primary">Modificar</a>
-						<br></td>
-					<td><a href="ListaEliminarClientes.jsp?id"
-						class="btn btn-danger">Eliminar</a> <br></td>
-				</tr>
-				<tr>
-					<th scope="row">3</th>
-					<td>0000012112</td>
-					<td>999992520522</td>
-					<td>63636324</td>
-					<td>2065656567</td>
-					<td>Luis</td>
-					<td>Garcia</td>
-					<td>M</td>
-					<td>02/02/1991</td>
-					<td>12 de Octubre 2566</td>
-					<td>Alberti</td>
-					<td>Bs As</td>
-					<td>garcialuis45@gmail.com</td>
-					<td>011156569898</td>
-					<td><a href="ModificarCliente.jsp?id" class="btn btn-primary">Modificar</a>
-						<br></td>
-					<td><a href="ListaEliminarClientes.jsp?id"
-						class="btn btn-danger">Eliminar</a> <br></td>
-				</tr>
-			</tbody>
-		</table>
+<table id="table_id" style="width:100%" class="table table-striped table-bordered " >
+<thead >
+		<tr class="text-center">
+			<th>ID USUARIO	</th>
+			<th>USUARIO</th>
+			<th>DNI</th>
+			<th>CUIL</th>
+			<th>NOMBRE</th>
+			<th>APELLIDO</th>
+			<th>SEXO	</th>
+			<th>FECHA NACIMIENTO	</th>
+			<th>DIRECCION	</th>
+			<th>NACIONALIDAD	</th>
+			<th>PROVINCIA	</th>
+			<th>LOCALIDAD	</th>
+			<th>MAIL	</th>
+			<th>TELEFONO	</th>
+			<th>ACCION	</th>	
+		</tr>
+		</thead>
+
+
+		<tbody>
+		<%
+			for (Usuario usuario : listaU) {
+		%>
+		<tr>
+			<td><%=usuario.getIdUsuario()%></td>
+			<td><%=usuario.getNombre()%></td>
+			<td><%=usuario.getDni()%></td>
+			<td><%=usuario.getCuil()%></td>
+			<td><%=usuario.getNombre()%></td>
+			<td><%=usuario.getApellido()%></td>
+			<td><%=usuario.getSexo()%></td>
+			<td><%=usuario.getFechaNac()%></td>
+			<td><%=usuario.getDireccion()%></td>
+			<td><%=usuario.getNacionalidad().getDescripcion()%></td>
+			<td><%=usuario.getProvincia().getDescripcion()%></td>
+			<td><%=usuario.getLocalidad().getDescripcion()%></td>
+			<td><%=usuario.getMail()%></td>
+			<td><%=usuario.getTelefono()%></td>
+			<td class="text-center"><a href="servletUsuario?idModificar=<%=usuario.getIdUsuario()%>" class="btn btn-secondary btn-sm" style="width: 80px;">Modificar</a> <br><br> <a href="servletUsuario?idEliminar=<%=usuario.getIdUsuario()%>" class="btn btn-danger btn-sm" style="width: 80px;">Eliminar</a></td>
+		</tr>
+		
+
+		<%
+			}
+		%>
+		</tbody>
+
+
+	</table>
+	
+
+	
+	
 	</div>
+
 
 </body>
 </html>

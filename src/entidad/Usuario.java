@@ -20,7 +20,7 @@ public class Usuario
 	private Provincia provincia;
 	private String mail;
 	private String telefono;
-	private Estado estado;
+	private boolean estado;
 	
 	//getters y setters
 	public long getIdUsuario() 
@@ -183,12 +183,12 @@ public class Usuario
 		this.telefono = telefono;
 	}
 	
-	public Estado getEstado() 
+	public boolean getEstado() 
 	{
 		return estado;
 	}
 	
-	public void setEstado(Estado estado)
+	public void setEstado(boolean estado)
 	{
 		this.estado = estado;
 	}
@@ -196,7 +196,7 @@ public class Usuario
 	//constructores
 	public Usuario(int idUsuario, String usuario, String contrasenia, TipoUsuario tipoUsuario, String dni, String cuil,
 			String nombre, String apellido, String sexo, Date fechaNac, String direccion, Localidad localidad,
-			Nacionalidad nacionalidad, Provincia provincia, String mail, String telefono, Estado estado)
+			Nacionalidad nacionalidad, Provincia provincia, String mail, String telefono, boolean estado)
 	{
 		super();
 		this.idUsuario = idUsuario;

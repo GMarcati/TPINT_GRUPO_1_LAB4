@@ -40,11 +40,6 @@ CREATE TABLE nacionalidades(
     primary key (idNacionalidad)
 );
 
-CREATE TABLE estados(
-	idEstado int NOT NULL auto_increment,
-    descripcion varchar(50) NOT NULL,
-    primary key (idEstado)
-);
 
 CREATE TABLE movimientos(
 	idMovimiento bigint NOT NULL auto_increment,
@@ -64,10 +59,9 @@ CREATE TABLE cuentas(
     fechaCreacion date NOT NULL,
     CBU bigint NOT NULL,
     saldo decimal NOT NULL,
-    idEstado int NOT NULL,
+    idEstado bit NOT NULL,
     primary key (idCuenta),
-    constraint foreign key (idTipoCuenta) references tipoCuentas (idTipoCuenta),
-    constraint foreign key (idEstado) references estados (idEstado)
+    constraint foreign key (idTipoCuenta) references tipoCuentas (idTipoCuenta)
 );
 
 CREATE TABLE usuarios(
@@ -87,12 +81,11 @@ CREATE TABLE usuarios(
     idProvincia int NULL,
     mail VARCHAR(100) NOT NULL unique,
     telefono VARCHAR(50) NULL,
-    idEstado int NOT NULL,
+    idEstado bit NOT NULL,
     primary key (idUsuario),
     constraint foreign key (idLocalidad) references localidades (idLocalidad),
     constraint foreign key (idNacionalidad) references nacionalidades (idNacionalidad),
     constraint foreign key (idProvincia) references provincias (idProvincia),
-    constraint foreign key (idEstado) references estados (idEstado),
     constraint foreign key (idTipoUsuario) references tipoUsuarios (idTipoUsuario)
 );
 
@@ -103,9 +96,8 @@ CREATE TABLE prestamos(
     montoSolicitado decimal NOT NULL,
     cantidadMeses bigint NOT NULL,
     valorCuota decimal NOT NULL,
-    idEstado int NOT NULL,
-    primary key (idPrestamo),
-    constraint foreign key (idEstado) references estados (idEstado)
+    idEstado bit NOT NULL,
+    primary key (idPrestamo)
 );
 
 CREATE TABLE movimientos_x_cuenta(
@@ -144,16 +136,16 @@ CREATE TABLE prestamos_x_cuenta(
              PRECARGA DE DATOS
 ---------------------------------------------*/
 
-insert into tipoUsuarios (descripcion) values ('administrador');
-insert into tipoUsuarios (descripcion) values ('usuario');
+insert into tipoUsuarios (descripcion) values ('Administrador');
+insert into tipoUsuarios (descripcion) values ('Usuario');
 
 insert into tipoCuentas (descripcion) values ('Caja de ahorro');
 insert into tipoCuentas (descripcion) values ('Cuenta corriente');
 
-insert into tipoMovimientos(descripcion) values ('Alta cuenta');
-insert into tipoMovimientos(descripcion) values ('Alta prestamo');
-insert into tipoMovimientos(descripcion) values ('Pago prestamo');
-insert into tipoMovimientos(descripcion) values ('Transferecnia');
+insert into tipoMovimientos(descripcion) values ('Alta de cuenta');
+insert into tipoMovimientos(descripcion) values ('Alta de un préstamo');
+insert into tipoMovimientos(descripcion) values ('Pago de préstamo');
+insert into tipoMovimientos(descripcion) values ('Transferencia');
 
 insert into provincias (descripcion) values('Buenos Aires');
 insert into provincias (descripcion) values('Salta');
@@ -203,8 +195,6 @@ insert into nacionalidades (descripcion) values ('Honduras');
 insert into nacionalidades (descripcion) values ('Mexico');
 insert into nacionalidades (descripcion) values ('Canada');
 
-insert into estados (descripcion) values ('Activo');
-insert into estados (descripcion) values ('Inactivo');
 
 insert into movimientos(idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (1, '2020/10/21', 'pago atrasado cuota', 5000, 123456789);
 insert into movimientos(idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (2, '2020/09/22', 'pago atrasado cuota', 4000, 123456789);
@@ -228,6 +218,49 @@ insert into usuarios (usuario, contrasenia, idTipoUsuario, DNI, CUIL, mail, idEs
 values('admin', 'admin', 1, '111', '1111', 'mailadm@fake', 1);
 insert into usuarios (usuario, contrasenia, idTipoUsuario, DNI, CUIL, nombre, apellido, sexo, fechaNacimiento, direccion, idLocalidad, idNacionalidad, idProvincia, mail, telefono, idEstado) 
 values ('usu', '123', 2, '222', '2222', 'nombreUsuario', 'apellidoUsuario', 'masculino', null, 'calleFalsa', 1, 1, 1, 'mailfake@gm', '44556677',1);
+
+INSERT into usuarios(usuario,contrasenia,idTipoUsuario,DNI,CUIL,nombre,apellido,sexo,fechaNacimiento,direccion,idLocalidad,idNacionalidad,idProvincia,mail,telefono,idEstado) 
+VALUES ('MFernandez','MFernandez',2,30115594,20301155949,'Maximiliano','Fernandez','Masculino','1980-12-10','Alvear 123',1,1,1,'mfernandez@gmail.com',4283959844,1);
+
+INSERT into usuarios(usuario,contrasenia,idTipoUsuario,DNI,CUIL,nombre,apellido,sexo,fechaNacimiento,direccion,idLocalidad,idNacionalidad,idProvincia,mail,telefono,idEstado) 
+VALUES ('LRodriguez','LRodriguez',2,33333333,20361151551,'Leandro','Rodriguez','Masculino','1991-06-25','Sarasa 53',4,1,1,'sarasa@gmail.com',4983567222,1);
+
+INSERT into usuarios(usuario,contrasenia,idTipoUsuario,DNI,CUIL,nombre,apellido,sexo,fechaNacimiento,direccion,idLocalidad,idNacionalidad,idProvincia,mail,telefono,idEstado) 
+VALUES ('JRubino','JRubino',2,26115555,26261155555,'Josue','Rubino','Masculino','1985-09-15','Arias 832',8,1,1,'josue_capo@gmail.com',4233367222,1);
+
+INSERT into usuarios(usuario,contrasenia,idTipoUsuario,DNI,CUIL,nombre,apellido,sexo,fechaNacimiento,direccion,idLocalidad,idNacionalidad,idProvincia,mail,telefono,idEstado) 
+VALUES ('RGimenez','RGimenez',2,30115556,20301155561,'Roberto','Gimenez','Masculino','1999-03-10','sarasa 1',4,6,3,'rgimenez@gmail.com',4283967222,1);
+
+INSERT into usuarios(usuario,contrasenia,idTipoUsuario,DNI,CUIL,nombre,apellido,sexo,fechaNacimiento,direccion,idLocalidad,idNacionalidad,idProvincia,mail,telefono,idEstado) 
+VALUES ('COlivera','COlivera',2,36115502,20361155021,'Carla','Olivera','Femenino','1982-10-20','Sarasa 605',2,3,1,'genio@gmail.com',4235467222,1);
+
+INSERT into usuarios(usuario,contrasenia,idTipoUsuario,DNI,CUIL,nombre,apellido,sexo,fechaNacimiento,direccion,idLocalidad,idNacionalidad,idProvincia,mail,telefono,idEstado) 
+VALUES ('FPerez','FPerez',2,36255555,20362555559,'Fernando','Perez','Masculino','1990-01-01','sarasa 523',5,2,9,'kpo@gmail.com',4327897222,1);
+
+INSERT into usuarios(usuario,contrasenia,idTipoUsuario,DNI,CUIL,nombre,apellido,sexo,fechaNacimiento,direccion,idLocalidad,idNacionalidad,idProvincia,mail,telefono,idEstado) 
+VALUES ('NDiaz','NDiaz',2,36116000,20361160001,'Nacho','Diaz','Masculino','1992-12-20','sara 1',2,2,2,'harrypotter@gmail.com',1204567222,1);
+
+INSERT into usuarios(usuario,contrasenia,idTipoUsuario,DNI,CUIL,nombre,apellido,sexo,fechaNacimiento,direccion,idLocalidad,idNacionalidad,idProvincia,mail,telefono,idEstado) 
+VALUES ('AGutierrez','AGutierrez',2,40260541,21402605418,'Ailen','Gutierrez','Femenino','1999-08-15','Sarasa 10',3,1,8,'samid@gmail.com',3904567222,1);
+
+INSERT into usuarios(usuario,contrasenia,idTipoUsuario,DNI,CUIL,nombre,apellido,sexo,fechaNacimiento,direccion,idLocalidad,idNacionalidad,idProvincia,mail,telefono,idEstado) 
+VALUES ('MQuiroga','MQuiroga',2,40115555,20401155552,'Marcelo','Quiroga','Masculino','1986-04-05','Sarasa 43',8,3,1,'elboga@gmail.com',6024567222,1);
+
+INSERT into usuarios(usuario,contrasenia,idTipoUsuario,DNI,CUIL,nombre,apellido,sexo,fechaNacimiento,direccion,idLocalidad,idNacionalidad,idProvincia,mail,telefono,idEstado) 
+VALUES ('SDelboni','SDelboni',2,36116666,20361166668,'Salvador','Delboni','Masculino','1990-08-10','Belgrano 666',9,10,4,'tortuga@gmail.com',7540567222,1);
+
+INSERT into usuarios(usuario,contrasenia,idTipoUsuario,DNI,CUIL,nombre,apellido,sexo,fechaNacimiento,direccion,idLocalidad,idNacionalidad,idProvincia,mail,telefono,idEstado) 
+VALUES ('TLedesma','TLedesma',2,39666555,22396665556,'Tomas','Ledesma','Masculino','1991-01-05','Sarasa 500',15,15,15,'cabezon@gmail.com',3024567222,1);
+
+INSERT into usuarios(usuario,contrasenia,idTipoUsuario,DNI,CUIL,nombre,apellido,sexo,fechaNacimiento,direccion,idLocalidad,idNacionalidad,idProvincia,mail,telefono,idEstado) 
+VALUES ('RBarili','RBarili',2,43135698,26431356987,'Rodolfo','Barili','Masculino','1996-07-16','Sarsa 113',12,13,10,'riverplate@gmail.com',6054567222,1);
+
+INSERT into usuarios(usuario,contrasenia,idTipoUsuario,DNI,CUIL,nombre,apellido,sexo,fechaNacimiento,direccion,idLocalidad,idNacionalidad,idProvincia,mail,telefono,idEstado) 
+VALUES ('MJackson','MJackson',2,37225555,20372255556,'Michael','Jackson','Masculino','1910-10-15','Sarsa 300',10,14,11,'jackson_90@gmail.com',9504567222,1);
+
+INSERT into usuarios(usuario,contrasenia,idTipoUsuario,DNI,CUIL,nombre,apellido,sexo,fechaNacimiento,direccion,idLocalidad,idNacionalidad,idProvincia,mail,telefono,idEstado) 
+VALUES ('WBlanco','WBlanco',2,36119999,2036119991,'Walter','Blanco','Masculino','1969-11-07','Peron 100',15,12,10,'elraton666@gmail.com',3650567222,1);
+
 
 insert into prestamos (importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstado) values(20000, '2020/10/21', 10000, 2, 10000,1);
 insert into prestamos (importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstado) values(40000, '2020/10/22', 20000, 3, 10000,1);

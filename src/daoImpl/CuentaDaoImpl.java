@@ -14,7 +14,6 @@ import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 
 import dao.CuentaDao;
 import entidad.Cuenta;
-import entidad.Estado;
 import entidad.TipoCuenta;
 
 public class CuentaDaoImpl implements CuentaDao{
@@ -60,10 +59,8 @@ public class CuentaDaoImpl implements CuentaDao{
 				 	
 				 	x.setCBU(rs.getLong("cuentas.CBU"));
 				 	x.setSaldo(rs.getFloat("cuentas.saldo")); //ver
-				 	Estado estado = new Estado();
-				 	estado.setIdEstado(rs.getInt("estado.idEstado"));
-				 	estado.setDescripcion(rs.getString("estado.descripcion"));
-				 	x.setEstado(estado);
+
+				 	x.setEstado(rs.getBoolean("estado.idEstado"));
 				 	ListadoCuenta.add(x);
 			 }
 		 }
@@ -113,10 +110,9 @@ public class CuentaDaoImpl implements CuentaDao{
 			 	
 			 	x.setCBU(rs.getLong("cuentas.CBU"));
 			 	x.setSaldo(rs.getFloat("cuentas.saldo")); //ver
-			 	Estado estado = new Estado();
-			 	estado.setIdEstado(rs.getInt("estado.idEstado"));
-			 	estado.setDescripcion(rs.getString("estado.descripcion"));
-			 	x.setEstado(estado);
+
+			 	x.setEstado(rs.getBoolean("estado.idEstado"));
+
 			 
 		 }
 		 catch(Exception e)
@@ -161,7 +157,7 @@ public class CuentaDaoImpl implements CuentaDao{
 		cn = new Conexion();
 		cn.Open();	
 
-		String query = "UPDATE  cuentas SET idTipoCuenta='"+cuenta.getTipoCuenta().getIdTipoCuenta()+"', fechaCreacion='"+cuenta.getFechaCreacion()+"', saldo='"+cuenta.getSaldo()+"', idEstado='"+cuenta.getEstado().getDescripcion()+"' WHERE idCuenta='"+cuenta.getIdCuenta()+"'";
+		String query = "UPDATE  cuentas SET idTipoCuenta='"+cuenta.getTipoCuenta().getIdTipoCuenta()+"', fechaCreacion='"+cuenta.getFechaCreacion()+"', saldo='"+cuenta.getSaldo()+"', idEstado='"+cuenta.getEstado()+"' WHERE idCuenta='"+cuenta.getIdCuenta()+"'";
 		try
 		 {
 			estado=cn.execute(query);

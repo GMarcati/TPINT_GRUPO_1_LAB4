@@ -14,7 +14,7 @@ public class Cuenta {
 		private LocalDate fechaCreacion;
 		private long CBU;
 		private double saldo;
-		private Estado estado;
+		private boolean estado;
 		
 		public Cuenta() {
 			
@@ -41,7 +41,7 @@ public class Cuenta {
 		}
 		
 		public Cuenta(long idCuenta, long numeroCuenta, TipoCuenta tipoCuenta, LocalDate fechaCreacion, long cBU,
-				double saldo, Estado estado) {
+				double saldo, boolean estado) {
 			super();
 			this.idCuenta = idCuenta;
 			this.numeroCuenta = numeroCuenta;
@@ -100,11 +100,11 @@ public class Cuenta {
 			this.saldo = saldo;
 		}
 
-		public Estado getEstado() {
+		public boolean getEstado() {
 			return estado;
 		}
 
-		public void setEstado(Estado estado) {
+		public void setEstado(boolean estado) {
 			this.estado = estado;
 		}
 

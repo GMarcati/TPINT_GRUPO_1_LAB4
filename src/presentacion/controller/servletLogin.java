@@ -37,7 +37,7 @@ public class servletLogin extends HttpServlet
 			if(!usuario.isEmpty() && !contra.isEmpty())//si el nombre de usuario NO esta vacio
 			{
 										
-					if(usuarioNeg.ingresar(usuario, contra)==true)
+					if(usuarioNeg.verificarLogin(usuario, contra)==true)
 					{
 						//PONER MENSAJE DE INGRESO EXITOSO
 						

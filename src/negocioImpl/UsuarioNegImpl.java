@@ -1,7 +1,13 @@
 package negocioImpl;
 
+import java.util.ArrayList;
+
 import dao.UsuarioDao;
 import daoImpl.UsuarioDaoImpl;
+import entidad.Localidad;
+import entidad.Nacionalidad;
+import entidad.Provincia;
+import entidad.Usuario;
 import negocio.UsuarioNeg;
 
 public class UsuarioNegImpl implements UsuarioNeg{
@@ -19,14 +25,49 @@ public class UsuarioNegImpl implements UsuarioNeg{
 		
 	}
 	
-	public boolean ingresar(String nombre, String apellido) 
+	public boolean verificarLogin(String nombre, String apellido) 
 	{
-		return usuarioDao.ingresar(nombre, apellido);
+		return usuarioDao.verificarLogin(nombre, apellido);
 	}
 	
 	public boolean altaUsuario()
 	{
 		return false;
+	}
+	
+	public ArrayList<Usuario> listarUsuarios() {
+		return (ArrayList<Usuario>) usuarioDao.listarUsuarios();
+	}
+	
+	public Usuario obtenerUno(int id) {
+		return usuarioDao.obtenerUno(id);
+	}
+	
+	public boolean modificar(Usuario usuario) {
+		return usuarioDao.modificar(usuario);
+	}
+	
+	public boolean eliminar(int id) {
+		
+		return usuarioDao.eliminar(id);
+	}
+	
+	public ArrayList<Nacionalidad> listarNacionalidades() {
+		
+		return (ArrayList<Nacionalidad>) usuarioDao.listarNacionalidades();
+	
+	}
+	
+	public ArrayList<Provincia> listarProvincias() {
+		
+		return (ArrayList<Provincia>) usuarioDao.listarProvincias();
+	
+	}
+	
+	public ArrayList<Localidad> listarLocalidades() {
+		
+		return (ArrayList<Localidad>) usuarioDao.listarLocalidades();
+	
 	}
 	
 }

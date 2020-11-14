@@ -11,14 +11,48 @@
 </head>
 <body>
 	<form action="servletAgregarUsuario" method="get">
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<div class="container body-content">
-			<span class="navbar-brand mb-0 h1">Banco Sarasa</span> 
-			<span class="navbar-text"> <a class="nav-item" href="PrincipalAdministrador.jsp">Menu admin</a> </span>
-		</div>
-		</nav>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"  style="margin-bottom: 1em;">
+        <div class="container">
 
-		<div class="container body-content" style="margin-top: 1em;">
+			<span class="navbar-brand mb-0 h1">Banco Sarasa</span>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+				<li class="nav-text dropdown">
+				<a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				Menu admin
+				</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="AltaCliente.jsp" >Alta cliente</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="servletUsuario?listadoU">Listar/Modificar/Dar de baja cliente</a> 
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="AltaCuenta.jsp" >Alta cuenta</a> 
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="ListaEliminarCuentas.jsp" >Listar/Modificar/Dar de baja cuenta</a> 
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="AsignarCuentaACliente.jsp">Asignar cuenta a cliente</a> 
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="ListaPrestamos.jsp">Autorizar préstamos</a> 
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="VerInformes.jsp" >Ver informes</a> 
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="Logoff.jsp" >Cerrar sesion</a> 
+					</div>
+				</li>
+						 					
+                </ul>
+
+
+            </div>
+        </div>
+
+    </nav>
+
+		<div class="container body-content" style="margin-top: 5em;">
 			<div>
 				<h2>ALTA CLIENTE</h2> <br>
 			</div>

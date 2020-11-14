@@ -15,12 +15,12 @@ public class Nacionalidad
 		this.idNacionalidad = idNacionalidad;
 	}
 	
-	public String getNacionalidad() 
+	public String getDescripcion() 
 	{
 		return nacionalidad;
 	}
 	
-	public void setNacionalidad(String nacionalidad) 
+	public void setDescripcion(String nacionalidad) 
 	{
 		this.nacionalidad = nacionalidad;
 	}
