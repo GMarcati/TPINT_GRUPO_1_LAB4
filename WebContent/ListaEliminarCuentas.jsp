@@ -14,8 +14,52 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 
+<!-- DATATABLE -->
+<!-- CSS para datatable -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+<!-- Javascript para datatable -->
+<script src="https://code.jquery.com/jquery-3.5.1.js">  </script>
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">  </script>
+ 
+ <script>
+ $(document).ready( function () {
+ $('#table_id').DataTable({
+  "language": {
+                "url": "http://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+            }
+ 
+ }
+ 
+ );
+
+ } );
+ </script>
+
 </head>
 <body>
+
+		<%
+		List<Cuenta> listaC = new ArrayList<Cuenta>();
+		if (request.getAttribute("listaCuenta") != null) {
+			listaC = (List<Cuenta>) request.getAttribute("listaCuenta");
+		}
+		%>
+		
+		
+		
+		<%
+	
+		if(request.getAttribute("estadoEliminar") != null)
+		{%>
+			<script>alert("Cuenta eliminada con exito")</script>
+		<%	
+		} 
+		%>
+		
+		
+		
+		
+
 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"  style="margin-bottom: 1em;">
         <div class="container">
@@ -38,7 +82,7 @@
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="AltaCuenta.jsp" >Alta cuenta</a> 
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="ListaEliminarCuentas.jsp" >Listar/Modificar/Dar de baja cuenta</a> 
+						<a class="dropdown-item" href="servletCuenta?listadoC" >Listar/Modificar/Dar de baja cuenta</a> 
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="AsignarCuentaACliente.jsp">Asignar cuenta a cliente</a> 
 						<div class="dropdown-divider"></div>
@@ -60,85 +104,48 @@
 		
 	
 
-<form action="servletCuenta" method="get">
 
 <div class="container-fluid" style="margin-top: 5em;">
-	<div><h2>LISTADO DE CUENTAS</h2><<br></div>
-	<label>Busqueda por TODAS LAS CUENTAS: </label><input type="submit" name="btnTodasCuentas" value="Aceptar"><br>
-
-	<label>Busqueda por nro de cuenta: </label> 	
-		<div class="input-group mb-3">
-  			<div class="input-group-prepend">
- 	</div>
-	<input type="text" name="txtNroCuenta" class="form-control" placeholder="Ej: 213213242" aria-label="Username" aria-describedby="basic-addon1">
-	<input type="submit" name="btnPorCuenta" value="Aceptar">
-</div><br>
-
-<label>Busqueda por tipo de cuenta: </label> 	
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-  </div>
-	<input type="text" name="txtTipoCuenta" class="form-control" placeholder="Ej: Cuenta Corriente" aria-label="Username" aria-describedby="basic-addon1">
-	<input type="submit" name="btnTipoCuenta" value="Aceptar">
-</div><br>
-
-
-<label>Busqueda por CBU: </label> 	
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-  </div>
-	<input type="text" name="txtCBU" class="form-control" placeholder="Ej: 20252525257" aria-label="Username" aria-describedby="basic-addon1">
-	<input type="submit" name="btnPorCBU" value="Aceptar">
-</div><br>
-</form>
-
- 	<%
-		List<Cuenta> listaC =  new ArrayList<Cuenta>();
-		if (request.getAttribute("listaCuenta") != null) {
-			System.out.print("pasa");
-			listaC = (ArrayList<Cuenta>) request.getAttribute("listaCuenta");
-		}
-	%>
- 
+	<div><h2>LISTADO DE CUENTAS</h2><br></div>
 	
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">IdCuenta</th>
-      <th scope="col">NroCuenta</th>
-      <th scope="col">TipoCuenta</th>
-      <th scope="col">Saldo</th>
-      <th scope="col">Estado</th>
-      <th scope="col">Accion</th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  
-<%	
-			for(Cuenta c : listaC) {
+	
+<table id="table_id" style="width:100%" class="table table-striped table-bordered " >
+<thead >
+		<tr class="text-center">
+			<th>ID CUENTA	</th>
+			<th>NRO CUENTA</th>
+			<th>TIPO CUENTA</th>
+			<th>SALDO</th>
+			<th>ACCION</th>
+		</tr>
+		</thead>
+
+
+		<tbody>
+		<%
+			for (Cuenta c : listaC) {
 		%>
-  
-  <tbody>
-    <tr>
-    <form action="servletCuenta" method="post">
-     		 <td><%=c.getIdCuenta()%></td> <input type="hidden" name="idCuenta" value="<%=c.getIdCuenta()%>"> </td>
-     		 <td><%=c.getNumeroCuenta()%></td>
-			 <td><%=c.getTipoCuenta().getDescripcion()%></td>
-     		 <td><%=c.getSaldo()%></td>
-     		 <td><%=c.getEstado()%></td>
-     		 
-     		 <td><input type="submit" class="btn btn-primary" name="btnModificar" value="Modificar"></td>
-     		 <td><input type="submit" class="btn btn-danger" name="btnEliminar" value="Eliminar"></td>
-	</form>  
-    </tr>
-    	<%
+		<tr>
+			<td><%=c.getIdCuenta()%></td>
+			<td><%=c.getNumeroCuenta()%></td>
+			<td><%=c.getTipoCuenta().getDescripcion()%></td>
+			<td><%=c.getSaldo()%></td>
+			<td class="text-center"><a href="servletCuenta?idModificar=<%=c.getIdCuenta()%>" class="btn btn-secondary btn-sm" style="width: 80px;">Modificar</a> <br><br> <a href="servletCuenta?idEliminar=<%=c.getIdCuenta()%>" class="btn btn-danger btn-sm" style="width: 80px;">Eliminar</a></td>
+		</tr>
+		
+
+		<%
 			}
 		%>
-    
-  </tbody>
-</table>
+		</tbody>
+
+
+	</table>
 </div>
 
+<div style="margin-top: 5em;">
+
+</div>
 
 </body>
 </html>

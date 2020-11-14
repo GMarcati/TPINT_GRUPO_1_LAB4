@@ -2,7 +2,6 @@ package entidad;
 
 import java.math.BigDecimal;
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.concurrent.ThreadLocalRandom;
 
 
@@ -11,7 +10,7 @@ public class Cuenta {
 		private long idCuenta;
 		private long numeroCuenta;
 		private TipoCuenta tipoCuenta;
-		private LocalDate fechaCreacion;
+		private Date fechaCreacion;
 		private long CBU;
 		private double saldo;
 		private int estado;
@@ -41,7 +40,7 @@ public class Cuenta {
 		}
 		
 
-		public Cuenta(long idCuenta, long numeroCuenta, TipoCuenta tipoCuenta, LocalDate fechaCreacion, long cBU,
+		public Cuenta(long idCuenta, long numeroCuenta, TipoCuenta tipoCuenta, Date fechaCreacion, long cBU,
 				double saldo, int estado) {
 			super();
 			this.idCuenta = idCuenta;
@@ -92,11 +91,11 @@ public class Cuenta {
 			this.tipoCuenta = tipoCuenta;
 		}
 
-		public LocalDate getFechaCreacion() {
+		public Date getFechaCreacion() {
 			return fechaCreacion;
 		}
 
-		public void setFechaCreacion(LocalDate fechaCreacion) {
+		public void setFechaCreacion(Date fechaCreacion) {
 			this.fechaCreacion = fechaCreacion;
 		}
 

@@ -11,6 +11,17 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 </head>
 <body>
+
+
+	<%
+	if (request.getAttribute("estadoAsignarCuenta") != null) 
+	{%>
+
+		<script>alert("Cuenta asignada a cliente con exito")</script>
+			
+	<% }
+	%>
+
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"  style="margin-bottom: 1em;">
         <div class="container">
 
@@ -32,7 +43,7 @@
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="AltaCuenta.jsp" >Alta cuenta</a> 
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="ListaEliminarCuentas.jsp" >Listar/Modificar/Dar de baja cuenta</a> 
+						<a class="dropdown-item" href="servletCuenta?listadoC" >Listar/Modificar/Dar de baja cuenta</a> 
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="AsignarCuentaACliente.jsp">Asignar cuenta a cliente</a> 
 						<div class="dropdown-divider"></div>
@@ -49,15 +60,17 @@
         </div>
     </nav>
 
+<form method="get" action="servletCuenta">
 	<div class="container body-content" style="margin-top: 5em;">
 		<div>
 			<h2>ASIGNAR CUENTA A CLIENTE</h2><br></div>
 		<div>
 		  	<label>Id cuenta: </label><input type="text" name="txtIdCuenta" class="form-control" placeholder="Ej: 1" aria-label="Ej: 1" aria-describedby="basic-addon1"><br>
 		  	<label>Id cliente: </label><input type="text" name="txtIdCliente" class="form-control" placeholder="Ej: 5" aria-label="Ej: 5" aria-describedby="basic-addon1"><br>
-			<input type="submit" name="btnAceptar" value="Aceptar">
+			<input class="btn btn-primary" type="submit" name="btnAsignarCuenta" value="Aceptar">
 	 	</div>
 	</div>
+</form>
 
 </body>
 </html>

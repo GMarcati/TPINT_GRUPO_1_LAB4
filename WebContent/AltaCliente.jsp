@@ -1,3 +1,9 @@
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="entidad.Usuario"%>
+<%@page import="entidad.Localidad"%>
+<%@page import="entidad.Nacionalidad"%>
+<%@page import="entidad.Provincia"%>
 <%@page import="entidad.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -11,7 +17,39 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 </head>
 <body>
-	<form action="servletAgregarUsuario" method="get">
+
+
+<%
+if(request.getParameter("estadoUsuario")!=null){
+%>
+	<script>alert("Usuario agregado con exito")</script>
+<%
+}
+
+%>
+
+		<%
+		List<Nacionalidad> listaNac = new ArrayList<Nacionalidad>();
+		if (request.getAttribute("listaNacionalidad") != null) {
+			listaNac = (List<Nacionalidad>) request.getAttribute("listaNacionalidad");
+		}
+		%>
+		<%
+		List<Provincia> listaProv = new ArrayList<Provincia>();
+		if (request.getAttribute("listaProvincia") != null) {
+			listaProv = (List<Provincia>) request.getAttribute("listaProvincia");
+		}
+		%>
+		<%
+		List<Localidad> listaLocal = new ArrayList<Localidad>();
+		if (request.getAttribute("listaLocalidad") != null) {
+			listaLocal = (List<Localidad>) request.getAttribute("listaLocalidad");
+		}
+		%>
+
+
+
+	<form action="servletUsuario" method="get">
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"  style="margin-bottom: 1em;">
         <div class="container">
 
@@ -33,7 +71,7 @@
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="AltaCuenta.jsp" >Alta cuenta</a> 
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="ListaEliminarCuentas.jsp" >Listar/Modificar/Dar de baja cuenta</a> 
+						<a class="dropdown-item" href="servletCuenta?listadoC" >Listar/Modificar/Dar de baja cuenta</a> 
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="AsignarCuentaACliente.jsp">Asignar cuenta a cliente</a> 
 						<div class="dropdown-divider"></div>
@@ -86,56 +124,49 @@
 					</div>
 				</div>
 			</fieldset>
+			
+			  <label>Nacionalidad:</label>
+  <select name="nacionalidad" class="form-control">
+  
+  <% 
+  
+  for(Nacionalidad nacionalidad : listaNac){    
+   %>
+   <option value="<%=nacionalidad.getIdNacionalidad() %>"> <%=nacionalidad.getDescripcion() %> </option>
+   <%
+   } %>
+  
+  
+  </select><br>
+  
+    <label>Provincia:</label>
+  <select name="provincia"  class="form-control">
+  
+  <% 
+  
+  for(Provincia provincia : listaProv){    
+   %>
+   <option value="<%=provincia.getIdProvincia() %>"> <%=provincia.getDescripcion() %> </option>
+   <%
+   } %>
+  
+  
+  </select><br>
+    <label>Localidad:</label>
+  <select name="localidad"  class="form-control">
+  
+  <% 
+  
+  for(Localidad localidad : listaLocal){    
+   %>
+   <option value="<%=localidad.getIdLocalidad() %>"> <%=localidad.getDescripcion() %> </option>
+   <%
+   } %>
+  
+  
+  </select><br>
 
 			<label>Fecha de Nacimiento</label><input type="text" name="txtFechaNac" class="form-control" placeholder="Ej: 20/05/1890" aria-label="Ej: 20/05/1890" aria-describedby="basic-addon1"><br>
-
-			<label class="my-1 mr-2" for="inlineFormCustomSelectPref">Nacionalidad:</label> 
-			<select class="custom-select my-1 mr-sm-2" id="cbxNacionalidad">
-				<option selected>Eliga el Pais...</option>
-				<option value="1">Argentina</option>
-				<option value="2">Brasil</option>
-				<option value="3">Bolivia</option>
-				<option value="4">Chile</option>
-				<option value="5">Paraguay</option>
-				<option value="6">Uruguay</option>
-				<option value="7">Colombia</option>
-				<option value="8">Ecuador</option>
-				<option value="9">Mexico</option>
-				<option value="10">EEUU</option>
-				<option value="11">Canada</option>
-			</select> 
-			
-			<label class="my-1 mr-2" for="inlineFormCustomSelectPref">Provincia:</label> 
-			<select class="custom-select my-1 mr-sm-2" id="cbxProvincia">
-				<option selected>Eliga la provincia...</option>
-				<option value="1">Argentina</option>
-				<option value="2">Brasil</option>
-				<option value="3">Bolivia</option>
-				<option value="4">Chile</option>
-				<option value="5">Paraguay</option>
-				<option value="6">Uruguay</option>
-				<option value="7">Colombia</option>
-				<option value="8">Ecuador</option>
-				<option value="9">Mexico</option>
-				<option value="10">EEUU</option>
-				<option value="11">Canada</option>
-			</select> 
-			
-			<label class="my-1 mr-2" for="inlineFormCustomSelectPref">Localidad:</label> 
-			<select class="custom-select my-1 mr-sm-2" id="cbxLocalidad">
-				<option selected>Eliga la localidad...</option>
-				<option value="1">Argentina</option>
-				<option value="2">Brasil</option>
-				<option value="3">Bolivia</option>
-				<option value="4">Chile</option>
-				<option value="5">Paraguay</option>
-				<option value="6">Uruguay</option>
-				<option value="7">Colombia</option>
-				<option value="8">Ecuador</option>
-				<option value="9">Mexico</option>
-				<option value="10">EEUU</option>
-				<option value="11">Canada</option>
-			</select> 
 			
 			<label>Dirección</label>
 			<input type="text" name="txtDireccion" class="form-control" placeholder="Ej: Av. Libertador 2254" aria-label="Ej: Av. Libertador 2254" aria-describedby="basic-addon1"><br>

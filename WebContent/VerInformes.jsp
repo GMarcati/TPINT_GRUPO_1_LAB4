@@ -32,7 +32,7 @@
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="AltaCuenta.jsp" >Alta cuenta</a> 
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="ListaEliminarCuentas.jsp" >Listar/Modificar/Dar de baja cuenta</a> 
+						<a class="dropdown-item" href="servletCuenta?listadoC" >Listar/Modificar/Dar de baja cuenta</a> 
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="AsignarCuentaACliente.jsp">Asignar cuenta a cliente</a> 
 						<div class="dropdown-divider"></div>

@@ -27,8 +27,8 @@ public class CuentaNegImpl implements CuentaNeg {
 	}
 	
 
-	public ArrayList<Cuenta> ListarCuentas() {
-		return (ArrayList<Cuenta>) cuentaDao.obtenerTodos();
+	public ArrayList<Cuenta> listarCuentas() {
+		return (ArrayList<Cuenta>) cuentaDao.listarCuentas();
 	}
 
 	@Override
@@ -44,6 +44,11 @@ public class CuentaNegImpl implements CuentaNeg {
 	@Override
 	public boolean borrar(long id) {
 		return cuentaDao.borrar(id);
+	}
+	
+	public boolean AsignarCuentaACliente(long idCuenta, long idUsuario) {
+		
+		return cuentaDao.AsignarCuentaACliente(idCuenta, idUsuario);
 	}
 
 }

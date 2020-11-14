@@ -105,8 +105,9 @@ public class UsuarioDaoImpl implements UsuarioDao {
 
 		cn = new Conexion();
 		cn.Open();	
+		
+		String query = "Update usuarios set contrasenia='"+usuario.getContrasenia() +"',idTipoUsuario="+usuario.getTipoUsuario().getIdTipoUsuario()+",DNI='"+usuario.getDni()+"',CUIL='"+usuario.getCuil()+"',nombre='"+usuario.getNombre()+"',apellido='"+usuario.getApellido()+"',sexo='"+usuario.getSexo()+"',fechaNacimiento='"+usuario.getFechaNac()+"',direccion='"+usuario.getDireccion()+"',idLocalidad="+usuario.getLocalidad().getIdLocalidad()+",idNacionalidad="+usuario.getNacionalidad().getIdNacionalidad()+",idProvincia="+usuario.getProvincia().getIdProvincia()+",mail='"+usuario.getMail()+"',telefono='"+usuario.getTelefono()+"' where idUsuario="+usuario.getIdUsuario()+" and idEstado =1";
 
-		String query = "Update usuarios set contrasenia='"+usuario.getContrasenia() +"',idTipoUsuario='"+usuario.getTipoUsuario().getIdTipoUsuario()+"',DNI='"+usuario.getDni()+"',CUIL='"+usuario.getCuil()+"',nombre='"+usuario.getNombre()+"',apellido='"+usuario.getApellido()+"',sexo='"+usuario.getSexo()+"',fechaNacimiento='"+usuario.getFechaNac()+"',direccion='"+usuario.getDireccion()+"',idLocalidad='"+usuario.getLocalidad().getIdLocalidad()+"',idNacionalidad='"+usuario.getNacionalidad().getIdNacionalidad()+"',idProvincia='"+usuario.getProvincia().getIdProvincia()+"',mail='"+usuario.getMail()+"',telefono='"+usuario.getTelefono()+"' where idUsuario='"+usuario.getIdUsuario()+"' and idEstado = 1";
 		try
 		 {
 			estado=cn.execute(query);
@@ -143,7 +144,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	}
 	
 	
-	public Usuario obtenerUno(int id) {
+	public Usuario obtenerUno(long id) {
 		cn = new Conexion();
 		cn.Open();
 		Usuario usuario = new Usuario();
@@ -216,10 +217,29 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	}
 	
 	//metodo
-	public boolean altaUsuario(Usuario usu)
+	public boolean altaUsuario(Usuario usuario)
 	{
-		
-		return true;
+		boolean estado=true;
+
+		cn = new Conexion();
+		cn.Open();	
+
+		String query = "INSERT INTO usuarios(usuario, contrasenia, idTipoUsuario, DNI, CUIL, nombre, apellido, sexo, fechaNacimiento, direccion, idLocalidad, idNacionalidad, idProvincia, mail, telefono, idEstado)  VALUES ('"+usuario.getUsuario()+"', '"+usuario.getContrasenia()+"', "+2+", '"+usuario.getDni()+"', '"+usuario.getCuil()+"', '"+usuario.getNombre()+"', '"+usuario.getApellido()+"', '"+usuario.getSexo()+"', '"+usuario.getFechaNac()+"', '"+usuario.getDireccion()+"', '"+usuario.getLocalidad().getIdLocalidad()+"', '"+usuario.getNacionalidad().getIdNacionalidad()+"', '"+usuario.getProvincia().getIdProvincia()+"', '"+usuario.getMail()+"', '"+usuario.getTelefono()+"', "+1+")";
+		//La siguiente linea es para ver los datos de la query
+		System.out.println(query);
+		try
+		 {
+			estado=cn.execute(query);
+		 }
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			cn.close();
+		}
+		return estado;
 	}
 	
 public List<Usuario> listarUsuarios(){

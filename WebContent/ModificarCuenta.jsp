@@ -27,14 +27,19 @@
 <div class="container body-content" style="margin-top: 1em;">
 <div><h2>MODIFICAR CUENTA</h2><br></div>
 <div>
- 
+ <form method="get" action="servletCuenta">
     
   
   <label>Numero de cuenta: </label><input type="text" name="txtNumeroCuenta" class="form-control" placeholder="Ej: 452535875436 - ingrese el numero de cuenta sin puntos " aria-label="Ej: 253587549014 - ingrese el numero de cuenta sin puntos" aria-describedby="basic-addon1"><br>
-  <label>Saldo: </label><input type="text" name="txtMontoInicial" class="form-control" placeholder="Monto inicial $ 10000 " aria-label="Monto inicial $ 10000" aria-describedby="basic-addon1"><br>
-  <label>Tipo de cuenta: </label><input type="text" name="txtTipoDeCuenta" class="form-control" placeholder="Caja de ahorro - Cuenta corriente" aria-label="Caja de ahorro - Cuenta corriente" aria-describedby="basic-addon1"><br>
+  <label>Saldo: </label><input type="text" name="txtSaldo" class="form-control" placeholder="Monto inicial $ 10000 " aria-label="Monto inicial $ 10000" aria-describedby="basic-addon1"><br>
+  <label>Tipo de cuenta: </label>
+  <select name="tipoCuenta">
+  <option value="1"> Caja de ahorro </option>
+  <option value="2"> Cuenta corriente </option>
+  </select><br>
   <label>CBU: </label><input type="text" name="txtCBU" class="form-control" placeholder="Ej: 00007562415899635412510 - 22 digitos" aria-label="Ej: 00007562415899635412510 - 22 digitos" aria-describedby="basic-addon1"><br>
-<input type="submit" name="btnAceptar" value="Aceptar">
+<input type="submit" name="btnModificar" value="Aceptar">
+</form>
  </div>
   </div>
 </body>

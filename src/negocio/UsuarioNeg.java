@@ -13,11 +13,11 @@ public interface UsuarioNeg
 {
 	public boolean verificarLogin(String nombre, String apellido);
 	public boolean verificarTipoUsuario(String usuario);
-	public boolean altaUsuario();
+	public boolean altaUsuario(Usuario usuario);
 	public boolean modificar(Usuario usuario);
 	public boolean eliminar(int id);
 	public List<Usuario> listarUsuarios();
-	public Usuario obtenerUno(int id);
+	public Usuario obtenerUno(long id);
 	public List<Nacionalidad> listarNacionalidades();
 	public List<Provincia> listarProvincias();
 	public List<Localidad> listarLocalidades();

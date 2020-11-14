@@ -33,10 +33,10 @@
 		</h2><br>
 	 
 		<div style="margin-left: 40px">
-		 	<a href="AltaCliente.jsp" class="btn btn-outline-primary" style="width: 450px; margin:10px">Alta cliente</a> <br>
+		 	<a href="servletUsuario?listarSelects" class="btn btn-outline-primary" style="width: 450px; margin:10px">Alta cliente</a> <br>
 		 	<a href="servletUsuario?listadoU" class="btn btn-outline-primary" style="width: 450px; margin:10px">Listar/Modificar/Dar de baja cliente</a> <br>
 			<a href="AltaCuenta.jsp" class="btn btn-outline-primary" style="width: 450px; margin:10px">Alta cuenta</a> <br>
-			<a href="ListaEliminarCuentas.jsp" class="btn btn-outline-primary" style="width: 450px; margin:10px">Listar/Modificar/Dar de baja cuenta</a> <br>
+			<a href="servletCuenta?listadoC" class="btn btn-outline-primary" style="width: 450px; margin:10px">Listar/Modificar/Dar de baja cuenta</a> <br>
 			<a href="AsignarCuentaACliente.jsp" class="btn btn-outline-primary" style="width: 450px; margin:10px">Asignar cuenta a cliente</a> <br>
 			<a href="ListaPrestamos.jsp" class="btn btn-outline-primary" style="width: 450px; margin:10px">Autorizar préstamos</a> <br>
 			<a href="VerInformes.jsp" class="btn btn-outline-primary" style="width: 450px; margin:10px">Ver informes</a> <br>

@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import daoImpl.UsuarioDaoImpl;
+import entidad.Localidad;
+import entidad.Nacionalidad;
+import entidad.Provincia;
 import entidad.Usuario;
 import negocio.UsuarioNeg;
 import negocioImpl.UsuarioNegImpl;
@@ -55,9 +58,9 @@ public class servletUsuario extends HttpServlet {
 			int id = Integer.parseInt(request.getParameter("idModificar"));
 			
 			
-			
-			
+
 			request.setAttribute("usuarioFiltrado", usuarioNeg.obtenerUno(id));	
+			request.setAttribute("idModificar", id);	
 			request.setAttribute("listaNacionalidad", usuarioNeg.listarNacionalidades());	
 			request.setAttribute("listaProvincia", usuarioNeg.listarProvincias());	
 			request.setAttribute("listaLocalidad", usuarioNeg.listarLocalidades());	
@@ -66,6 +69,59 @@ public class servletUsuario extends HttpServlet {
 			
 			
 		}
+		
+if(request.getParameter("btnModificar") != null) {
+			
+			Usuario usuario= new Usuario();
+			boolean estado=true;
+			
+			//Da error de null
+			
+			usuario.setIdUsuario(Long.parseLong(request.getParameter("txtIdUsuario")));
+			usuario.setContrasenia(request.getParameter("txtContrasenia"));
+			usuario.setDni(request.getParameter("txtDni"));
+			usuario.setCuil(request.getParameter("txtCuil"));
+			usuario.setNombre(request.getParameter("txtNombre"));
+			usuario.setApellido(request.getParameter("txtApellido"));
+			usuario.setSexo(request.getParameter("txtSexo"));
+			
+			Nacionalidad nacionalidad = new Nacionalidad();
+			nacionalidad.setIdNacionalidad(Integer.parseInt(request.getParameter("nacionalidad")));
+		    usuario.setNacionalidad(nacionalidad);
+			
+			Provincia provincia = new Provincia();
+			provincia.setIdProvincia(Integer.parseInt(request.getParameter("provincia")));			
+		    usuario.setProvincia(provincia);
+		    
+			Localidad localidad = new Localidad();
+			localidad.setIdLocalidad(Integer.parseInt(request.getParameter("localidad")));			
+		    usuario.setLocalidad(localidad);
+		    
+		    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		    
+		    try {
+				usuario.setFechaNac(format.parse(request.getParameter("txtFechaNac")));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		    
+		    usuario.setDireccion(request.getParameter("txtDireccion"));
+		    usuario.setMail(request.getParameter("txtMail"));
+		    usuario.setTelefono(request.getParameter("txtTelefono"));
+		    
+		    //System.out.println(request.getParameter("txtContrasenia")+request.getParameter("txtDni")+request.getParameter("txtCuil")+request.getParameter("txtNombre")+request.getParameter("txtApellido")+request.getParameter("txtSexo")+request.getParameter("nacionalidad")+request.getParameter("provincia")+request.getParameter("localidad")+request.getParameter("txtFechaNac")+request.getParameter("txtDireccion")+request.getParameter("txtMail")+request.getParameter("txtTelefono")  );
+		    
+		    estado=usuarioNeg.modificar(usuario);
+		    
+		    request.setAttribute("estadoModificar", estado);
+		    request.setAttribute("listaUsuario", usuarioNeg.listarUsuarios());
+	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/ListaEliminarClientes.jsp");
+			dispatcher.forward(request, response);
+		    
+			
+		}
+		
 		
 		if(request.getParameter("idEliminar")!=null) {
 			
@@ -77,8 +133,66 @@ public class servletUsuario extends HttpServlet {
 		}
 		
 		
+		if(request.getParameter("listarSelects")!=null) {
+			
+			
+			request.setAttribute("listaNacionalidad", usuarioNeg.listarNacionalidades());	
+			request.setAttribute("listaProvincia", usuarioNeg.listarProvincias());	
+			request.setAttribute("listaLocalidad", usuarioNeg.listarLocalidades());	
+	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/AltaCliente.jsp");
+			dispatcher.forward(request, response);
+		}
+		
 		if(request.getParameter("btnAceptar")!=null)
 		{
+			boolean estado=true;
+			Usuario usuario = new Usuario();
+			
+			usuario.setUsuario(request.getParameter("txtUsuario"));
+			usuario.setContrasenia(request.getParameter("txtPass"));
+			usuario.setDni(request.getParameter("txtDni"));
+			usuario.setCuil(request.getParameter("txtCuil"));
+			usuario.setNombre(request.getParameter("txtNombre"));
+			usuario.setApellido(request.getParameter("txtApellido"));
+			usuario.setSexo(request.getParameter("gridRadios"));
+			
+			Nacionalidad nacionalidad = new Nacionalidad();
+			nacionalidad.setIdNacionalidad(Integer.parseInt(request.getParameter("nacionalidad")));
+		    usuario.setNacionalidad(nacionalidad);
+			
+			Provincia provincia = new Provincia();
+			provincia.setIdProvincia(Integer.parseInt(request.getParameter("provincia")));			
+		    usuario.setProvincia(provincia);
+		    
+			Localidad localidad = new Localidad();
+			localidad.setIdLocalidad(Integer.parseInt(request.getParameter("localidad")));			
+		    usuario.setLocalidad(localidad);
+			
+			DateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
+			try
+			{
+				Date convertido= fecha.parse(request.getParameter("txtFechaNac"));
+				usuario.setFechaNac(convertido);
+			} 
+			catch (ParseException e) 
+			{
+				e.printStackTrace();
+			}
+			
+			
+			usuario.setDireccion(request.getParameter("txtDireccion"));
+			usuario.setMail(request.getParameter("txtMail"));
+			usuario.setTelefono(request.getParameter("txtTelefono"));
+			
+			estado=usuarioNeg.altaUsuario(usuario);
+			
+	    	request.setAttribute("estadoUsuario", estado);
+	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/AltaCliente.jsp");
+			dispatcher.forward(request, response);
+			
+			
+			
+			/*
 			UsuarioDaoImpl udi= new UsuarioDaoImpl();
 			
 			Usuario usu= new Usuario();
@@ -118,6 +232,7 @@ public class servletUsuario extends HttpServlet {
 			{
 				System.out.println("debes completar todos los campos");
 			}
+			*/
 		}
 		
 	}

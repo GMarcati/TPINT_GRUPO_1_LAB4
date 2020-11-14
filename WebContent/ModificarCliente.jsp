@@ -89,16 +89,15 @@
 <div><h2>MODIFICAR CLIENTE</h2><br></div>
 <div>
  
-    
-  <label>Constraseña: </label><input type="text" name="txtConstrasenia" class="form-control" value="<%=usuario.getContrasenia()%>" ><br>
+  <label>Id Usuario: </label><input type="text" disabled="disabled" name="txtIdUsuario" class="form-control" value="<%=request.getAttribute("idModificar")%>" ><br>
+  <label>Constraseña: </label><input type="text" name="txtContrasenia" class="form-control" value="<%=usuario.getContrasenia()%>" ><br>
   <label>DNI: </label><input type="text" name="txtDni" class="form-control" value="<%=usuario.getDni()%>"><br>
   <label>CUIL: </label><input type="text" name="txtCuil" class="form-control" value="<%=usuario.getCuil()%>"><br>
   <label>Nombre: </label><input type="text" name="txtNombre" class="form-control" value="<%=usuario.getNombre()%>"><br>
   <label>Apellido: </label><input type="text" name="txtApellido" class="form-control" value="<%=usuario.getApellido()%>"><br>
   <label>Sexo: </label><input type="text" name="txtSexo" class="form-control" value="<%=usuario.getSexo()%>"><br>
-  <label>Nacionalidad: </label><input type="text" name="txtNac" class="form-control" value="<%=usuario.getNacionalidad().getDescripcion()%>"><br>
-  <label>Nacionalidad a cambiar:</label>
-  <select class="form-control">
+  <label>Nacionalidad:</label>
+  <select name="nacionalidad" class="form-control">
   
   <% 
   
@@ -112,7 +111,7 @@
   </select><br>
   
     <label>Provincia:</label>
-  <select class="form-control">
+  <select name="provincia"  class="form-control">
   
   <% 
   
@@ -125,7 +124,7 @@
   
   </select><br>
     <label>Localidad:</label>
-  <select class="form-control">
+  <select name="localidad"  class="form-control">
   
   <% 
   
@@ -142,7 +141,7 @@
   <label>Direccion</label><input type="text" name="txtDireccion" class="form-control" value="<%=usuario.getDireccion()%>"><br>
   <label>Mail: </label><input type="text" name="txtMail" class="form-control"  value="<%=usuario.getMail()%>"><br>
   <label>Telefono: </label><input type="text" name="txtTelefono" class="form-control" value="<%=usuario.getTelefono()%>"><br>
-  <input type="submit" name="btnAceptar" value="Aceptar" class="btn btn-primary">
+  <input type="submit" name="btnModificar" value="Aceptar" class="btn btn-primary">
  </div>
   </div>
   </form>

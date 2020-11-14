@@ -35,9 +35,9 @@ public class UsuarioNegImpl implements UsuarioNeg{
 		return usuarioDao.verificarTipoUsuario(usuario);
 	}
 	
-	public boolean altaUsuario()
+	public boolean altaUsuario(Usuario usuario)
 	{
-		return false;
+		return this.usuarioDao.altaUsuario(usuario);
 	}
 	
 	public ArrayList<Usuario> listarUsuarios() 
@@ -45,7 +45,7 @@ public class UsuarioNegImpl implements UsuarioNeg{
 		return (ArrayList<Usuario>) usuarioDao.listarUsuarios();
 	}
 	
-	public Usuario obtenerUno(int id) 
+	public Usuario obtenerUno(long id) 
 	{
 		return usuarioDao.obtenerUno(id);
 	}
