@@ -59,7 +59,7 @@ CREATE TABLE cuentas(
     fechaCreacion date NOT NULL,
     CBU bigint NOT NULL,
     saldo decimal NOT NULL,
-    idEstado bit NOT NULL,
+    idEstado int NOT NULL,
     primary key (idCuenta),
     constraint foreign key (idTipoCuenta) references tipoCuentas (idTipoCuenta)
 );
