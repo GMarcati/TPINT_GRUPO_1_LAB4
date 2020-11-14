@@ -58,16 +58,22 @@ public class CuentaDaoImpl implements CuentaDao{
 				 	}*/
 				 	
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 				 	x.setCBU(rs.getLong("cuentas.CBU"));
 				 	x.setSaldo(rs.getFloat("cuentas.saldo")); //ver
 
 				 	x.setEstado(rs.getBoolean("estado.idEstado"));
 =======
+=======
+>>>>>>> Stashed changes
 				 	//x.setCBU(rs.getLong("cuentas.CBU"));
 				 	x.setSaldo(rs.getDouble("cuentas.saldo")); //ver
 	
 				 	x.setEstado(rs.getInt("cuentas.idEstado"));
 		
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 				 	ListadoCuenta.add(x);
 			 }
@@ -118,10 +124,15 @@ public class CuentaDaoImpl implements CuentaDao{
 			 	
 			 	x.setCBU(rs.getLong("cuentas.CBU"));
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 			 	x.setSaldo(rs.getFloat("cuentas.saldo")); //ver
 
 			 	x.setEstado(rs.getBoolean("estado.idEstado"));
 
+=======
+			 	x.setSaldo(rs.getDouble("cuentas.saldo")); //ver
+			 	x.setEstado(rs.getInt("cuentas.idEstado"));
+>>>>>>> Stashed changes
 =======
 			 	x.setSaldo(rs.getDouble("cuentas.saldo")); //ver
 			 	x.setEstado(rs.getInt("cuentas.idEstado"));

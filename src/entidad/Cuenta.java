@@ -15,7 +15,11 @@ public class Cuenta {
 		private long CBU;
 		private double saldo;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 		private boolean estado;
+=======
+		private int estado;
+>>>>>>> Stashed changes
 =======
 		private int estado;
 >>>>>>> Stashed changes
@@ -47,7 +51,11 @@ public class Cuenta {
 
 		public Cuenta(long idCuenta, long numeroCuenta, TipoCuenta tipoCuenta, LocalDate fechaCreacion, long cBU,
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 				double saldo, boolean estado) {
+=======
+				double saldo, int estado) {
+>>>>>>> Stashed changes
 =======
 				double saldo, int estado) {
 >>>>>>> Stashed changes
@@ -125,6 +133,7 @@ public class Cuenta {
 		}
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 		public boolean getEstado() {
 			return estado;
 		}
@@ -141,6 +150,9 @@ public class Cuenta {
 		}
 		
 		
+=======
+
+>>>>>>> Stashed changes
 =======
 
 >>>>>>> Stashed changes
