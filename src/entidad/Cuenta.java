@@ -14,15 +14,7 @@ public class Cuenta {
 		private LocalDate fechaCreacion;
 		private long CBU;
 		private double saldo;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 		private boolean estado;
-=======
-		private int estado;
->>>>>>> Stashed changes
-=======
-		private int estado;
->>>>>>> Stashed changes
 		
 		public Cuenta() {
 			
@@ -48,17 +40,8 @@ public class Cuenta {
 			return CBU;
 		}
 		
-
 		public Cuenta(long idCuenta, long numeroCuenta, TipoCuenta tipoCuenta, LocalDate fechaCreacion, long cBU,
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 				double saldo, boolean estado) {
-=======
-				double saldo, int estado) {
->>>>>>> Stashed changes
-=======
-				double saldo, int estado) {
->>>>>>> Stashed changes
 			super();
 			this.idCuenta = idCuenta;
 			this.numeroCuenta = numeroCuenta;
@@ -66,21 +49,6 @@ public class Cuenta {
 			this.fechaCreacion = fechaCreacion;
 			CBU = cBU;
 			this.saldo = saldo;
-			this.estado = estado;
-		}
-
-		@Override
-		public String toString() {
-			return "Cuenta [idCuenta=" + idCuenta + ", numeroCuenta=" + numeroCuenta + ", tipoCuenta=" + tipoCuenta
-					+ ", fechaCreacion=" + fechaCreacion + ", CBU=" + CBU + ", saldo=" + saldo + ", estado=" + estado
-					+ "]";
-		}
-
-		public int getEstado() {
-			return estado;
-		}
-
-		public void setEstado(int estado) {
 			this.estado = estado;
 		}
 
@@ -132,8 +100,6 @@ public class Cuenta {
 			this.saldo = saldo;
 		}
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 		public boolean getEstado() {
 			return estado;
 		}
@@ -150,12 +116,6 @@ public class Cuenta {
 		}
 		
 		
-=======
-
->>>>>>> Stashed changes
-=======
-
->>>>>>> Stashed changes
 		
 		
 		

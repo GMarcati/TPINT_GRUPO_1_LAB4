@@ -108,7 +108,7 @@
 	<!-- Hacer MENU ADMIN -->
 	<!-- Aca va el form direccionando al servlet -->
 
-	<div class="container-fluid" style="margin-top: 1em;">
+	<div class="container-fluid" style="margin-top: 5em;">
 		<div>
 			<h2>LISTADO DE CLIENTES</h2>
 			<br>
@@ -169,6 +169,11 @@
 	</table>
 	
 
+	
+	
+	</div>
+	
+	<div style="margin-top: 5em;">
 	
 	
 	</div>

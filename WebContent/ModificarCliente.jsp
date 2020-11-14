@@ -90,14 +90,14 @@
 <div>
  
     
-  <label>Constraseña: </label><input type="text" name="txtPass" class="form-control" value="<%=usuario.getContrasenia()%>" ><br>
+  <label>Constraseña: </label><input type="text" name="txtConstrasenia" class="form-control" value="<%=usuario.getContrasenia()%>" ><br>
   <label>DNI: </label><input type="text" name="txtDni" class="form-control" value="<%=usuario.getDni()%>"><br>
   <label>CUIL: </label><input type="text" name="txtCuil" class="form-control" value="<%=usuario.getCuil()%>"><br>
   <label>Nombre: </label><input type="text" name="txtNombre" class="form-control" value="<%=usuario.getNombre()%>"><br>
   <label>Apellido: </label><input type="text" name="txtApellido" class="form-control" value="<%=usuario.getApellido()%>"><br>
   <label>Sexo: </label><input type="text" name="txtSexo" class="form-control" value="<%=usuario.getSexo()%>"><br>
-  
-  <label>Nacionalidad:</label>
+  <label>Nacionalidad: </label><input type="text" name="txtNac" class="form-control" value="<%=usuario.getNacionalidad().getDescripcion()%>"><br>
+  <label>Nacionalidad a cambiar:</label>
   <select class="form-control">
   
   <% 
