@@ -1,3 +1,4 @@
+<%@page import="entidad.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -12,8 +13,8 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 1em;">
     	<div class="container body-content">
-  			<span class="navbar-brand mb-0 h1">Banco Sarasa</span>
-  				<span class="navbar-text"><a class="nav-item" href="#">Cerrar sesion</a></span>
+  			<span class="navbar-brand mb-0 h1">Banco Sarasa--> Sesión de <%= Usuario.getNombreUsu()%></span>
+  				<span class="navbar-text"><a class="nav-item" href="#">Cerrar sesión</a></span>
   		</div>
 	</nav>
 	

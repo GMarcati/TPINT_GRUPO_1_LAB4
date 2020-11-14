@@ -1,6 +1,9 @@
 package daoImpl;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +30,6 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		cn.Open();
 		
 		boolean resultado= false; //va a almacenar true, si hubo coincidencia de usuario y contraseña
-		
 		
 		try
 		{
@@ -56,6 +58,46 @@ public class UsuarioDaoImpl implements UsuarioDao {
 			cn.close();
 		}
 		return resultado;
+	}
+	
+	//METODO QUE VERIFICA QUE TIPO DE USUARIO ES EL QUE INGRESO AL LOGIN-->
+	public boolean verificarTipoUsuario(String usuario)
+	{
+		cn = new Conexion();
+		cn.Open();
+		
+		boolean resultado= false; //va a almacenar true, si es administrador y false si es cliente
+		
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+		} 
+		catch (ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+		
+		try 
+		{
+			ResultSet rs= cn.query("select idTipoUsuario from usuarios where usuario= '"+usuario+"'");
+			if(rs.next())
+			{
+				int tipo= rs.getInt(1);
+				if(tipo==1)
+				{
+					resultado=true;
+				}
+			}
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			resultado=false;
+		}
+		finally
+		{
+			return resultado;
+		}
 	}
 	
 	public boolean modificar(Usuario usuario) {

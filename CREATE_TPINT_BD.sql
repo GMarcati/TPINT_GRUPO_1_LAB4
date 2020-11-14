@@ -195,7 +195,6 @@ insert into nacionalidades (descripcion) values ('Honduras');
 insert into nacionalidades (descripcion) values ('Mexico');
 insert into nacionalidades (descripcion) values ('Canada');
 
-
 insert into movimientos(idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (1, '2020/10/21', 'pago atrasado cuota', 5000, 123456789);
 insert into movimientos(idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (2, '2020/09/22', 'pago atrasado cuota', 4000, 123456789);
 insert into movimientos(idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (3, '2020/08/23', 'pago atrasado cuota', 3000, 123456789);

@@ -30,44 +30,48 @@ public class UsuarioNegImpl implements UsuarioNeg{
 		return usuarioDao.verificarLogin(nombre, apellido);
 	}
 	
+	public boolean verificarTipoUsuario(String usuario)
+	{
+		return usuarioDao.verificarTipoUsuario(usuario);
+	}
+	
 	public boolean altaUsuario()
 	{
 		return false;
 	}
 	
-	public ArrayList<Usuario> listarUsuarios() {
+	public ArrayList<Usuario> listarUsuarios() 
+	{
 		return (ArrayList<Usuario>) usuarioDao.listarUsuarios();
 	}
 	
-	public Usuario obtenerUno(int id) {
+	public Usuario obtenerUno(int id) 
+	{
 		return usuarioDao.obtenerUno(id);
 	}
 	
-	public boolean modificar(Usuario usuario) {
+	public boolean modificar(Usuario usuario) 
+	{
 		return usuarioDao.modificar(usuario);
 	}
 	
-	public boolean eliminar(int id) {
-		
+	public boolean eliminar(int id) 
+	{
 		return usuarioDao.eliminar(id);
 	}
 	
-	public ArrayList<Nacionalidad> listarNacionalidades() {
-		
+	public ArrayList<Nacionalidad> listarNacionalidades() 
+	{
 		return (ArrayList<Nacionalidad>) usuarioDao.listarNacionalidades();
-	
 	}
 	
-	public ArrayList<Provincia> listarProvincias() {
-		
+	public ArrayList<Provincia> listarProvincias() 
+	{
 		return (ArrayList<Provincia>) usuarioDao.listarProvincias();
-	
 	}
 	
-	public ArrayList<Localidad> listarLocalidades() {
-		
+	public ArrayList<Localidad> listarLocalidades() 
+	{
 		return (ArrayList<Localidad>) usuarioDao.listarLocalidades();
-	
 	}
-	
 }

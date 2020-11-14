@@ -12,6 +12,7 @@ import entidad.Usuario;
 public interface UsuarioNeg 
 {
 	public boolean verificarLogin(String nombre, String apellido);
+	public boolean verificarTipoUsuario(String usuario);
 	public boolean altaUsuario();
 	public boolean modificar(Usuario usuario);
 	public boolean eliminar(int id);
