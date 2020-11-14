@@ -26,7 +26,7 @@
 				Menu admin
 				</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="AltaCliente.jsp" >Alta cliente</a>
+						<a class="dropdown-item" href="servletUsuario?listarSelects" >Alta cliente</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="servletUsuario?listadoU">Listar/Modificar/Dar de baja cliente</a> 
 						<div class="dropdown-divider"></div>
