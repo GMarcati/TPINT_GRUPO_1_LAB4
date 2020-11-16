@@ -21,6 +21,8 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js">  </script>
 <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">  </script>
  
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+ 
  <script>
  $(document).ready( function () {
  $('#table_id').DataTable({
@@ -51,10 +53,20 @@
 	
 		if(request.getAttribute("estadoEliminar") != null)
 		{%>
-			<script>alert("Cuenta eliminada con exito")</script>
+			<script>swal("Cuenta eliminada con exito!", "", "success")</script>
 		<%	
 		} 
 		%>
+		
+		<%
+		if(request.getAttribute("estadoModificar") != null)
+		{%>
+			<script>swal("Cuenta modificada con exito!", "", "success")</script>
+		<%	
+		} 
+		%>
+		
+
 		
 		
 		
@@ -115,6 +127,8 @@
 			<th>ID CUENTA	</th>
 			<th>NRO CUENTA</th>
 			<th>TIPO CUENTA</th>
+			<th>FECHA CREACION</th>
+			<th>CBU</th>
 			<th>SALDO</th>
 			<th>ACCION</th>
 		</tr>
@@ -129,6 +143,8 @@
 			<td><%=c.getIdCuenta()%></td>
 			<td><%=c.getNumeroCuenta()%></td>
 			<td><%=c.getTipoCuenta().getDescripcion()%></td>
+			<td><%=c.getFechaCreacion()%></td>
+			<td><%=c.getCBU()%></td>
 			<td><%=c.getSaldo()%></td>
 			<td class="text-center"><a href="servletCuenta?idModificar=<%=c.getIdCuenta()%>" class="btn btn-secondary btn-sm" style="width: 80px;">Modificar</a> <br><br> <a href="servletCuenta?idEliminar=<%=c.getIdCuenta()%>" class="btn btn-danger btn-sm" style="width: 80px;">Eliminar</a></td>
 		</tr>

@@ -1,3 +1,5 @@
+<%@page import="entidad.Usuario"%>
+<%@page import="entidad.Cuenta"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -11,17 +13,57 @@
 
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<div class="container body-content">
-		<span class="navbar-brand mb-0 h1">Banco Sarasa</span>
-        
-    	<span class="navbar-text">
-   	   	<a class="nav-item" href="PrincipalAdministrador.jsp">Menu admin</a>
-    	</span>
-  		</div>
-  		
-  
-</nav>
+
+	<%
+		Cuenta cuenta = new Cuenta();
+		if (request.getAttribute("cuentaFiltrada") != null) {
+			cuenta = (Cuenta)request.getAttribute("cuentaFiltrada");
+		}
+	%>
+	
+
+	
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"  style="margin-bottom: 1em;">
+        <div class="container">
+
+			<span class="navbar-brand mb-0 h1">Banco Sarasa--> Sesión de <%= Usuario.getNombreUsu()%></span>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+				<li class="nav-text dropdown">
+				<a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				Menu admin
+				</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="AltaCliente.jsp" >Alta cliente</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="servletUsuario?listadoU">Listar/Modificar/Dar de baja cliente</a> 
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="AltaCuenta.jsp" >Alta cuenta</a> 
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="servletCuenta?listadoC" >Listar/Modificar/Dar de baja cuenta</a> 
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="AsignarCuentaACliente.jsp">Asignar cuenta a cliente</a> 
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="ListaPrestamos.jsp">Autorizar préstamos</a> 
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="VerInformes.jsp" >Ver informes</a> 
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="Logoff.jsp" >Cerrar sesión</a> 
+					</div>
+				</li>
+						 					
+                </ul>
+
+
+            </div>
+        </div>
+
+    </nav>
 
 
 <div class="container body-content" style="margin-top: 1em;">
@@ -29,16 +71,16 @@
 <div>
  <form method="get" action="servletCuenta">
     
-  
-  <label>Numero de cuenta: </label><input type="text" name="txtNumeroCuenta" class="form-control" placeholder="Ej: 452535875436 - ingrese el numero de cuenta sin puntos " aria-label="Ej: 253587549014 - ingrese el numero de cuenta sin puntos" aria-describedby="basic-addon1"><br>
-  <label>Saldo: </label><input type="text" name="txtSaldo" class="form-control" placeholder="Monto inicial $ 10000 " aria-label="Monto inicial $ 10000" aria-describedby="basic-addon1"><br>
-  <label>Tipo de cuenta: </label>
-  <select name="tipoCuenta">
-  <option value="1"> Caja de ahorro </option>
-  <option value="2"> Cuenta corriente </option>
-  </select><br>
-  <label>CBU: </label><input type="text" name="txtCBU" class="form-control" placeholder="Ej: 00007562415899635412510 - 22 digitos" aria-label="Ej: 00007562415899635412510 - 22 digitos" aria-describedby="basic-addon1"><br>
-<input type="submit" name="btnModificar" value="Aceptar">
+  <label>Id cuenta: </label> <input readonly="readonly" type="text" name="txtIdCuenta" class="form-control" value="<%=request.getAttribute("idModificar")%>"><br>
+  <label>Numero de cuenta: </label><input required type="number" name="txtNumeroCuenta" class="form-control" value="<%=cuenta.getNumeroCuenta()%>"><br>
+  <label>Saldo: </label><input required type="number" name="txtSaldo" class="form-control" value="<%=cuenta.getSaldo()%>" min="1" step="any"><br>
+		  	<label>Tipo de cuenta</label> 
+				<select required class="form-control" name="tipoCuenta" >  
+					<option value="1" >Caja de ahorro </option>  
+					<option value="2">Cuenta corriente </option> 
+</select> <br>
+  <label>CBU: </label><input required type="number" name="txtCBU" class="form-control" value="<%=cuenta.getCBU()%>"><br>
+<input class="btn btn-primary" type="submit" name="btnModificar" value="Aceptar">
 </form>
  </div>
   </div>

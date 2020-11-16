@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -106,7 +107,9 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		cn = new Conexion();
 		cn.Open();	
 		
-		String query = "Update usuarios set contrasenia='"+usuario.getContrasenia() +"',idTipoUsuario="+usuario.getTipoUsuario().getIdTipoUsuario()+",DNI='"+usuario.getDni()+"',CUIL='"+usuario.getCuil()+"',nombre='"+usuario.getNombre()+"',apellido='"+usuario.getApellido()+"',sexo='"+usuario.getSexo()+"',fechaNacimiento='"+usuario.getFechaNac()+"',direccion='"+usuario.getDireccion()+"',idLocalidad="+usuario.getLocalidad().getIdLocalidad()+",idNacionalidad="+usuario.getNacionalidad().getIdNacionalidad()+",idProvincia="+usuario.getProvincia().getIdProvincia()+",mail='"+usuario.getMail()+"',telefono='"+usuario.getTelefono()+"' where idUsuario="+usuario.getIdUsuario()+" and idEstado =1";
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		
+		String query = "Update usuarios set contrasenia='"+usuario.getContrasenia() +"',DNI='"+usuario.getDni()+"',CUIL='"+usuario.getCuil()+"',nombre='"+usuario.getNombre()+"',apellido='"+usuario.getApellido()+"',sexo='"+usuario.getSexo()+"',fechaNacimiento='"+formatter.format(usuario.getFechaNac())+"',direccion='"+usuario.getDireccion()+"',idLocalidad="+usuario.getLocalidad().getIdLocalidad()+",idNacionalidad="+usuario.getNacionalidad().getIdNacionalidad()+",idProvincia="+usuario.getProvincia().getIdProvincia()+",mail='"+usuario.getMail()+"',telefono='"+usuario.getTelefono()+"' where idUsuario="+usuario.getIdUsuario()+"";
 
 		try
 		 {
@@ -223,10 +226,12 @@ public class UsuarioDaoImpl implements UsuarioDao {
 
 		cn = new Conexion();
 		cn.Open();	
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
-		String query = "INSERT INTO usuarios(usuario, contrasenia, idTipoUsuario, DNI, CUIL, nombre, apellido, sexo, fechaNacimiento, direccion, idLocalidad, idNacionalidad, idProvincia, mail, telefono, idEstado)  VALUES ('"+usuario.getUsuario()+"', '"+usuario.getContrasenia()+"', "+2+", '"+usuario.getDni()+"', '"+usuario.getCuil()+"', '"+usuario.getNombre()+"', '"+usuario.getApellido()+"', '"+usuario.getSexo()+"', '"+usuario.getFechaNac()+"', '"+usuario.getDireccion()+"', '"+usuario.getLocalidad().getIdLocalidad()+"', '"+usuario.getNacionalidad().getIdNacionalidad()+"', '"+usuario.getProvincia().getIdProvincia()+"', '"+usuario.getMail()+"', '"+usuario.getTelefono()+"', "+1+")";
+		String query = "INSERT INTO usuarios(usuario, contrasenia, idTipoUsuario, DNI, CUIL, nombre, apellido, sexo, fechaNacimiento, direccion, idLocalidad, idNacionalidad, idProvincia, mail, telefono, idEstado)  VALUES ('"+usuario.getUsuario()+"', '"+usuario.getContrasenia()+"', "+2+", '"+usuario.getDni()+"', '"+usuario.getCuil()+"', '"+usuario.getNombre()+"', '"+usuario.getApellido()+"', '"+usuario.getSexo()+"', '"+formatter.format(usuario.getFechaNac())+"', '"+usuario.getDireccion()+"', '"+usuario.getLocalidad().getIdLocalidad()+"', '"+usuario.getNacionalidad().getIdNacionalidad()+"', '"+usuario.getProvincia().getIdProvincia()+"', '"+usuario.getMail()+"', '"+usuario.getTelefono()+"', "+1+")";
 		//La siguiente linea es para ver los datos de la query
-		System.out.println(query);
+		//System.out.println(query);
 		try
 		 {
 			estado=cn.execute(query);

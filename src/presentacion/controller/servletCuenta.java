@@ -57,7 +57,7 @@ public class servletCuenta extends HttpServlet {
 		if(request.getParameter("idModificar") != null) {
 			
 			long idCuenta = Integer.parseInt(request.getParameter("idModificar"));
-			
+			request.setAttribute("idModificar", idCuenta);	
 			request.setAttribute("cuentaFiltrada", cuentaNeg.obtenerUno(idCuenta));	
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/ModificarCuenta.jsp");
 			dispatcher.forward(request, response);
@@ -70,8 +70,9 @@ public class servletCuenta extends HttpServlet {
 			Cuenta cuenta = new Cuenta();
 			boolean estado=true;
 			
+			cuenta.setIdCuenta(Integer.parseInt(request.getParameter("txtIdCuenta")));
 			cuenta.setNumeroCuenta(Integer.parseInt(request.getParameter("txtNumeroCuenta")));
-			cuenta.setSaldo(Integer.parseInt(request.getParameter("txtSaldo")));
+			cuenta.setSaldo(Double.parseDouble(request.getParameter("txtSaldo")));
 			cuenta.setCBU(Integer.parseInt(request.getParameter("txtCBU")));
 			TipoCuenta tipoCuenta = new TipoCuenta();
 			tipoCuenta.setIdTipoCuenta(Integer.parseInt(request.getParameter("tipoCuenta")));
@@ -126,10 +127,9 @@ public class servletCuenta extends HttpServlet {
 			boolean estado=true;
 			
 			
-			if(!request.getParameter("txtIdCuenta").isEmpty() && !request.getParameter("txtIdCliente").isEmpty()) {
 				
-				estado=cuentaNeg.AsignarCuentaACliente(Integer.parseInt(request.getParameter("txtIdCuenta")), Integer.parseInt(request.getParameter("txtIdCliente")));
-			}
+			estado=cuentaNeg.AsignarCuentaACliente(Integer.parseInt(request.getParameter("txtIdCuenta")), Integer.parseInt(request.getParameter("txtIdCliente")));
+			
 			
 			
 			

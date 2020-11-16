@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.Locale;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +15,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.sun.corba.se.impl.oa.toa.TOA;
 
 import daoImpl.UsuarioDaoImpl;
 import entidad.Localidad;
@@ -70,20 +75,19 @@ public class servletUsuario extends HttpServlet {
 			
 		}
 		
-if(request.getParameter("btnModificar") != null) {
+		if(request.getParameter("btnModificar") != null) {
 			
 			Usuario usuario= new Usuario();
 			boolean estado=true;
 			
-			//Da error de null
-			
-			usuario.setIdUsuario(Long.parseLong(request.getParameter("txtIdUsuario")));
+
+			usuario.setIdUsuario(Integer.parseInt((request.getParameter("txtIdUsuario"))));
 			usuario.setContrasenia(request.getParameter("txtContrasenia"));
 			usuario.setDni(request.getParameter("txtDni"));
 			usuario.setCuil(request.getParameter("txtCuil"));
 			usuario.setNombre(request.getParameter("txtNombre"));
 			usuario.setApellido(request.getParameter("txtApellido"));
-			usuario.setSexo(request.getParameter("txtSexo"));
+			usuario.setSexo(request.getParameter("gridRadios"));
 			
 			Nacionalidad nacionalidad = new Nacionalidad();
 			nacionalidad.setIdNacionalidad(Integer.parseInt(request.getParameter("nacionalidad")));
@@ -97,14 +101,27 @@ if(request.getParameter("btnModificar") != null) {
 			localidad.setIdLocalidad(Integer.parseInt(request.getParameter("localidad")));			
 		    usuario.setLocalidad(localidad);
 		    
-		    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		    
+		    /*
 		    try {
 				usuario.setFechaNac(format.parse(request.getParameter("txtFechaNac")));
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			*/
+		    
+
+		    try {
+		    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+				usuario.setFechaNac(format.parse(request.getParameter("txtFechaNac")));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			
+			
 		    
 		    usuario.setDireccion(request.getParameter("txtDireccion"));
 		    usuario.setMail(request.getParameter("txtMail"));
@@ -168,11 +185,16 @@ if(request.getParameter("btnModificar") != null) {
 			localidad.setIdLocalidad(Integer.parseInt(request.getParameter("localidad")));			
 		    usuario.setLocalidad(localidad);
 			
-			DateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
+		    
 			try
 			{
-				Date convertido= fecha.parse(request.getParameter("txtFechaNac"));
-				usuario.setFechaNac(convertido);
+
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+				Date date= formatter.parse(request.getParameter("txtFechaNac"));
+
+				usuario.setFechaNac(date);
+
 			} 
 			catch (ParseException e) 
 			{

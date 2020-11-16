@@ -37,8 +37,8 @@ public class CuentaNegImpl implements CuentaNeg {
 	}
 
 	@Override
-	public boolean editar(Cuenta cat) {
-		return cuentaDao.editar(cat);
+	public boolean editar(Cuenta cuenta) {
+		return cuentaDao.editar(cuenta);
 	}
 
 	@Override

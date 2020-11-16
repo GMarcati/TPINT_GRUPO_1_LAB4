@@ -86,20 +86,20 @@ public class CuentaDaoImpl implements CuentaDao{
 	public Cuenta obtenerUno(long id) {
 		cn = new Conexion();
 		cn.Open();
-		Cuenta cue = new Cuenta();
+		Cuenta cuenta = new Cuenta();
 		try
 		 {
-			String query = "SELECT cuentas.idCuenta, cuentas.numeroCuenta, tipoCuentas.idTipoCuenta, tipoCuentas.descripcion, cuentas.CBU, cuentas.saldo, estados.idEstado, estados.descripcion FROM cuentas inner join tipoCuentas on ( cuentas.idTipoCuenta = tipoCuentas.idTipoCuenta ) inner join on ( cuentas.idEstado = estados.idEstado )  where estados.descripcion='Falso' && cuentas.idCuenta="+id;
+			 String query = "SELECT C.idCuenta, C.numeroCuenta, TC.idTipoCuenta, TC.descripcion, C.fechaCreacion, C.CBU, C.saldo FROM cuentas as C inner join tipoCuentas as TC on C.idTipoCuenta = TC.idTipoCuenta where C.idEstado=1 && C.idCuenta="+id;
 			 ResultSet rs= cn.query(query);
 			 rs.next();
 			 
-			 	Cuenta x = new Cuenta();
-			 	x.setIdCuenta(rs.getLong("cuentas.idCuenta"));
-			 	x.setNumeroCuenta(rs.getLong("cuenta.numeroCuenta"));
+			 	
+			 	cuenta.setIdCuenta(rs.getLong("C.idCuenta"));
+			 	cuenta.setNumeroCuenta(rs.getLong("C.numeroCuenta"));
 			 	TipoCuenta tCuenta = new TipoCuenta();
-			 	tCuenta.setIdTipoCuenta(rs.getInt("tipoCuentas.idTipoCuenta"));
-			 	tCuenta.setDescripcion(rs.getString("tipoCuentas.descripcion"));
-			 	x.setTipoCuenta(tCuenta);
+			 	tCuenta.setIdTipoCuenta(rs.getInt("TC.idTipoCuenta"));
+			 	tCuenta.setDescripcion(rs.getString("TC.descripcion"));
+			 	cuenta.setTipoCuenta(tCuenta);
 			 	
 			 	// **** ver el como castearlo
 			 	/*DateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
@@ -112,10 +112,9 @@ public class CuentaDaoImpl implements CuentaDao{
 			 	{
 			 		e.printStackTrace();
 			 	}*/
-			 	
-			 	x.setCBU(rs.getLong("cuentas.CBU"));
-			 	x.setSaldo(rs.getDouble("cuentas.saldo")); //ver
-			 	x.setEstado(rs.getInt("cuentas.idEstado"));
+			 	cuenta.setFechaCreacion(rs.getDate("C.fechaCreacion"));
+			 	cuenta.setCBU(rs.getLong("C.CBU"));
+			 	cuenta.setSaldo(rs.getDouble("C.saldo")); //ver
 			 
 		 }
 		 catch(Exception e)
@@ -126,7 +125,7 @@ public class CuentaDaoImpl implements CuentaDao{
 		 {
 			 cn.close();
 		 }
-		return cue;
+		return cuenta;
 	}
 	
 	public boolean insertar(Cuenta cuenta) {
@@ -160,7 +159,7 @@ public class CuentaDaoImpl implements CuentaDao{
 		cn = new Conexion();
 		cn.Open();	
 
-		String query = "UPDATE  cuentas SET idTipoCuenta='"+cuenta.getTipoCuenta().getIdTipoCuenta()+"', fechaCreacion='"+cuenta.getFechaCreacion()+"', saldo='"+cuenta.getSaldo()+"', idEstado='"+cuenta.getEstado()+"' WHERE idCuenta='"+cuenta.getIdCuenta()+"'";
+		String query = "UPDATE cuentas SET numeroCuenta='"+cuenta.getNumeroCuenta()+"', idTipoCuenta='"+cuenta.getTipoCuenta().getIdTipoCuenta()+"', CBU='"+cuenta.getCBU()+"', saldo='"+cuenta.getSaldo()+"' WHERE idCuenta='"+cuenta.getIdCuenta()+"'";
 		try
 		 {
 			estado=cn.execute(query);

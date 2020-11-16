@@ -25,7 +25,7 @@
             </div>
             <hr />
            
-            <input class="btn btn-primary btn-lg" type="submit" value="Ingresar" name="btnIngresar">
+            <a href="Principal.jsp" class="btn btn-primary">Volver al inicio</a>
 		</div>
 	
 	

@@ -33,8 +33,7 @@ public class Cuenta {
 		public long GenerarNumeroCBU() {
 			
 			CBU= ThreadLocalRandom.current().nextLong(100000000, 999999999);
-			CBU+= ThreadLocalRandom.current().nextLong(100000000, 999999999);
-			CBU+= ThreadLocalRandom.current().nextLong(1000, 9999);
+			//CBU+= ThreadLocalRandom.current().nextLong(100000000, 999999999);
 			
 			return CBU;
 		}

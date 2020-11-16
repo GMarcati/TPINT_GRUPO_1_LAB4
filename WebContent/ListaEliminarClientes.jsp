@@ -30,6 +30,8 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js">  </script>
 <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">  </script>
  
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+ 
  <script>
  $(document).ready( function () {
  $('#table_id').DataTable({
@@ -58,12 +60,20 @@
 	if (request.getAttribute("usuarioEliminado") != null) 
 	{%>
 
-		<script>alert("Usuario eliminado con exito")</script>
+		<script>swal("Usuario eliminado con exito!", "", "success")</script>
 			
 	<% }
 	%>
 	
-	usuarioEliminado
+		<%
+	if (request.getAttribute("estadoModificar") != null) 
+	{%>
+
+		<script>swal("Usuario modificado con exito!", "", "success")</script>
+			
+	<% }
+	%>
+	
 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"  style="margin-bottom: 1em;">
         <div class="container">
@@ -143,7 +153,7 @@
 		%>
 		<tr>
 			<td><%=usuario.getIdUsuario()%></td>
-			<td><%=usuario.getNombre()%></td>
+			<td><%=usuario.getUsuario()%></td>
 			<td><%=usuario.getDni()%></td>
 			<td><%=usuario.getCuil()%></td>
 			<td><%=usuario.getNombre()%></td>
@@ -156,7 +166,10 @@
 			<td><%=usuario.getLocalidad().getDescripcion()%></td>
 			<td><%=usuario.getMail()%></td>
 			<td><%=usuario.getTelefono()%></td>
-			<td class="text-center"><a href="servletUsuario?idModificar=<%=usuario.getIdUsuario()%>" class="btn btn-secondary btn-sm" style="width: 80px;">Modificar</a> <br><br> <a href="servletUsuario?idEliminar=<%=usuario.getIdUsuario()%>" class="btn btn-danger btn-sm" style="width: 80px;">Eliminar</a></td>
+			<td class="text-center">
+			<a href="servletUsuario?idModificar=<%=usuario.getIdUsuario()%>" class="btn btn-secondary btn-sm" style="width: 80px;">Modificar</a> <br><br> 
+			<a href="servletUsuario?idEliminar=<%=usuario.getIdUsuario()%>" class="btn btn-danger btn-sm" style="width: 80px;">Eliminar</a>
+			</td>
 		</tr>
 		
 
@@ -167,7 +180,6 @@
 
 
 	</table>
-	
 
 	
 	

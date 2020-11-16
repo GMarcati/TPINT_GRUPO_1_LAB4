@@ -46,7 +46,7 @@
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"  style="margin-bottom: 1em;">
         <div class="container">
 
-			<span class="navbar-brand mb-0 h1">Banco Sarasa--> Sesion de <%= Usuario.getNombreUsu()%></span>
+			<span class="navbar-brand mb-0 h1">Banco Sarasa--> Sesión de <%= Usuario.getNombreUsu()%></span>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -54,7 +54,7 @@
 
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
 				<li class="nav-text dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				Menu admin
 				</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -64,7 +64,7 @@
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="AltaCuenta.jsp" >Alta cuenta</a> 
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="ListaEliminarCuentas.jsp" >Listar/Modificar/Dar de baja cuenta</a> 
+						<a class="dropdown-item" href="servletCuenta?listadoC" >Listar/Modificar/Dar de baja cuenta</a> 
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="AsignarCuentaACliente.jsp">Asignar cuenta a cliente</a> 
 						<div class="dropdown-divider"></div>
@@ -72,7 +72,7 @@
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="VerInformes.jsp" >Ver informes</a> 
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="Logoff.jsp" >Cerrar sesion</a> 
+						<a class="dropdown-item" href="Logoff.jsp" >Cerrar sesión</a> 
 					</div>
 				</li>
 						 					
@@ -88,14 +88,40 @@
 <div class="container body-content" style="margin-top: 5em;">
 <div><h2>MODIFICAR CLIENTE</h2><br></div>
 <div>
+ <%
+ String x="";
+ if(request.getAttribute("idModificar")!=null)
+ {
+	 
+	 x=request.getAttribute("idModificar").toString();
+	 
+ }	 %>
  
-  <label>Id Usuario: </label><input type="text" disabled="disabled" name="txtIdUsuario" class="form-control" value="<%=request.getAttribute("idModificar")%>" ><br>
-  <label>Constraseña: </label><input type="text" name="txtContrasenia" class="form-control" value="<%=usuario.getContrasenia()%>" ><br>
-  <label>DNI: </label><input type="text" name="txtDni" class="form-control" value="<%=usuario.getDni()%>"><br>
-  <label>CUIL: </label><input type="text" name="txtCuil" class="form-control" value="<%=usuario.getCuil()%>"><br>
-  <label>Nombre: </label><input type="text" name="txtNombre" class="form-control" value="<%=usuario.getNombre()%>"><br>
-  <label>Apellido: </label><input type="text" name="txtApellido" class="form-control" value="<%=usuario.getApellido()%>"><br>
-  <label>Sexo: </label><input type="text" name="txtSexo" class="form-control" value="<%=usuario.getSexo()%>"><br>
+  <label>Id Usuario: </label><input readonly="readonly" type="text" name="txtIdUsuario" class="form-control" value="<%=x%>" ><br>
+  <label>Constraseña: </label><input required type="text" name="txtContrasenia" class="form-control" value="<%=usuario.getContrasenia()%>" ><br>
+  <label>DNI: </label><input required type="text" name="txtDni" class="form-control" value="<%=usuario.getDni()%>"><br>
+  <label>CUIL: </label><input required type="text" name="txtCuil" class="form-control" value="<%=usuario.getCuil()%>"><br>
+  <label>Nombre: </label><input required type="text" name="txtNombre" class="form-control" value="<%=usuario.getNombre()%>"><br>
+  <label>Apellido: </label><input required type="text" name="txtApellido" class="form-control" value="<%=usuario.getApellido()%>"><br>
+  			<fieldset class="form-group">
+				<div class="row">
+					<legend class="col-form-label col-sm-2 pt-0">Sexo: </legend>
+					<div class="col-sm-10">
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="gridRadios" id="RdSexo" value="Masculino" checked> 
+							<label class="form-check-label" for="gridRadios1"> Masculino</label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="gridRadios" id="RdSexo" value="Femenino">
+							 <label class="form-check-label" for="gridRadios2"> Femenino </label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="gridRadios" id="RdSexo" value="Indefinido">
+							 <label class="form-check-label" for="gridRadios2"> Indefinido </label>
+						</div>
+					</div>
+				</div>
+			</fieldset>
   <label>Nacionalidad:</label>
   <select name="nacionalidad" class="form-control">
   
