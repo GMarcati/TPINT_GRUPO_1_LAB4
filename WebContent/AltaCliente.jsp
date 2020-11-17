@@ -18,9 +18,6 @@
 </head>
 <body>
 
-
-
-
 		<%
 		List<Nacionalidad> listaNac = new ArrayList<Nacionalidad>();
 		if (request.getAttribute("listaNacionalidad") != null) {
@@ -50,55 +47,46 @@
 		%>
 
 	<form action="servletUsuario" method="get">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"  style="margin-bottom: 1em;">
+	        <div class="container">
 	
+				<span class="navbar-brand mb-0 h1">Banco Sarasa--> Sesión de <%= Usuario.getNombreUsu()%></span>
+	            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	                <span class="navbar-toggler-icon"></span>
+	            </button>
+	            <div class="collapse navbar-collapse " id="navbarSupportedContent">
 	
-
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"  style="margin-bottom: 1em;">
-        <div class="container">
-
-			<span class="navbar-brand mb-0 h1">Banco Sarasa--> Sesión de <%= Usuario.getNombreUsu()%></span>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse " id="navbarSupportedContent">
-
-                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-				<li class="nav-text dropdown">
-				<a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				Menu admin
-				</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="AltaCliente.jsp" >Alta cliente</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="servletUsuario?listadoU">Listar/Modificar/Dar de baja cliente</a> 
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="AltaCuenta.jsp" >Alta cuenta</a> 
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="servletCuenta?listadoC" >Listar/Modificar/Dar de baja cuenta</a> 
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="AsignarCuentaACliente.jsp">Asignar cuenta a cliente</a> 
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="ListaPrestamos.jsp">Autorizar préstamos</a> 
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="VerInformes.jsp" >Ver informes</a> 
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="Logoff.jsp" >Cerrar sesión</a> 
-					</div>
-				</li>
-						 					
-                </ul>
-
-
-            </div>
-        </div>
-
-    </nav>
-
+	                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+						<li class="nav-text dropdown">
+							<a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu admin</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item" href="AltaCliente.jsp" >Alta cliente</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="servletUsuario?listadoU">Listar/Modificar/Dar de baja cliente</a> 
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="AltaCuenta.jsp" >Alta cuenta</a> 
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="servletCuenta?listadoC" >Listar/Modificar/Dar de baja cuenta</a> 
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="AsignarCuentaACliente.jsp">Asignar cuenta a cliente</a> 
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="ListaPrestamos.jsp">Autorizar préstamos</a> 
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="VerInformes.jsp" >Ver informes</a> 
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="Logoff.jsp" >Cerrar sesión</a> 
+							</div>
+						</li>					
+	                </ul>
+	            </div>
+	        </div>
+	    </nav>
+	
 		<div class="container body-content" style="margin-top: 5em;">
 			<div>
 				<h2>ALTA CLIENTE</h2> <br>
 			</div>
-			
+				
 			<label>Usuario: </label>
 			<input required type="text" name="txtUsuario" class="form-control" placeholder="Ej: THerrera " aria-label="Ej: THerrera" aria-describedby="basic-addon1"><br>
 			<label>Constraseña: </label>
@@ -111,7 +99,7 @@
 			<input required type="text" name="txtNombre" class="form-control" placeholder="Ej: Pepito" aria-label="Ej: Pepito" aria-describedby="basic-addon1"><br>
 			<label>Apellido:</label>
 			<input required type="text" name="txtApellido" class="form-control" placeholder="Ej: Cibrian" aria-label="Ej: Cibrian" aria-describedby="basic-addon1"><br>
-
+	
 			<fieldset class="form-group">
 				<div class="row">
 					<legend class="col-form-label col-sm-2 pt-0">Sexo: </legend>
@@ -131,50 +119,39 @@
 					</div>
 				</div>
 			</fieldset>
-			
-			  <label>Nacionalidad:</label>
-  <select name="nacionalidad" class="form-control">
-  
-  <% 
-  
-  for(Nacionalidad nacionalidad : listaNac){    
-   %>
-   <option value="<%=nacionalidad.getIdNacionalidad() %>"> <%=nacionalidad.getDescripcion() %> </option>
-   <%
-   } %>
-  
-  
-  </select><br>
-  
-    <label>Provincia:</label>
-  <select name="provincia"  class="form-control">
-  
-  <% 
-  
-  for(Provincia provincia : listaProv){    
-   %>
-   <option value="<%=provincia.getIdProvincia() %>"> <%=provincia.getDescripcion() %> </option>
-   <%
-   } %>
-  
-  
-  </select><br>
-    <label>Localidad:</label>
-  <select name="localidad"  class="form-control">
-  
-  <% 
-  
-  for(Localidad localidad : listaLocal){    
-   %>
-   <option value="<%=localidad.getIdLocalidad() %>"> <%=localidad.getDescripcion() %> </option>
-   <%
-   } %>
-  
-  
-  </select><br>
-
+				
+			<label>Nacionalidad:</label>
+	  		<select name="nacionalidad" class="form-control">
+	  		<% 
+		  	for(Nacionalidad nacionalidad : listaNac){    
+		 	 %>
+		  	<option value="<%=nacionalidad.getIdNacionalidad() %>"> <%=nacionalidad.getDescripcion() %> </option>
+		   	<%
+		   	} %>
+	  		</select><br>
+	  
+	   		<label>Provincia:</label>
+	  		<select name="provincia"  class="form-control">
+	  		<% 
+	  		for(Provincia provincia : listaProv){    
+	   		%>
+	   		<option value="<%=provincia.getIdProvincia() %>"> <%=provincia.getDescripcion() %> </option>
+	   		<%
+	   		} %>
+	  		</select><br>
+	  			
+	   		<label>Localidad:</label>
+	  		<select name="localidad"  class="form-control">
+	 		<%  
+	  		for(Localidad localidad : listaLocal){    
+	   		%>
+	   		<option value="<%=localidad.getIdLocalidad() %>"> <%=localidad.getDescripcion() %> </option>
+	   		<%
+	   		} %>
+	  		</select><br>
+	
 			<label>Fecha de Nacimiento</label><input required type="date" name="txtFechaNac" class="form-control" placeholder="Ej: 20/05/1890" aria-label="Ej: 20/05/1890" aria-describedby="basic-addon1"><br>
-			
+				
 			<label>Dirección</label>
 			<input required type="text" name="txtDireccion" class="form-control" placeholder="Ej: Av. Libertador 2254" aria-label="Ej: Av. Libertador 2254" aria-describedby="basic-addon1"><br>
 			<label>Mail: </label>

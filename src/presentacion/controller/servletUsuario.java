@@ -26,44 +26,30 @@ import entidad.Usuario;
 import negocio.UsuarioNeg;
 import negocioImpl.UsuarioNegImpl;
 
-/**
- * Servlet implementation class servletUsuario
- */
 @WebServlet("/servletUsuario")
 public class servletUsuario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	UsuarioNeg usuarioNeg = new UsuarioNegImpl();
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public servletUsuario() {
+     
+    public servletUsuario() 
+    {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
 		if(request.getParameter("listadoU")!=null)
 		{
-			
-			
 			request.setAttribute("listaUsuario", usuarioNeg.listarUsuarios());	
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/ListaEliminarClientes.jsp");
 			dispatcher.forward(request, response);
-		
 		}
 		
-		if(request.getParameter("idModificar")!=null) {
-			
+		if(request.getParameter("idModificar")!=null) 
+		{
 			int id = Integer.parseInt(request.getParameter("idModificar"));
 			
-			
-
 			request.setAttribute("usuarioFiltrado", usuarioNeg.obtenerUno(id));	
 			request.setAttribute("idModificar", id);	
 			request.setAttribute("listaNacionalidad", usuarioNeg.listarNacionalidades());	
@@ -71,16 +57,13 @@ public class servletUsuario extends HttpServlet {
 			request.setAttribute("listaLocalidad", usuarioNeg.listarLocalidades());	
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/ModificarCliente.jsp");
 			dispatcher.forward(request, response);
-			
-			
 		}
 		
-		if(request.getParameter("btnModificar") != null) {
-			
+		if(request.getParameter("btnModificar") != null) 
+		{
 			Usuario usuario= new Usuario();
 			boolean estado=true;
 			
-
 			usuario.setIdUsuario(Integer.parseInt((request.getParameter("txtIdUsuario"))));
 			usuario.setContrasenia(request.getParameter("txtContrasenia"));
 			usuario.setDni(request.getParameter("txtDni"));
@@ -112,17 +95,16 @@ public class servletUsuario extends HttpServlet {
 			*/
 		    
 
-		    try {
+		    try 
+		    {
 		    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 				usuario.setFechaNac(format.parse(request.getParameter("txtFechaNac")));
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
+			} 
+		    catch (ParseException e) 
+		    {
 				e.printStackTrace();
 			}
 
-			
-			
-		    
 		    usuario.setDireccion(request.getParameter("txtDireccion"));
 		    usuario.setMail(request.getParameter("txtMail"));
 		    usuario.setTelefono(request.getParameter("txtTelefono"));
@@ -135,24 +117,18 @@ public class servletUsuario extends HttpServlet {
 		    request.setAttribute("listaUsuario", usuarioNeg.listarUsuarios());
 	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/ListaEliminarClientes.jsp");
 			dispatcher.forward(request, response);
-		    
-			
 		}
 		
-		
-		if(request.getParameter("idEliminar")!=null) {
-			
-			
+		if(request.getParameter("idEliminar")!=null) 
+		{
 			request.setAttribute("usuarioEliminado", usuarioNeg.eliminar(Integer.parseInt(request.getParameter("idEliminar"))));			
 			request.setAttribute("listaUsuario", usuarioNeg.listarUsuarios());
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/ListaEliminarClientes.jsp");
 			dispatcher.forward(request, response);
 		}
 		
-		
-		if(request.getParameter("listarSelects")!=null) {
-			
-			
+		if(request.getParameter("listarSelects")!=null)
+		{
 			request.setAttribute("listaNacionalidad", usuarioNeg.listarNacionalidades());	
 			request.setAttribute("listaProvincia", usuarioNeg.listarProvincias());	
 			request.setAttribute("listaLocalidad", usuarioNeg.listarLocalidades());	
@@ -185,22 +161,18 @@ public class servletUsuario extends HttpServlet {
 			localidad.setIdLocalidad(Integer.parseInt(request.getParameter("localidad")));			
 		    usuario.setLocalidad(localidad);
 			
-		    
 			try
 			{
-
 				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
 				Date date= formatter.parse(request.getParameter("txtFechaNac"));
 
 				usuario.setFechaNac(date);
-
 			} 
 			catch (ParseException e) 
 			{
 				e.printStackTrace();
 			}
-			
 			
 			usuario.setDireccion(request.getParameter("txtDireccion"));
 			usuario.setMail(request.getParameter("txtMail"));
@@ -208,11 +180,10 @@ public class servletUsuario extends HttpServlet {
 			
 			estado=usuarioNeg.altaUsuario(usuario);
 			
+			//hay que agregar aca el mensaje de exito al agregar usuario
 	    	request.setAttribute("estadoUsuario", estado);
 	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/AltaCliente.jsp");
 			dispatcher.forward(request, response);
-			
-			
 			
 			/*
 			UsuarioDaoImpl udi= new UsuarioDaoImpl();
@@ -259,13 +230,8 @@ public class servletUsuario extends HttpServlet {
 		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
 
-		
-		
 	}
-
 }

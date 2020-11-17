@@ -5,8 +5,8 @@ import java.sql.Date;
 import java.util.concurrent.ThreadLocalRandom;
 
 
-public class Cuenta {
-
+public class Cuenta 
+{
 		private long idCuenta;
 		private long numeroCuenta;
 		private TipoCuenta tipoCuenta;
@@ -15,26 +15,23 @@ public class Cuenta {
 		private double saldo;
 		private int estado;
 		
-		public Cuenta() {
-			
-			
+		public Cuenta() 
+		{
 			this.numeroCuenta=GenerarNumeroCuenta();
 			this.CBU=GenerarNumeroCBU();
-			
 		}
 		
-		public long GenerarNumeroCuenta() {
-			
+		public long GenerarNumeroCuenta() 
+		{
 			numeroCuenta= ThreadLocalRandom.current().nextLong(100000000, 999999999);
 			
 			return numeroCuenta;
 		}
 		
-		public long GenerarNumeroCBU() {
-			
+		public long GenerarNumeroCBU() 
+		{
 			CBU= ThreadLocalRandom.current().nextLong(100000000, 999999999);
 			//CBU+= ThreadLocalRandom.current().nextLong(100000000, 999999999);
-			
 			return CBU;
 		}
 		
@@ -114,9 +111,4 @@ public class Cuenta {
 			this.saldo = saldo;
 		}
 
-
-		
-		
-		
-	
 }

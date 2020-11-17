@@ -367,44 +367,35 @@ public List<Provincia> listarProvincias(){
 	 {
 		 cn.close();
 	 }
-	
 	return listaProvincia;
 }
 
-public List<Localidad> listarLocalidades(){
-	
-	cn = new Conexion();
-	cn.Open();
-	 List<Localidad> listaLocalidad = new ArrayList<Localidad>();
-	 try
-	 {
-		 ResultSet rs= cn.query("select * from localidades");
-		 while(rs.next())
-		 {
-			 
-			 Localidad localidad = new Localidad();
-			 localidad.setIdLocalidad(rs.getInt("idLocalidad"));
-			 localidad.setDescripcion(rs.getString("descripcion"));
-			 
-			 
-			 
-			 listaLocalidad.add(localidad);
+	public List<Localidad> listarLocalidades()
+	{
+		cn = new Conexion();
+		cn.Open();
+		List<Localidad> listaLocalidad = new ArrayList<Localidad>();
+		try
+		{
+			ResultSet rs= cn.query("select * from localidades");
+			while(rs.next())
+			{ 
+				Localidad localidad = new Localidad();
+				localidad.setIdLocalidad(rs.getInt("idLocalidad"));
+				localidad.setDescripcion(rs.getString("descripcion"));
+				 
+				listaLocalidad.add(localidad);
+			} 
 		 }
-		 
-	 }
-	 catch(Exception e)
-	 {
-		 e.printStackTrace();
-	 }
-	 finally
-	 {
-		 cn.close();
-	 }
-	
-	return listaLocalidad;
-}
+		 catch(Exception e)
+		 {
+			 e.printStackTrace();
+		 }
+		 finally
+		 {
+			 cn.close();
+		 }
+		return listaLocalidad;
+	}
 
-
-	
-	
 }

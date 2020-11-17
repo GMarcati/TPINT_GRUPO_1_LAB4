@@ -21,7 +21,4 @@ public interface UsuarioNeg
 	public List<Nacionalidad> listarNacionalidades();
 	public List<Provincia> listarProvincias();
 	public List<Localidad> listarLocalidades();
-	
-	
-	
 }

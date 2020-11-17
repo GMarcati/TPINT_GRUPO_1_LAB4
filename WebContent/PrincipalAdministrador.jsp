@@ -14,7 +14,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 1em;">
     	<div class="container body-content">
   			<span class="navbar-brand mb-0 h1">Banco Sarasa--> Sesión de <%= Usuario.getNombreUsu()%></span>
-  				<span class="navbar-text"><a class="nav-item" href="#">Cerrar sesión</a></span>
+  				<span class="navbar-text"><a class="nav-item" href="Logoff.jsp">Cerrar sesión</a></span>
   		</div>
 	</nav>
 	
@@ -39,14 +39,9 @@
 			<a href="servletCuenta?listadoC" class="btn btn-outline-primary" style="width: 450px; margin:10px">Listar/Modificar/Dar de baja cuenta</a> <br>
 			<a href="AsignarCuentaACliente.jsp" class="btn btn-outline-primary" style="width: 450px; margin:10px">Asignar cuenta a cliente</a> <br>
 			<a href="ListaPrestamos.jsp" class="btn btn-outline-primary" style="width: 450px; margin:10px">Autorizar préstamos</a> <br>
+			<!--  <a href="servletPrestamo?listadoP" class="btn btn-outline-primary" style="width: 450px; margin:10px">Autorizar préstamos</a> <br>-->
 			<a href="VerInformes.jsp" class="btn btn-outline-primary" style="width: 450px; margin:10px">Ver informes</a> <br>
 		</div>
 	</div>
-<!-- Desde aca vamos a poder redireccionar para realizar ABM de clientes y en esta pagina vamos a poder ver el listado-->
-	
-
-<!-- Listado de clientes -->
-
-
 </body>
 </html>

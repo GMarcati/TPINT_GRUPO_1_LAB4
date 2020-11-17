@@ -64,8 +64,6 @@ public class CuentaDaoImpl implements CuentaDao{
 				 	//x.setCBU(rs.getLong("cuentas.CBU"));
 				 	//x.setSaldo(rs.getDouble("cuentas.saldo")); //ver
 	
-				 	
-		
 				 	ListadoCuenta.add(x);
 			 }
 		 }

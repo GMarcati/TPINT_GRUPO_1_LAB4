@@ -23,7 +23,7 @@
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
 				<li class="nav-text dropdown">
 				<a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				Menu admin
+				Menú admin
 				</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<a class="dropdown-item" href="servletUsuario?listarSelects" >Alta cliente</a>
@@ -40,70 +40,68 @@
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="VerInformes.jsp" >Ver informes</a> 
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="Logoff.jsp" >Cerrar sesion</a> 
+						<a class="dropdown-item" href="Logoff.jsp" >Cerrar sesión</a> 
 					</div>
-				</li>
-						 					
+				</li>					
                 </ul>
-
-
             </div>
         </div>
-
     </nav>
-<div class="container-fluid" style="margin-top: 5em;">
-<div><h2>LISTADO DE PRESTAMOS</h2><!-- Ingresar USUARIO SESION --><br></div>
+    
+	<div class="container-fluid" style="margin-top: 5em;">
+		<div>
+			<h2>LISTADO DE PRESTAMOS</h2><br>
+		</div>
 
-<label>Busqueda por IdCliente: </label> 	
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-  </div>
-	<input type="text" name="txtNroCuenta" class="form-control" placeholder="Ej: 10" aria-label="Username" aria-describedby="basic-addon1">
-	<input type="submit" name="btnAceptar" value="Aceptar">
-</div><br>
+		<label>Busqueda por IdCliente: </label> 	
+		<div class="input-group mb-3">
+			<div class="input-group-prepend"></div>
+			<input type="text" name="txtNroCuenta" class="form-control" placeholder="Ej: 10" aria-label="Username" aria-describedby="basic-addon1">
+			<input type="submit" name="btnAceptar" value="Aceptar" class="btn btn-primary ml-4">
+		</div><br>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">NroCuenta</th>
-      <th scope="col">IdCliente</th>
-      <th scope="col">Valor cuota</th>
-      <th scope="col">Cuotas</th>
-      <th scope="col">Estado</th>
-      <th scope="col">Accion</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>213213242</td>
-      <td>1</td>
-      <td>$5000</td>
-      <td>18</td>
-      <td>Pendiente</td>
-      <td><a href="ListaPrestamos.jsp?estado" class="btn btn-success" >Aprobado</a> <a href="ListaPrestamos.jsp?estado" class="btn btn-danger" >Rechazado</a><br></td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>2245242</td>
-      <td>5</td>
-      <td>$3000</td>
-      <td>12</td>
-      <td>Aprobado</td>
-<td><a href="ListaPrestamos.jsp?estado" class="btn btn-success" >Aprobado</a> <a href="ListaPrestamos.jsp?estado" class="btn btn-danger" >Rechazado</a><br></td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>5050505</td>
-      <td>10</td>
-      <td>$1000</td>
-      <td>36</td>
-      <td>Rechazado</td>
-<td><a href="ListaPrestamos.jsp?estado" class="btn btn-success" >Aprobado</a> <a href="ListaPrestamos.jsp?estado" class="btn btn-danger" >Rechazado</a><br></td>
-    </tr>
-  </tbody>
-</table>
-</div>
+		<table class="table">
+			<thead>
+		    	<tr>
+					<th scope="col">Número cuenta</th>
+				    <th scope="col">Monto solicitado</th>
+				    <th scope="col">Monto a devolver</th>
+				    <th scope="col">Cuotas</th>
+				    <th scope="col">Valor cuota</th>
+				    <th scope="col">Estado</th>
+				    <th scope="col">Accion</th>
+		    	</tr>
+		  	</thead>
+			<tbody>
+				<tr>
+			  	    <td>213213242</td>
+					<td>$5000</td>
+					<td>$10000</td>
+			     	<td>12</td>
+			     	<td>833.33</td>
+			     	<td>Pendiente</td>
+			      	<td><a href="ListaPrestamos.jsp?estado" class="btn btn-success" >Aprobado</a> <a href="ListaPrestamos.jsp?estado" class="btn btn-danger" >Rechazado</a><br></td>
+			    </tr>
+			    <tr>
+			      	<td>2245242</td>
+			      	<td>$3000</td>
+			      	<td>$6000</td>
+			      	<td>6</td>
+			      	<td>833.33</td>
+			      	<td>Aprobado</td>
+					<td><a href="ListaPrestamos.jsp?estado" class="btn btn-success" >Aprobado</a> <a href="ListaPrestamos.jsp?estado" class="btn btn-danger" >Rechazado</a><br></td>
+			    </tr>
+		    	<tr>
+		      		<td>5050505</td>
+		      		<td>$10000</td>
+		      		<td>$20000</td>
+		     		<td>36</td>
+		     		<td>833.33</td>
+		      		<td>Rechazado</td>
+					<td><a href="ListaPrestamos.jsp?estado" class="btn btn-success" >Aprobado</a> <a href="ListaPrestamos.jsp?estado" class="btn btn-danger" >Rechazado</a><br></td>
+		    	</tr>
+		  	</tbody>
+		</table>
+	</div>
 </body>
 </html>
