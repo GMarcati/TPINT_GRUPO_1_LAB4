@@ -45,7 +45,7 @@ CREATE TABLE usuarios(
 	usuario varchar(50) NOT NULL unique,
     contrasenia varchar(50) NOT NULL,
     idTipoUsuario int NOT NULL,
-    DNI VARCHAR(8) NOT NULL,
+    DNI VARCHAR(8) NOT NULL unique,
     CUIL VARCHAR(11) NOT NULL,
     nombre VARCHAR(100) NULL,
     apellido VARCHAR(100) NULL,
@@ -67,11 +67,11 @@ CREATE TABLE usuarios(
 
 CREATE TABLE cuentas(
 	idCuenta bigint NOT NULL auto_increment,
-    idUsuario bigint not null, -- agregada ultima actualizacion
-    numeroCuenta bigint NOT NULL,
+    idUsuario bigint null, -- agregada ultima actualizacion
+    numeroCuenta bigint NOT NULL unique,
     idTipoCuenta int NOT NULL,
     fechaCreacion date NOT NULL,
-    CBU bigint NOT NULL,
+    CBU bigint NOT NULL unique,
     saldo decimal NOT NULL,
     idEstado bit NOT NULL,
     primary key (idCuenta),
@@ -236,6 +236,6 @@ insert into prestamos (idCuenta, importeAdevolver, fecha, montoSolicitado, canti
 
 
 select p.*, c.numeroCuenta from prestamos as p
-inner join cuentas as c on c.idCuenta= p.idCuenta
+inner join cuentas as c on c.idCuenta= p.idCuenta;
 
-select * from cuentas
+select * from cuentas;

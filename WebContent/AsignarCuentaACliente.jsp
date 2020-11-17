@@ -1,4 +1,7 @@
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="entidad.Usuario"%>
+<%@page import="entidad.Cuenta"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -6,13 +9,9 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Asignar cuenta a cliente</title>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
-
+<jsp:include page="MenuAdmin.jsp"></jsp:include>
 
 	<%
 	if (request.getAttribute("estadoAsignarCuenta") != null) 
@@ -22,6 +21,44 @@
 			
 	<% }
 	%>
+	
+			<%
+		boolean estado=false;
+		if(request.getAttribute("estadoAsignarCuenta")!=null){
+			estado=(Boolean)request.getAttribute("estadoAsignarCuenta");
+			
+			
+			if(estado==true){
+			%>
+				<script>swal("Cuenta asignada a cliente con exito!", "", "success")</script>
+			<%
+			}else
+			{
+			%>
+				<script>swal("Error al asignar la cuenta al cliente.", "", "error")</script>
+			<%
+			}
+			
+
+		}
+
+		%>
+	
+	
+			<%
+		List<Usuario> listaU = new ArrayList<Usuario>();
+		if (request.getAttribute("listaUsuario") != null) {
+			listaU = (List<Usuario>) request.getAttribute("listaUsuario");
+		}
+		%>
+		
+		<%
+		List<Cuenta> listaC = new ArrayList<Cuenta>();
+		if (request.getAttribute("listaCuenta") != null) {
+			listaC = (List<Cuenta>) request.getAttribute("listaCuenta");
+		}
+		%>
+		
 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"  style="margin-bottom: 1em;">
         <div class="container">
@@ -66,8 +103,26 @@
 		<div>
 			<h2>ASIGNAR CUENTA A CLIENTE</h2><br></div>
 		<div>
-		  	<label>Id cuenta: </label><input required type="number" name="txtIdCuenta" class="form-control" placeholder="Ej: 1" aria-label="Ej: 1" aria-describedby="basic-addon1"><br>
-		  	<label>Id cliente: </label><input required type="number" name="txtIdCliente" class="form-control" placeholder="Ej: 5" aria-label="Ej: 5" aria-describedby="basic-addon1"><br>
+			<label>Id Cuenta:</label>
+	  		<select name="txtIdCuenta" class="form-control">
+	  		<% 
+		  	for(Cuenta cuenta : listaC){    
+		 	 %>
+		  	<option value="<%=cuenta.getIdCuenta() %>"> <%=cuenta.getIdCuenta() %> - <%=cuenta.getNumeroCuenta() %> </option>
+		   	<%
+		   	} %>
+	  		</select><br>
+			<label>Id Cliente:</label>
+	  		<select name="txtIdCliente" class="form-control">
+	  		<% 
+		  	for(Usuario usuario : listaU){    
+		 	 %>
+		  	<option value="<%=usuario.getIdUsuario() %>"> <%=usuario.getIdUsuario() %> - <%=usuario.getUsuario() %> </option>
+		   	<%
+		   	} %>
+	  		</select><br>
+			
+			
 			<input class="btn btn-primary" type="submit" name="btnAsignarCuenta" value="Aceptar">
 	 	</div>
 	</div>

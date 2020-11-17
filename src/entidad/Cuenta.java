@@ -8,6 +8,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Cuenta 
 {
 		private long idCuenta;
+		private long idUsuario;
 		private long numeroCuenta;
 		private TipoCuenta tipoCuenta;
 		private Date fechaCreacion;
@@ -48,11 +49,12 @@ public class Cuenta
 			this.estado = estado;
 		}
 
+
 		@Override
 		public String toString() {
-			return "Cuenta [idCuenta=" + idCuenta + ", numeroCuenta=" + numeroCuenta + ", tipoCuenta=" + tipoCuenta
-					+ ", fechaCreacion=" + fechaCreacion + ", CBU=" + CBU + ", saldo=" + saldo + ", estado=" + estado
-					+ "]";
+			return "Cuenta [idCuenta=" + idCuenta + ", idUsuario=" + idUsuario + ", numeroCuenta=" + numeroCuenta
+					+ ", tipoCuenta=" + tipoCuenta + ", fechaCreacion=" + fechaCreacion + ", CBU=" + CBU + ", saldo="
+					+ saldo + ", estado=" + estado + "]";
 		}
 
 		public int getEstado() {
@@ -109,6 +111,14 @@ public class Cuenta
 
 		public void setSaldo(double saldo) {
 			this.saldo = saldo;
+		}
+
+		public long getIdUsuario() {
+			return idUsuario;
+		}
+
+		public void setIdUsuario(long idUsuario) {
+			this.idUsuario = idUsuario;
 		}
 
 }

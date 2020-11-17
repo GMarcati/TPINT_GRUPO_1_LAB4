@@ -200,8 +200,8 @@ public class CuentaDaoImpl implements CuentaDao{
 		cn = new Conexion();
 		cn.Open();	
 
-		String query = "Insert into cuentas_x_cliente(idCuenta, idUsuario) VALUES ("+idCuenta+","+idUsuario+")";
-
+		//String query = "Insert into cuentas(idUsuario) VALUES ("+idUsuario+") where idCuenta="+idCuenta;
+		String query = "Update cuentas set idUsuario="+idUsuario+" where idCuenta="+idCuenta;
 		try
 		 {
 			estado=cn.execute(query);
@@ -220,6 +220,7 @@ public class CuentaDaoImpl implements CuentaDao{
 		
 		
 	}
+	
 
 	//******** LISTAR NUMEROCUENTA PARA JSP TRANSFERENCIA **********///
 	public List<Cuenta> listarNumeroCuentas(){

@@ -28,7 +28,7 @@ public class servletLogin extends HttpServlet
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		boolean estado=true;
+		boolean estado=false;
 				
 		if(request.getParameter("btnIngresar")!=null) //si se presiono el boton ingresar en el login
 		{
@@ -58,17 +58,20 @@ public class servletLogin extends HttpServlet
 				}
 				else
 				{
+					
+					
 					//Cuando no coincide el usuario y la contraseña
-					request.getSession().setAttribute("Error", "El usuario/contraseña es incorrecto.");
-					RequestDispatcher rd= request.getRequestDispatcher("/ErrorLogin.jsp");
+					request.setAttribute("estadoLoginError", estado);
+					RequestDispatcher rd= request.getRequestDispatcher("/Login.jsp");
 					rd.forward(request, response);
 				}
 			}
 			else
 			{
+				
 				//Cuando no se ingrese nada en los campos de usuario y contraseña
-				request.getSession().setAttribute("Error", "Los campos usuario y/o contraseña estan vacios.");
-				RequestDispatcher rd= request.getRequestDispatcher("/ErrorLogin.jsp");
+				request.setAttribute("estadoLoginErrorVacio", estado);
+				RequestDispatcher rd= request.getRequestDispatcher("/Login.jsp");
 				rd.forward(request, response);
 			}
 		}

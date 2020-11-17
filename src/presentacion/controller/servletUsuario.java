@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sun.corba.se.impl.oa.toa.TOA;
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 import daoImpl.UsuarioDaoImpl;
 import entidad.Localidad;
@@ -39,6 +40,16 @@ public class servletUsuario extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
+		
+		if(request.getParameter("listadoUCuenta")!=null) {
+			
+			
+		    request.setAttribute("listaUsuarios", usuarioNeg.listarUsuarios());
+	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/AltaCuenta.jsp");
+			dispatcher.forward(request, response);
+			
+		}
+		
 		if(request.getParameter("listadoU")!=null)
 		{
 			request.setAttribute("listaUsuario", usuarioNeg.listarUsuarios());	
@@ -85,15 +96,6 @@ public class servletUsuario extends HttpServlet {
 		    usuario.setLocalidad(localidad);
 		    
 		    
-		    /*
-		    try {
-				usuario.setFechaNac(format.parse(request.getParameter("txtFechaNac")));
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			*/
-		    
 
 		    try 
 		    {
@@ -109,7 +111,6 @@ public class servletUsuario extends HttpServlet {
 		    usuario.setMail(request.getParameter("txtMail"));
 		    usuario.setTelefono(request.getParameter("txtTelefono"));
 		    
-		    //System.out.println(request.getParameter("txtContrasenia")+request.getParameter("txtDni")+request.getParameter("txtCuil")+request.getParameter("txtNombre")+request.getParameter("txtApellido")+request.getParameter("txtSexo")+request.getParameter("nacionalidad")+request.getParameter("provincia")+request.getParameter("localidad")+request.getParameter("txtFechaNac")+request.getParameter("txtDireccion")+request.getParameter("txtMail")+request.getParameter("txtTelefono")  );
 		    
 		    estado=usuarioNeg.modificar(usuario);
 		    
@@ -179,53 +180,14 @@ public class servletUsuario extends HttpServlet {
 			usuario.setTelefono(request.getParameter("txtTelefono"));
 			
 			estado=usuarioNeg.altaUsuario(usuario);
-			
 			//hay que agregar aca el mensaje de exito al agregar usuario
 	    	request.setAttribute("estadoUsuario", estado);
+			request.setAttribute("listaNacionalidad", usuarioNeg.listarNacionalidades());	
+			request.setAttribute("listaProvincia", usuarioNeg.listarProvincias());	
+			request.setAttribute("listaLocalidad", usuarioNeg.listarLocalidades());	
 	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/AltaCliente.jsp");
 			dispatcher.forward(request, response);
 			
-			/*
-			UsuarioDaoImpl udi= new UsuarioDaoImpl();
-			
-			Usuario usu= new Usuario();
-			
-			usu.setUsuario(request.getParameter("txtUsuario"));
-			usu.setContrasenia(request.getParameter("txtPass"));
-			usu.setDni(request.getParameter("txtDni"));
-			usu.setCuil(request.getParameter("txtCuil"));
-			usu.setNombre(request.getParameter("txtNombre"));
-			usu.setApellido(request.getParameter("txtApellido"));
-			
-			usu.setSexo(request.getParameter("gridRadios"));
-			
-			//se pasa la fecha ingresada como string a date
-			DateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
-			try
-			{
-				Date convertido= fecha.parse(request.getParameter("txtFechaNac"));
-				usu.setFechaNac(convertido);
-			} 
-			catch (ParseException e) 
-			{
-				e.printStackTrace();
-			}
-			
-			System.out.println("soy: "+ request.getParameter("cbxNacionalidad"));
-			
-			usu.setDireccion(request.getParameter("txtDireccion"));
-			usu.setMail(request.getParameter("txtMail"));
-			usu.setTelefono(request.getParameter("txtTelefono"));
-			
-			if(udi.verificarCampos(usu)==true)
-			{
-				System.out.println("bien");
-			}
-			else
-			{
-				System.out.println("debes completar todos los campos");
-			}
-			*/
 		}
 		
 	}

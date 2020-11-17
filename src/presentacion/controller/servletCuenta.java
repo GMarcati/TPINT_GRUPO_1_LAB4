@@ -14,12 +14,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
+
 import dao.CuentaDao;
 import entidad.Cuenta;
 import entidad.TipoCuenta;
 import entidad.Usuario;
 import negocio.CuentaNeg;
+import negocio.UsuarioNeg;
 import negocioImpl.CuentaNegImpl;
+import negocioImpl.UsuarioNegImpl;
 
 
 /**
@@ -30,7 +34,8 @@ public class servletCuenta extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	CuentaNeg cuentaNeg = new CuentaNegImpl();
-       
+	UsuarioNeg usuarioNeg = new UsuarioNegImpl();
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -43,6 +48,16 @@ public class servletCuenta extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		if(request.getParameter("AsignarCuenta") != null) {
+			
+			
+			request.setAttribute("listaUsuario", usuarioNeg.listarUsuarios());
+			request.setAttribute("listaCuenta", cuentaNeg.listarCuentas());
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/AsignarCuentaACliente.jsp");
+			dispatcher.forward(request, response);
+			
+		}
 		
 		if(request.getParameter("listadoC")!=null)
 		{
@@ -87,7 +102,7 @@ public class servletCuenta extends HttpServlet {
 			
 		}
 		
-		
+
 		
 		
 		//*********************** INSERTAR CUENTA**************************************//
@@ -126,13 +141,11 @@ public class servletCuenta extends HttpServlet {
 		if(request.getParameter("btnAsignarCuenta")!=null) {
 			boolean estado=true;
 			
-			
-				
+						
 			estado=cuentaNeg.AsignarCuentaACliente(Integer.parseInt(request.getParameter("txtIdCuenta")), Integer.parseInt(request.getParameter("txtIdCliente")));
 			
-			
-			
-			
+			request.setAttribute("listaUsuario", usuarioNeg.listarUsuarios());
+			request.setAttribute("listaCuenta", cuentaNeg.listarCuentas());
 	    	request.setAttribute("estadoAsignarCuenta", estado);
 	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/AsignarCuentaACliente.jsp");
 			dispatcher.forward(request, response);

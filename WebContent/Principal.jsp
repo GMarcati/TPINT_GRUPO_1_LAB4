@@ -27,6 +27,10 @@
 		  <p>El mejor lugar donde pedir tus prestamos con los interes mas bajos y con muchas cuotas.</p>
 		  <a class="btn btn-primary btn-lg" href="Login.jsp" role="button">Ingresar</a>
 		</div>
+		<hr />
+		<footer>
+			<p>&copy; 2020 - Banco Sarasa</p>
+		</footer>
 	</div>
 </body>
 </html>
