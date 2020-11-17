@@ -1,6 +1,7 @@
 package negocioImpl;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import dao.CuentaDao;
 import daoImpl.CuentaDaoImpl;
@@ -49,6 +50,16 @@ public class CuentaNegImpl implements CuentaNeg {
 	public boolean AsignarCuentaACliente(long idCuenta, long idUsuario) {
 		
 		return cuentaDao.AsignarCuentaACliente(idCuenta, idUsuario);
+	}
+
+	@Override
+	public List<Cuenta> listarNumeroCuentas() {
+		return (ArrayList<Cuenta>) cuentaDao.listarNumeroCuentas();
+	}
+
+	@Override
+	public List<Cuenta> listarCuentasPorUsuario(long idUsuario) {
+		return (ArrayList<Cuenta>) cuentaDao.listarCuentasPorUsuario(idUsuario);
 	}
 
 }

@@ -220,6 +220,68 @@ public class CuentaDaoImpl implements CuentaDao{
 		
 		
 	}
+
+	//******** LISTAR NUMEROCUENTA PARA JSP TRANSFERENCIA **********///
+	public List<Cuenta> listarNumeroCuentas(){
+		cn = new Conexion();
+		cn.Open();
+		
+		List<Cuenta> ListadoNroCuenta = new ArrayList<Cuenta>();
+		 try
+		 {
+			 String query = "SELECT C.idCuenta, C.numeroCuenta FROM cuentas as C where C.idEstado=1"; 
+			 ResultSet rs = cn.query(query);
+			 while(rs.next())
+			 {
+				 	Cuenta x = new Cuenta();
+				 	x.setIdCuenta(rs.getLong("C.idCuenta"));
+				 	x.setNumeroCuenta(rs.getLong("C.numeroCuenta"));
+	
+				 	ListadoNroCuenta.add(x);
+			 }
+		 }
+		 catch(Exception e)
+		 {
+			 e.printStackTrace();
+		 }
+		 finally
+		 {
+			 cn.close();
+		 }
+		 return ListadoNroCuenta;
+	}
+	
+	//******** LISTAR CUENTA POR USUARIO PARA JSP TRANSFERENCIA **********///
+	public List<Cuenta> listarCuentasPorUsuario(long idUsuario){
+		cn = new Conexion();
+		cn.Open();
+		
+		List<Cuenta> ListadoCuentaXUsuario = new ArrayList<Cuenta>();
+		 try
+		 {
+			 String query = "SELECT C.idCuenta, C.numeroCuenta FROM cuentas as C where C.idUsuario="+idUsuario; 
+			 ResultSet rs = cn.query(query);
+			 while(rs.next())
+			 {
+				 	Cuenta x = new Cuenta();
+				 	x.setIdCuenta(rs.getLong("C.idCuenta"));
+				 	x.setCBU(rs.getLong("C.numeroCuenta"));
+				 	
+	
+				 	ListadoCuentaXUsuario.add(x);
+			 }
+		 }
+		 catch(Exception e)
+		 {
+			 e.printStackTrace();
+		 }
+		 finally
+		 {
+			 cn.close();
+		 }
+		 return ListadoCuentaXUsuario;
+	}
+	
 	
 	
 }
