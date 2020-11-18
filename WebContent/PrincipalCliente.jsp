@@ -29,7 +29,7 @@
 	
 	 <div style="margin-left: 40px">
 	 	<a href="ListaCuentasCliente.jsp" class="btn btn-outline-primary" style="width: 450px; margin:10px">Cuentas</a> <br>
-	 	<a href="Transferir.jsp" class="btn btn-outline-primary" style="width: 450px; margin:10px">Transferir</a> <br>
+	 	<a href="servletMovimientos?listarSelects" class="btn btn-outline-primary" style="width: 450px; margin:10px">Transferir</a> <br>
 	 	<a href="SolicitarPrestamo.jsp" class="btn btn-outline-primary" style="width: 450px; margin:10px">Solicitar préstamo</a> <br>
 	 	<a href="ListaPrestamosCliente.jsp" class="btn btn-outline-primary" style="width: 450px; margin:10px">Ver préstamos adquiridos</a> <br>
 	 	<a href="DatosPersonales.jsp" class="btn btn-outline-primary" style="width: 450px; margin:10px">Mis datos</a> <br>

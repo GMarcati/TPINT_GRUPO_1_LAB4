@@ -9,7 +9,7 @@ public interface CuentaDao {
 
 
 	public List<Cuenta> listarCuentas();
-	public List<Cuenta> listarNumeroCuentas(); //Para COMBO jsp transferir
+	public List<Cuenta> listarNumeroCuentas(); //Para COMBO jsp transferir CUENTAS ACTIVAS
 	public List<Cuenta> listarCuentasPorUsuario(long idUsuario); //Para COMBO jsp transferir
 	public Cuenta obtenerUno(long id);
 	public boolean insertar(Cuenta cuenta);

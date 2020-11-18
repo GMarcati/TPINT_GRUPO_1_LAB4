@@ -10,11 +10,10 @@ public class Movimientos {
 	private Date fechaCreacion;
 	private String detalle;
 	private double importe;
-	private int estado;
 	private long cuentaDestino;
 	
 	public Movimientos(long idMovimiento, long idCuenta, TipoMovimiento tipoMovimiento, Date fechaCreacion,
-			String detalle, double importe, int estado, long cuentaDestino) {
+			String detalle, double importe, long cuentaDestino) {
 		super();
 		this.idMovimiento = idMovimiento;
 		this.idCuenta = idCuenta;
@@ -22,7 +21,6 @@ public class Movimientos {
 		this.fechaCreacion = fechaCreacion;
 		this.detalle = detalle;
 		this.importe = importe;
-		this.estado = estado;
 		this.cuentaDestino = cuentaDestino;
 	}
 	
@@ -78,13 +76,6 @@ public class Movimientos {
 		this.importe = importe;
 	}
 
-	public int getEstado() {
-		return estado;
-	}
-
-	public void setEstado(int estado) {
-		this.estado = estado;
-	}
 
 	public long getCuentaDestino() {
 		return cuentaDestino;
