@@ -99,7 +99,7 @@
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"  style="margin-bottom: 1em;">
         <div class="container">
 
-			<span class="navbar-brand mb-0 h1">Banco Sarasa--> Sesión de <%= Usuario.getNombreUsu()%></span>
+			<span class="navbar-brand mb-0 h1">Banco Sarasa--> Sesión de <%= session.getAttribute("NombreUsuario")%></span>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -125,7 +125,7 @@
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="VerInformes.jsp" >Ver informes</a> 
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="Logoff.jsp" >Cerrar sesion</a> 
+						<a class="dropdown-item" href="servletLogin?Logoff" >Cerrar sesion</a> 
 					</div>
 				</li>
 						 					

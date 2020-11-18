@@ -14,5 +14,6 @@ public interface CuentaNeg {
 	public boolean editar(Cuenta cuenta);
 	public boolean borrar(long id);
 	public boolean AsignarCuentaACliente(long idCuenta, long idUsuario);
+	public boolean ContCuentasPorCliente(long idUsuario);
 	
 }

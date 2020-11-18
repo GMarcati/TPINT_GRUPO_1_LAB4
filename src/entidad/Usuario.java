@@ -4,7 +4,6 @@ import java.util.Date;
 
 public class Usuario 
 {
-	public static String nombreUsu;
 	private long idUsuario;
 	private String usuario;
 	private String contrasenia;
@@ -23,16 +22,6 @@ public class Usuario
 	private String telefono;
 	private boolean estado;
 	
-	//getters y setters
-	public static String getNombreUsu()
-	{
-		return nombreUsu;
-	}
-	
-	public static void setNombreUsu(String nombreUsu) 
-	{
-		Usuario.nombreUsu = nombreUsu;
-	}
 	
 	public long getIdUsuario() 
 	{

@@ -61,7 +61,7 @@
 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 1em;">
 		<div class="container body-content">
-	  		<span class="navbar-brand mb-0 h1">Banco Sarasa--> Sesion de <%= Usuario.getNombreUsu()%></span>
+	  		<span class="navbar-brand mb-0 h1">Banco Sarasa--> Sesion de <%= session.getAttribute("NombreUsuario")%></span>
 	  		<span class="navbar-text">
 	   	   	<a class="nav-item" href="PrincipalCliente.jsp">Menu cliente</a>
 	    	</span>

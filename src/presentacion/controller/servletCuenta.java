@@ -140,9 +140,15 @@ public class servletCuenta extends HttpServlet {
 		
 		if(request.getParameter("btnAsignarCuenta")!=null) {
 			boolean estado=true;
+			boolean estadoAux=true;
 			
-						
-			estado=cuentaNeg.AsignarCuentaACliente(Integer.parseInt(request.getParameter("txtIdCuenta")), Integer.parseInt(request.getParameter("txtIdCliente")));
+			//Verifica que el cliente no tenga mas de 3 cuentas
+			estadoAux=cuentaNeg.ContCuentasPorCliente(Integer.parseInt(request.getParameter("txtIdCliente")));
+			if(estadoAux==true) {
+				estado=cuentaNeg.AsignarCuentaACliente(Integer.parseInt(request.getParameter("txtIdCuenta")), Integer.parseInt(request.getParameter("txtIdCliente")));
+			} else {
+				estado=false;
+			}
 			
 			request.setAttribute("listaUsuario", usuarioNeg.listarUsuarios());
 			request.setAttribute("listaCuenta", cuentaNeg.listarCuentas());

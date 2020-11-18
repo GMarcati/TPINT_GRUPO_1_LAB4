@@ -39,7 +39,7 @@
   		</div>
 	</nav>
 
-	<form action="servletLogin" method="get">
+	<form action="servletLogin" method="post">
 		<div class="container body-content"> <br />
             <div class="jumbotron jumbotron-fluid text-center rounded-pill">
                 <div class="container">

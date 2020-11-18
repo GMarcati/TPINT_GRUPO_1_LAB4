@@ -14,8 +14,8 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 1em;">
     	<div class="container body-content">
-  			<span class="navbar-brand mb-0 h1">Banco Sarasa--> Sesión de <%= Usuario.getNombreUsu()%></span>
-  				<span class="navbar-text"><a class="nav-item" href="Logoff.jsp">Cerrar sesión</a></span>
+  			<span class="navbar-brand mb-0 h1">Banco Sarasa--> Sesión de <%= session.getAttribute("NombreUsuario")%></span>
+  				<span class="navbar-text"><a class="nav-item" href="servletLogin?Logoff">Cerrar sesión</a></span>
   		</div>
 	</nav>
 	

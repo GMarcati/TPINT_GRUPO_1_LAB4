@@ -51,6 +51,11 @@ public class CuentaNegImpl implements CuentaNeg {
 		
 		return cuentaDao.AsignarCuentaACliente(idCuenta, idUsuario);
 	}
+	
+	public boolean ContCuentasPorCliente(long idUsuario) {
+		
+		return cuentaDao.ContCuentasPorCliente(idUsuario);
+	}
 
 	@Override
 	public List<Cuenta> listarNumeroCuentas() {

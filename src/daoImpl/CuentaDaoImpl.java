@@ -221,6 +221,45 @@ public class CuentaDaoImpl implements CuentaDao{
 		
 	}
 	
+	public boolean ContCuentasPorCliente(long idUsuario)
+	{
+		cn = new Conexion();
+		cn.Open();
+		
+		boolean estado= true;
+		
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+		} 
+		catch (ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+		
+		try 
+		{
+			ResultSet rs= cn.query("select COUNT(idUsuario) from cuentas where idUsuario="+idUsuario+" and idEstado=1");
+			rs.next();
+			
+			int cont= rs.getInt(1);
+			if(cont>=3)
+			{
+				estado=false;
+			}
+			
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			cn.close();
+		}
+		return estado;
+	}
+	
 
 	//******** LISTAR NUMEROCUENTA PARA JSP TRANSFERENCIA **********///
 	public List<Cuenta> listarNumeroCuentas(){

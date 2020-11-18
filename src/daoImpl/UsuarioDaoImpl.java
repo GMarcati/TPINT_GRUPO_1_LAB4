@@ -93,12 +93,12 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		catch (Exception e) 
 		{
 			e.printStackTrace();
-			resultado=false;
 		}
 		finally
 		{
-			return resultado;
+			cn.close();
 		}
+		return resultado;
 	}
 	
 	public boolean modificar(Usuario usuario) {
