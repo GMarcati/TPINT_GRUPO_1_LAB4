@@ -14,7 +14,19 @@
 	<title>ALTA CLIENTE</title>
 
 
-
+<script>
+  function mostrarContrasena(){
+      var tipo = document.getElementById("txtPass");
+      var tipoAux = document.getElementById("txtPassConfirm");
+      if(tipo.type == "password" || tipoAux.type == "password"){
+          tipo.type = "text";
+          tipoAux.type = "text";
+      }else{
+          tipo.type = "password";
+          tipoAux.type = "password";
+      }
+  }
+</script>
 
 </head>
 <body>
@@ -42,18 +54,25 @@
 		
 		<%
 		boolean estado=false;
+		boolean estadoPass=false;
 		if(request.getAttribute("estadoUsuario")!=null){
 			estado=(Boolean)request.getAttribute("estadoUsuario");
+			estadoPass=(Boolean)request.getAttribute("estadoPass");
 			
-			
-			if(estado==true){
+			if(estado==true && estadoPass==true){
 			%>
 				<script>swal("Usuario agregado con exito!", "", "success")</script>
 			<%
-			}else
+			} else if(estadoPass==false)
 			{
 			%>
-				<script>swal("Error al agregar el usuario.", "El usuario/mail ingresado ya existe!", "error")</script>
+				<script>swal("Error al agregar el usuario.", "La contraseña no coincide.", "error")</script>
+			<% 
+			}
+			else
+			{
+			%>
+				<script>swal("Error al agregar el usuario.", "El usuario y/o mail ingresado ya existe!", "error")</script>
 			<%
 			}
 			
@@ -74,8 +93,11 @@
 							
 			<label>Usuario: </label>
 			<input required type="text" name="txtUsuario" class="form-control" placeholder="Ej: THerrera " aria-label="Ej: THerrera" aria-describedby="basic-addon1"><br>
-			<label>Constraseña: </label>
-			<input required type="text" name="txtPass" class="form-control" placeholder="Ej: b4nc0s4r4s4 " aria-label="Ej: b4nc0s4r4s4" aria-describedby="basic-addon1"><br>
+			<label>Contraseña: </label>
+			<input required type="password" id="txtPass" name="txtPass" class="form-control" placeholder="Ej: b4nc0s4r4s4 " aria-label="Ej: b4nc0s4r4s4" aria-describedby="basic-addon1"><br>
+			<label>Confirmar contraseña: </label>
+			<input required type="password" id="txtPassConfirm" name="txtPassConfirm" class="form-control" placeholder="Ej: b4nc0s4r4s4 " aria-label="Ej: b4nc0s4r4s4" aria-describedby="basic-addon1"><br>
+			<button class="btn btn-info" type="button" onclick="mostrarContrasena()">Mostrar Contraseña</button><br><br>
 			<label>DNI: </label>
 			<input required	 type="number" min="11111111" max="99999999" name="txtDni" class="form-control" placeholder="Ej: 25358754 - ingrese el dni 8 digitos " aria-label="Ej: 25358754 - ingrese el dni sin puntos" aria-describedby="basic-addon1"><br>
 			<label>CUIL:</label>

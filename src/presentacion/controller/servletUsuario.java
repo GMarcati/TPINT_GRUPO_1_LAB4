@@ -140,6 +140,7 @@ public class servletUsuario extends HttpServlet {
 		if(request.getParameter("btnAceptar")!=null)
 		{
 			boolean estado=true;
+			boolean estadoPass=true;
 			Usuario usuario = new Usuario();
 			
 			usuario.setUsuario(request.getParameter("txtUsuario"));
@@ -179,8 +180,16 @@ public class servletUsuario extends HttpServlet {
 			usuario.setMail(request.getParameter("txtMail"));
 			usuario.setTelefono(request.getParameter("txtTelefono"));
 			
-			estado=usuarioNeg.altaUsuario(usuario);
-			//hay que agregar aca el mensaje de exito al agregar usuario
+			if(request.getParameter("txtPass").equals(request.getParameter("txtPassConfirm"))) {
+				estado=usuarioNeg.altaUsuario(usuario);
+				
+				
+			} else {
+				estado=false;
+				estadoPass=false;
+			}
+			
+			request.setAttribute("estadoPass", estadoPass);
 	    	request.setAttribute("estadoUsuario", estado);
 			request.setAttribute("listaNacionalidad", usuarioNeg.listarNacionalidades());	
 			request.setAttribute("listaProvincia", usuarioNeg.listarProvincias());	

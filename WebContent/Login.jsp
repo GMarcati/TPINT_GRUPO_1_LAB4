@@ -10,6 +10,19 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <title>Login</title>
+
+  <script>
+$(document).ready(function () {
+  $('#mostrar_contrasena').click(function () {
+    if ($('#mostrar_contrasena').is(':checked')) {
+      $('#txtContra').attr('type', 'text');
+    } else {
+      $('#txtContra').attr('type', 'password');
+    }
+  });
+});
+</script>
+
 </head>
 
 <body>
@@ -53,10 +66,17 @@
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Contraseña</label>
-                <input type="password" id="txtContra" name="txtContra" class="form-control" Style="width: 500px">
+                <input type="password" id="txtContra" name="txtContra" class="form-control" Style="width: 500px" >
+            <div style="margin-top:10px;">
+          	<input style="margin-left:20px;" type="checkbox" id="mostrar_contrasena" title="Click para mostrar contraseña"/>
+          	&nbsp;&nbsp;Mostrar contraseña
+         	</div>
             </div>
+     
             
             <input class="btn btn-primary btn-lg" type="submit" value="Ingresar" name="btnIngresar">
+            
+           
             
         <hr />
 		<footer>

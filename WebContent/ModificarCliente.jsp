@@ -12,6 +12,23 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
 	<title>Modificar Cliente</title>
+
+
+
+<script>
+  function mostrarContrasena(){
+      var tipo = document.getElementById("txtContrasenia");
+      if(tipo.type == "password"){
+          tipo.type = "text";
+      }else{
+          tipo.type = "password";
+      }
+  }
+</script>
+
+
+
+
 </head>
 <body>
 
@@ -59,8 +76,10 @@
 	 
  }	 %>
  
+  	
   <label>Id Usuario: </label><input readonly="readonly" type="text" name="txtIdUsuario" class="form-control" value="<%=x%>" ><br>
-  <label>Constraseña: </label><input required type="text" name="txtContrasenia" class="form-control" value="<%=usuario.getContrasenia()%>" ><br>
+  <label>Constraseña: </label><input required id="txtContrasenia" type="password" name="txtContrasenia" class="form-control" value="<%=usuario.getContrasenia()%>" ><br>
+  <button class="btn btn-info" type="button" onclick="mostrarContrasena()">Mostrar Contraseña</button><br><br>
   <label>DNI: </label><input required type="number" min="11111111" max="99999999" name="txtDni" class="form-control" value="<%=usuario.getDni()%>"><br>
   <label>CUIL: </label><input required type="number" min="11111111111" max="99999999999" name="txtCuil" class="form-control" value="<%=usuario.getCuil()%>"><br>
   <label>Nombre: </label><input required type="text" name="txtNombre" class="form-control" value="<%=usuario.getNombre()%>"><br>
