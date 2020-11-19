@@ -216,9 +216,6 @@ public class CuentaDaoImpl implements CuentaDao{
 		}
 		return estado;
 		
-		
-		
-		
 	}
 	
 	public boolean ContCuentasPorCliente(long idUsuario)

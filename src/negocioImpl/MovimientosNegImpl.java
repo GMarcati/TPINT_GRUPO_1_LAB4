@@ -35,4 +35,14 @@ public class MovimientosNegImpl implements MovimientosNeg {
 		return this.movimientoDao.altaMovimento(movimiento);
 	}
 
+	@Override
+	public boolean AumentarSaldoCuentaDestino(long id, double importe) {
+		return this.movimientoDao.AumentarSaldoCuentaDestino(id, importe);
+	}
+
+	@Override
+	public boolean DescontarSaldoCuentaOrigen(long id, double importe) {
+		return this.movimientoDao.DescontarSaldoCuentaOrigen(id, importe);
+	}
+
 }

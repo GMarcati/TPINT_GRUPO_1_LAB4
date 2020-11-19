@@ -61,6 +61,10 @@ public class servletMovimientos extends HttpServlet {
 		if(request.getParameter("btnAceptar")!=null)
 		{
 			boolean estado=true;
+			boolean estadoDescuentoSaldoDestino=true;
+			boolean estadoAumentoSaldoOrigen=true;
+			
+			
 			Movimientos movimientos = new Movimientos();
 	
 			movimientos.setIdCuenta(Long.parseLong(request.getParameter("CuentaUsuario")));
@@ -74,10 +78,18 @@ public class servletMovimientos extends HttpServlet {
 			LocalDate localDate = LocalDate.now();
 			movimientos.setFechaCreacion(java.sql.Date.valueOf(localDate));
 			movimientos.setDetalle(request.getParameter("txtDetalle"));
-			String x = request.getParameter("txtMonto");
+			
 			movimientos.setImporte(Double.parseDouble(request.getParameter("txtMonto"))); //VER XQ PUSE INTEGER ES DECIMAL
 			
 			estado=movimientoNeg.altaMovimento(movimientos);
+			
+			double importe = Double.parseDouble(request.getParameter("txtMonto"));
+			long cuentaOrigen = Long.parseLong(request.getParameter("CuentaUsuario"));
+			long cuentaDestino = Long.parseLong(request.getParameter("NumeroCuentaDestino"));
+			
+			estadoDescuentoSaldoDestino = movimientoNeg.DescontarSaldoCuentaOrigen(cuentaOrigen, importe);
+			estadoAumentoSaldoOrigen = movimientoNeg.AumentarSaldoCuentaDestino(cuentaDestino, importe);
+			
 			//hay que agregar aca el mensaje de exito al agregar usuario
 	    	request.setAttribute("estadoMovimiento", estado);
 			request.setAttribute("listaNumeroCuentas", cuentaNeg.listarNumeroCuentas());	

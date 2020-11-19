@@ -121,5 +121,55 @@ public class MovimientosDaoImpl implements MovimientosDao {
 		}
 		return estado;
 	}
+	
+	public boolean AumentarSaldoCuentaDestino(long idCuenta, double importe) {
+		
+		boolean estado=true;
+
+		cn = new Conexion();
+		cn.Open();	
+
+		String query = "Update cuentas set saldo=saldo+"+importe+" where idCuenta="+idCuenta;
+		try
+		 {
+			estado=cn.execute(query);
+		 }
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			cn.close();
+		}
+		return estado;
+		
+	}
+	
+	public boolean DescontarSaldoCuentaOrigen(long idCuenta, double importe) {
+		
+		boolean estado=true;
+		double importeNegativo = -importe;
+
+		cn = new Conexion();
+		cn.Open();	
+
+		String query = "Update cuentas set saldo=saldo"+importeNegativo+" where idCuenta="+idCuenta;
+		try
+		 {
+			estado=cn.execute(query);
+		 }
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			cn.close();
+		}
+		return estado;
+		
+	}
+	
 
 }
