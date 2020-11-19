@@ -16,7 +16,7 @@
     	<div class="container body-content">
   		<span class="navbar-brand mb-0 h1">Banco Sarasa--> Sesion de <%= session.getAttribute("NombreUsuario")%></span>
   		 <span class="navbar-text">
-   	   	<a class="nav-item" href="#">Cerrar sesion</a>
+   	   	<a class="nav-item" href="servletLogin?Logoff">Cerrar sesion</a>
     	</span>
   		</div>
 	</nav>

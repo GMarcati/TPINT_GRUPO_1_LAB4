@@ -6,12 +6,43 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>LISTA PRESTAMOS</title>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+	integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+	crossorigin="anonymous"></script>
+
+<!-- DATATABLE -->
+<!-- CSS para datatable -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+<!-- Javascript para datatable -->
+<script src="https://code.jquery.com/jquery-3.5.1.js">  </script>
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">  </script>
+ 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+ 
+ <script>
+ $(document).ready( function () {
+ $('#table_id').DataTable({
+  "language": {
+                "url": "http://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+            }
+ 
+ }
+ 
+ );
+
+ } );
+ </script>
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"  style="margin-bottom: 1em;">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"  style="margin-bottom: 1em;">
         <div class="container">
 
 			<span class="navbar-brand mb-0 h1">Banco Sarasa--> Sesión de <%= session.getAttribute("NombreUsuario")%></span>
@@ -23,7 +54,7 @@
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
 				<li class="nav-text dropdown">
 				<a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				Menú admin
+				Menu admin
 				</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<a class="dropdown-item" href="servletUsuario?listarSelects" >Alta cliente</a>
@@ -34,18 +65,22 @@
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="servletCuenta?listadoC" >Listar/Modificar/Dar de baja cuenta</a> 
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="AsignarCuentaACliente.jsp">Asignar cuenta a cliente</a> 
+						<a class="dropdown-item" href="servletCuenta?AsignarCuenta">Asignar cuenta a cliente</a> 
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="ListaPrestamos.jsp">Autorizar préstamos</a> 
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="VerInformes.jsp" >Ver informes</a> 
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="Logoff.jsp" >Cerrar sesión</a> 
+						<a class="dropdown-item" href="servletLogin?Logoff" >Cerrar sesion</a> 
 					</div>
-				</li>					
+				</li>
+						 					
                 </ul>
+
+
             </div>
         </div>
+
     </nav>
     
 	<div class="container-fluid" style="margin-top: 5em;">

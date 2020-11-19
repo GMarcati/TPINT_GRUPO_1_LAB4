@@ -49,8 +49,7 @@ public class servletLogin extends HttpServlet
 			String usuario=request.getParameter("txtUsuario");
 			String contra=request.getParameter("txtContra");
 			
-			if(!usuario.isEmpty() && !contra.isEmpty())//si el nombre de usuario NO esta vacio
-			{
+
 				if(usuarioNeg.verificarLogin(usuario, contra)==true)
 				{
 					if(usuarioNeg.verificarTipoUsuario(usuario)==true)//funcion que selecciona tipo de usuario, si es true, es adm
@@ -81,15 +80,7 @@ public class servletLogin extends HttpServlet
 					RequestDispatcher rd= request.getRequestDispatcher("/Login.jsp");
 					rd.forward(request, response);
 				}
-			}
-			else
-			{
-				
-				//Cuando no se ingrese nada en los campos de usuario y contraseña
-				request.setAttribute("estadoLoginErrorVacio", estado);
-				RequestDispatcher rd= request.getRequestDispatcher("/Login.jsp");
-				rd.forward(request, response);
-			}
+
 		}
 		
 
