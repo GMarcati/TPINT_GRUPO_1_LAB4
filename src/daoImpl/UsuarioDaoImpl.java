@@ -12,6 +12,7 @@ import dao.UsuarioDao;
 import entidad.Localidad;
 import entidad.Nacionalidad;
 import entidad.Provincia;
+import entidad.TipoUsuario;
 import entidad.Usuario;
 
 
@@ -43,7 +44,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		
 		try 
 		{
-			ResultSet rs= cn.query("select * from usuarios where usuario='"+usuario+"' and contrasenia='"+contra+"'");
+			ResultSet rs= cn.query("select * from usuarios where usuario='"+usuario+"' and contrasenia='"+contra+"' and idEstado=1");
 			if(rs.next())
 			{
 				resultado=true;
@@ -196,6 +197,63 @@ public class UsuarioDaoImpl implements UsuarioDao {
 			 cn.close();
 		 }
 		return usuario;
+	}
+	
+	public Usuario obtenerUsuarioPorNombreUsuario(String nombreUsuario) {
+		
+		cn = new Conexion();
+		cn.Open();
+		Usuario usuario = new Usuario();
+		try
+		 {
+			 ResultSet rs= cn.query("Select U.idUsuario, U.usuario, U.contrasenia, U.idTipoUsuario, U.DNI, U.CUIL, U.nombre, U.apellido, U.sexo, U.fechaNacimiento, U.direccion, N.idNacionalidad, N.descripcion, P.idProvincia, P.descripcion, L.idLocalidad, L.descripcion, U.mail, U.telefono from usuarios as U inner join nacionalidades as N on U.idNacionalidad = N.idNacionalidad inner join provincias as P on U.idProvincia = P.idProvincia inner join localidades as L on U.idLocalidad = L.idLocalidad where U.idEstado = 1 and U.Usuario='"+nombreUsuario+"'");
+			 rs.next();
+			 usuario.setIdUsuario(rs.getLong("U.idUsuario"));
+			 usuario.setUsuario(rs.getString("U.usuario"));
+			 usuario.setContrasenia(rs.getString("U.contrasenia"));
+			 TipoUsuario tUsuario = new TipoUsuario();
+			 tUsuario.setIdTipoUsuario(rs.getInt("U.idTipoUsuario"));
+			 usuario.setTipoUsuario(tUsuario);
+			 usuario.setDni(rs.getString("U.DNI"));
+			 usuario.setCuil(rs.getString("U.CUIL"));
+			 usuario.setNombre(rs.getString("U.nombre"));
+			 usuario.setApellido(rs.getString("U.apellido"));
+			 usuario.setSexo(rs.getString("U.sexo"));
+			 usuario.setFechaNac(rs.getDate("U.fechaNacimiento"));
+			 usuario.setDireccion(rs.getString("U.direccion"));
+			 
+			 Nacionalidad nacionalidad = new Nacionalidad();
+			 nacionalidad.setIdNacionalidad(rs.getInt("N.idNacionalidad"));
+			 nacionalidad.setDescripcion(rs.getString("N.descripcion"));
+			 
+
+			 Provincia provincia = new Provincia();
+			 provincia.setIdProvincia(rs.getInt("P.idProvincia"));
+			 provincia.setDescripcion(rs.getString("P.descripcion"));
+			 
+			 Localidad localidad = new Localidad();
+			 localidad.setIdLocalidad(rs.getInt("L.idLocalidad"));
+			 localidad.setDescripcion(rs.getString("L.descripcion"));
+			 
+			 usuario.setMail(rs.getString("U.mail"));
+			 usuario.setTelefono(rs.getString("U.telefono"));
+			 
+			 usuario.setNacionalidad(nacionalidad);
+			 usuario.setProvincia(provincia);
+			 usuario.setLocalidad(localidad);
+			 //System.out.println(nombreUsuario);
+			 
+		 }
+		 catch(Exception e)
+		 {
+			 e.printStackTrace();
+		 }
+		 finally
+		 {
+			 cn.close();
+		 }
+		return usuario;
+		
 	}
 	
 	

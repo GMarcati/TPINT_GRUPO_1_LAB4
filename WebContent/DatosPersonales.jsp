@@ -10,23 +10,30 @@
 <body>
 <jsp:include page="MenuCliente.jsp"></jsp:include>
 	
+
+		
+		<%
+		Usuario usuario = new Usuario();
+		usuario=(Usuario)session.getAttribute("Usuario");
+		
+		%>
+	
 	<div class="container body-content" style="margin-top: 5em;">
 		<div class="margin m-3">
-	  		<label>DNI: </label><input type="text" name="txtDni" class="form-control" placeholder="25358754" aria-label="25358754 " aria-describedby="basic-addon1"><br>
-	  		<label>CUIL: </label><input type="text" name="txtCuil" class="form-control" placeholder="30253587542" aria-label="" aria-describedby="basic-addon1"><br>
-	 		<label>Nombre: </label><input type="text" name="txtNombre" class="form-control" placeholder="Pepito" aria-label="Pepito" aria-describedby="basic-addon1"><br>
-	  		<label>Apellido: </label><input type="text" name="txtApellido" class="form-control" placeholder="Cibrian" aria-label="Cibrian" aria-describedby="basic-addon1"><br>
-	  		<label>Sexo: </label><input type="text" name="txtSexo" class="form-control" placeholder="Masculino" aria-label="Masculino" aria-describedby="basic-addon1"><br>
-	  		<label>Nacionalidad: </label><input type="text" name="txtNacionalidad" class="form-control" placeholder="Argentina" aria-label="Argentina" aria-describedby="basic-addon1"><br>
-	
+	  		<label>DNI: </label><input readonly="readonly" type="text" name="txtDni" class="form-control" value="<%=usuario.getDni()%>"><br>
+	  		<label>CUIL: </label><input readonly="readonly" type="text" name="txtCuil" class="form-control" value="<%=usuario.getCuil()%>"><br>
+	 		<label>Nombre: </label><input readonly="readonly" type="text" name="txtNombre" class="form-control" value="<%=usuario.getNombre()%>"><br>
+	  		<label>Apellido: </label><input readonly="readonly" type="text" name="txtApellido" class="form-control" value="<%=usuario.getApellido()%>"><br>
+	  		<label>Sexo: </label><input readonly="readonly" type="text" name="txtSexo" class="form-control" value="<%=usuario.getSexo()%>"><br>
+	  		<label>Nacionalidad: </label><input readonly="readonly" type="text" name="txtNacionalidad" class="form-control" value="<%=usuario.getNacionalidad().getDescripcion()%>"><br>
+			<label>Localidad:</label><input readonly="readonly" type="text" name="txtLocalidad" class="form-control" value="<%=usuario.getLocalidad().getDescripcion()%>"><br>
+			<label>Provincia: </label><input readonly="readonly" type="text" name="txtProvincia" class="form-control" value="<%=usuario.getProvincia().getDescripcion()%>"><br>
 		        
-			<label>Fecha de Nacimiento:</label><input type="text" name="txtFechaNac" class="form-control" placeholder="20/05/1890" aria-label="20/05/1890" aria-describedby="basic-addon1"><br>
-			<label>Dirección:</label><input type="text" name="txtDireccion" class="form-control" placeholder="Av. Libertador 2254" aria-label="Av. Libertador 2254" aria-describedby="basic-addon1"><br>
-			<label>Localidad:</label><input type="text" name="txtLocalidad" class="form-control" placeholder="General Pacheco" aria-label="General Pacheco" aria-describedby="basic-addon1"><br>
-			<label>Provincia: </label><input type="text" name="txtProvincia" class="form-control" placeholder="Buenos Aires" aria-label="Buenos Aires" aria-describedby="basic-addon1"><br>
-			<label>Mail: </label><input type="text" name="txtMail" class="form-control" placeholder="pepitocibrian@gmail.com" aria-label="pepitocibrian@gmail.com" aria-describedby="basic-addon1"><br>
-			<label>Teléfono: </label><input type="text" name="txtTelefono" class="form-control" placeholder="116620458578" aria-label="116620458578" aria-describedby="basic-addon1"><br>
-			<a href="PrincipalCliente.jsp" class="btn btn-primary">Volver al menú</a>
+			<label>Fecha de Nacimiento:</label><input readonly="readonly" type="text" name="txtFechaNac" class="form-control" value="<%=usuario.getFechaNac()%>"><br>
+			<label>Dirección:</label><input readonly="readonly" type="text" name="txtDireccion" class="form-control" value="<%=usuario.getDireccion()%>"><br>
+
+			<label>Mail: </label><input readonly="readonly" type="text" name="txtMail" class="form-control" value="<%=usuario.getMail()%>"><br>
+			<label>Teléfono: </label><input readonly="readonly" type="text" name="txtTelefono" class="form-control" value="<%=usuario.getTelefono()%>"><br>
 		</div>
 	</div>
 </body>

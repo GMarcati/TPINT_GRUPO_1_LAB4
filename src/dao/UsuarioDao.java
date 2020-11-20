@@ -16,6 +16,7 @@ public interface UsuarioDao
 	public boolean eliminar(int id);
 	public List<Usuario> listarUsuarios();
 	public Usuario obtenerUno(long id);
+	public Usuario obtenerUsuarioPorNombreUsuario(String nombreUsuario);
 	public List<Nacionalidad> listarNacionalidades();
 	public List<Provincia> listarProvincias();
 	public List<Localidad> listarLocalidades();

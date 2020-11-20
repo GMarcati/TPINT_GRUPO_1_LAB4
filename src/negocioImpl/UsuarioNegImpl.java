@@ -50,6 +50,10 @@ public class UsuarioNegImpl implements UsuarioNeg{
 		return usuarioDao.obtenerUno(id);
 	}
 	
+	public Usuario obtenerUsuarioPorNombreUsuario(String nombreUsuario) {
+		return usuarioDao.obtenerUsuarioPorNombreUsuario(nombreUsuario);
+	}
+	
 	public boolean modificar(Usuario usuario) 
 	{
 		return usuarioDao.modificar(usuario);
