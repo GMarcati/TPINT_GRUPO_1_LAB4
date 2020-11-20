@@ -31,6 +31,7 @@
 <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">  </script>
  
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
  
  <script>
  $(document).ready( function () {
@@ -45,6 +46,9 @@
 
  } );
  </script>
+
+
+
 
 </head>
 <body>
@@ -141,7 +145,6 @@
 			<br>
 		</div>
 		<br>
-
 <table id="table_id" style="width:100%" class="table table-striped table-bordered " >
 <thead >
 		<tr class="text-center">
@@ -185,7 +188,7 @@
 			<td><%=usuario.getTelefono()%></td>
 			<td class="text-center">
 			<a href="servletUsuario?idModificar=<%=usuario.getIdUsuario()%>" class="btn btn-secondary btn-sm" style="width: 80px;">Modificar</a> <br><br> 
-			<a href="servletUsuario?idEliminar=<%=usuario.getIdUsuario()%>" class="btn btn-danger btn-sm" style="width: 80px;">Eliminar</a>
+			<a href="servletUsuario?idEliminar=<%=usuario.getIdUsuario()%>" class="btn btn-danger btn-sm" style="width: 80px;" onclick="return confirm ('¿Está seguro que desea eliminar ese registro?')">Eliminar</a>
 			</td>
 		</tr>
 		
@@ -197,8 +200,6 @@
 
 
 	</table>
-
-	
 	
 	</div>
 	

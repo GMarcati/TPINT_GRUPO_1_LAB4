@@ -1,3 +1,6 @@
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="entidad.Movimientos"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -6,72 +9,133 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
 <title>Movimientos</title>
+
+	<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+	integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+	crossorigin="anonymous"></script>
+	
+	
+<!-- DATATABLE -->
+<!-- CSS para datatable -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+<!-- Javascript para datatable -->
+<script src="https://code.jquery.com/jquery-3.5.1.js">  </script>
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">  </script>
+ 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+ 
+ <script>
+ $(document).ready( function () {
+ $('#table_id').DataTable({
+  "language": {
+                "url": "http://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+            }
+ 
+ }
+ 
+ );
+
+ } );
+ </script>
 </head>
 <body>
 
-<jsp:include page="MenuCliente.jsp"></jsp:include>
-<!-- Aca va el form direccionando al servlet -->
+	
+		<%
+		List<Movimientos> listaMovimientos = new ArrayList<Movimientos>();
+		if (request.getAttribute("listaMovimientosXCuenta") != null) {
+			listaMovimientos = (List<Movimientos>) request.getAttribute("listaMovimientosXCuenta");
+		}
+		%>
 
-<div class="container body-content" style="margin-top: 1em;">
-<div><center><h2>MOVIMIENTOS </h2></center><!-- Ingresar USUARIO SESION --></div>
-<div><h4>CUENTA: 99999999</h4><!-- Ingresar USUARIO SESION --></div>
-<label>Busqueda por fecha: </label> 	
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    
-  </div>
-	<input type="text" name="txtImporteDesde" class="form-control" placeholder="Desde:" aria-label="Username" aria-describedby="basic-addon1">
-	<input type="text" name="txtImporteHasta" class="form-control" placeholder="Hasta:" aria-label="Username" aria-describedby="basic-addon1">
-	<input type="submit" name="btnAceptar" value="Aceptar" class="btn btn-primary">
-</div><br>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"  style="margin-bottom: 1em;">
+	        <div class="container">
+	
+				<span class="navbar-brand mb-0 h1">Banco Sarasa--> Sesión de <%= session.getAttribute("NombreUsuario")%></span>
+	            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	                <span class="navbar-toggler-icon"></span>
+	            </button>
+	            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+	
+	                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+						<li class="nav-text dropdown">
+							<a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu cliente</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item" href="servletCuenta?PrincipalClienteCuentas" >Cuentas</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="servletMovimientos?listarSelects">Transferencias</a> 
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="SolicitarPrestamo.jsp" >Solicitar préstamo</a> 
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="ListaPrestamosCliente.jsp" >Ver préstamos adquiridos</a> 
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="DatosPersonales.jsp" >Mis datos</a> 
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="servletLogin?Logoff" >Cerrar sesión</a> 
+							</div>
+						</li>					
+	                </ul>
+	            </div>
+	        </div>
+	    </nav>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Tipo de Movimiento</th>
-      <th scope="col">Fecha</th>
-      <th scope="col">Detalle</th>
-      <th scope="col">Importe</th>
-      <th scope="col">Cuenta Destino</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Transferencia</td>
-      <td>20/10/2020</td>
-      <td>Alquiler</td>
-      <td>$ 70.000,-</td>
-      <td>00055254480058</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Deposito</td>
-      <td>28/10/2020</td>
-      <td>Ahorros</td>
-      <td>$ 50.000,-</td>
-      <td>00044582802581</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Transferencia</td>
-      <td>30/10/2020</td>
-      <td>Jornal</td>
-      <td>$ 30.000,-</td>
-      <td>00020000575588</td>
-    </tr>
-    <tr>
-      <th scope="row">4</th>
-      <td>Transferencia</td>
-      <td>30/10/2020</td>
-      <td>Aguinaldo</td>
-      <td>$ 15.000,-</td>
-      <td>00020000575588</td>
-    </tr>
-  </tbody>
-</table>
-</div>
+
+	<div class="container-fluid" style="margin-top: 5em;">
+		<div>
+			<h2>MOVIMIENTOS DE LA CUENTA <%=request.getAttribute("numeroCuenta") %></h2>
+			<br>
+		</div>
+		<br>
+<table id="table_id" style="width:100%" class="table table-striped table-bordered " >
+<thead >
+		<tr class="text-center">
+			<th>#</th>
+			<th>TIPO DE MOVIMIENTO</th>
+			<th>FECHA</th>
+			<th>DETALLE</th>
+			<th>IMPORTE</th>
+			<th>CUENTA DESTINO</th>	
+		</tr>
+		</thead>
+
+
+		<tbody>
+		<%
+			for (Movimientos movimiento : listaMovimientos) {
+		%>
+		<tr class="text-center">
+			<td ><%=movimiento.getIdMovimiento()%></td>
+			<td><%=movimiento.getTipoMovimiento().getDescripcion()%></td>
+			<td><%=movimiento.getFechaCreacion()%></td>
+			<td><%=movimiento.getDetalle()%></td>
+			<td>$<%=movimiento.getImporte()%></td>
+			<td><%=movimiento.getCuentaDestino()%></td>
+		</tr>
+		
+
+		<%
+			}
+		%>
+		</tbody>
+
+
+	</table>
+	
+	</div>
+	
+	<div style="margin-top: 5em;">
+	
+	
+	</div>
 
 </body>
 </html>

@@ -31,8 +31,10 @@
 				<tr>
 					<th scope="col">IdPrestamo</th>
 					<th scope="col">NroCuenta</th>
+					<th scope="col">Fecha Creacion</th>
 					<th scope="col">Valor cuota</th>
 					<th scope="col">Cuotas</th>
+					<th scope="col">Estado</th>
 					<th scope="col">Accion</th>
 				</tr>
 			</thead>
@@ -40,22 +42,28 @@
 				<tr>
 					<th scope="row">1</th>
 					<td>213213242</td>
+					<td>2020-02-12</td>
 					<td>$5000</td>
 					<td>18</td>
+					<td>Finalizado</td>
 					<td><a href="PagarPrestamo.jsp?idPrestamo" class="btn btn-primary">PAGAR</a> <br></td>
 				</tr>
 				<tr>
 					<th scope="row">2</th>
 					<td>2245242</td>
+					<td>2020-05-10</td>
 					<td>$3000</td>
 					<td>12</td>
+					<td>Activo</td>
 					<td><a href="PagarPrestamo.jsp?idPrestamo" class="btn btn-primary">PAGAR</a> <br></td>
 				</tr>
 				<tr>
 					<th scope="row">3</th>
 					<td>5050505</td>
+					<td>2020-09-20</td>
 					<td>$1000</td>
 					<td>36</td>
+					<td>Activo</td>
 					<td><a href="PagarPrestamo.jsp?idPrestamo" class="btn btn-primary">PAGAR</a> <br></td>
 				</tr>
 			</tbody>

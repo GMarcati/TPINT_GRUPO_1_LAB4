@@ -33,6 +33,8 @@ public class MovimientosDaoImpl implements MovimientosDao {
 			 while(rs.next())
 			 {
 				 
+				 
+				 
 				 Movimientos movimientos = new Movimientos();
 				 movimientos.setIdMovimiento(rs.getLong("m.idMovimiento"));
 				 movimientos.setIdCuenta(rs.getLong("m.idCuenta"));
@@ -43,6 +45,7 @@ public class MovimientosDaoImpl implements MovimientosDao {
 				 movimientos.setTipoMovimiento(tmovimiento);
 				 
 				 movimientos.setFechaCreacion(rs.getDate("m.fecha"));
+				 movimientos.setDetalle(rs.getString("m.detalle"));
 				 movimientos.setImporte(rs.getDouble("m.importe"));
 				 movimientos.setCuentaDestino(rs.getLong("m.cuentaDestino"));
 				  

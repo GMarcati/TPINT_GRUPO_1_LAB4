@@ -109,6 +109,17 @@ public class servletMovimientos extends HttpServlet {
 		}
 		
 		
+		if(request.getParameter("idCuenta")!=null) {
+			
+			int idCuenta = Integer.parseInt(request.getParameter("idCuenta"));
+			long numeroCuenta = Integer.parseInt(request.getParameter("numeroCuenta"));
+			request.setAttribute("listaMovimientosXCuenta", movimientoNeg.listarMovimientosPorCuenta(idCuenta));
+			request.setAttribute("numeroCuenta", numeroCuenta);
+	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/MovimientosCuentaCliente.jsp");
+			dispatcher.forward(request, response);
+		}
+		
+		
 		
 		
 		

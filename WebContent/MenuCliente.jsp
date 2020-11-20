@@ -26,7 +26,7 @@
 						<li class="nav-text dropdown">
 							<a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu cliente</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="ListaCuentasCliente.jsp" >Cuentas</a>
+								<a class="dropdown-item" href="servletCuenta?PrincipalClienteCuentas" >Cuentas</a>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="servletMovimientos?listarSelects">Transferencias</a> 
 								<div class="dropdown-divider"></div>

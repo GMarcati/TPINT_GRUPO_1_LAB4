@@ -169,7 +169,7 @@
 			<td><%=c.getFechaCreacion()%></td>
 			<td><%=c.getCBU()%></td>
 			<td><%=c.getSaldo()%></td>
-			<td class="text-center"><a href="servletCuenta?idModificar=<%=c.getIdCuenta()%>" class="btn btn-secondary btn-sm" style="width: 80px;">Modificar</a> <br><br> <a href="servletCuenta?idEliminar=<%=c.getIdCuenta()%>" class="btn btn-danger btn-sm" style="width: 80px;">Eliminar</a></td>
+			<td class="text-center"><a href="servletCuenta?idModificar=<%=c.getIdCuenta()%>" class="btn btn-secondary btn-sm" style="width: 80px;">Modificar</a> <br><br> <a href="servletCuenta?idEliminar=<%=c.getIdCuenta()%>" class="btn btn-danger btn-sm" style="width: 80px;" onclick="return confirm ('¿Está seguro que desea eliminar ese registro?')">Eliminar</a></td>
 		</tr>
 		
 

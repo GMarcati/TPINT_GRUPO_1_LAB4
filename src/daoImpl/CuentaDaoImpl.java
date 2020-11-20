@@ -296,13 +296,20 @@ public class CuentaDaoImpl implements CuentaDao{
 		List<Cuenta> ListadoCuentaXUsuario = new ArrayList<Cuenta>();
 		 try
 		 {
-			 String query = "SELECT C.idCuenta, C.numeroCuenta FROM cuentas as C where C.idUsuario="+idUsuario; 
+			 String query = "SELECT C.idCuenta, C.numeroCuenta, TC.idTipoCuenta, TC.descripcion, C.fechaCreacion, C.CBU, C.saldo FROM cuentas as C inner join tipoCuentas as TC on C.idTipoCuenta=TC.idTipoCuenta where C.idEstado=1 and C.idUsuario="+idUsuario; 
 			 ResultSet rs = cn.query(query);
 			 while(rs.next())
 			 {
 				 	Cuenta x = new Cuenta();
 				 	x.setIdCuenta(rs.getLong("C.idCuenta"));
-				 	x.setCBU(rs.getLong("C.numeroCuenta"));
+				 	x.setNumeroCuenta(rs.getLong("C.numeroCuenta"));
+				 	TipoCuenta tipoCuenta = new TipoCuenta();
+				 	tipoCuenta.setIdTipoCuenta(rs.getInt("TC.idTipoCuenta"));
+				 	tipoCuenta.setDescripcion(rs.getString("TC.descripcion"));
+				 	x.setTipoCuenta(tipoCuenta);
+				 	x.setFechaCreacion(rs.getDate("C.fechaCreacion"));
+				 	x.setCBU(rs.getLong("C.CBU"));
+				 	x.setSaldo(rs.getDouble("C.saldo"));
 				 	
 	
 				 	ListadoCuentaXUsuario.add(x);

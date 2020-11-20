@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import entidad.Cuenta;
 import entidad.TipoCuenta;
+import entidad.Usuario;
 import negocio.CuentaNeg;
 import negocio.UsuarioNeg;
 import negocioImpl.CuentaNegImpl;
@@ -167,6 +168,17 @@ public class servletCuenta extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/ListaEliminarCuentas.jsp");   
 	        rd.forward(request, response);
 			
+			
+		}
+		
+		if(request.getParameter("PrincipalClienteCuentas")!=null) {
+			
+			Usuario usuario = new Usuario();
+			usuario=(Usuario) request.getSession().getAttribute("Usuario");
+			
+			request.setAttribute("listaCuentasPorUsuario", cuentaNeg.listarCuentasPorUsuario(usuario.getIdUsuario()));	
+	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/ListaCuentasCliente.jsp");
+			dispatcher.forward(request, response);
 			
 		}
 		
