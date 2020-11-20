@@ -100,7 +100,7 @@ CREATE TABLE prestamos(
     montoSolicitado decimal NOT NULL,
     cantidadMeses int NOT NULL,
     valorCuota decimal NOT NULL,
-    idEstado bit NOT NULL,
+    idEstado int NOT NULL, -- si es 1, se encuentra pendiente. Si es 0, rechazado. Si es 2, aprobado
     primary key (idPrestamo),
     constraint foreign key (idCuenta) references cuentas (idCuenta) -- agregada ultima actualizacion
 );

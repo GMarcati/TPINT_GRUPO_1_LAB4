@@ -247,7 +247,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		return estado;
 	}
 	
-public List<Usuario> listarUsuarios(){
+		public List<Usuario> listarUsuarios(){
 		
 		cn = new Conexion();
 		cn.Open();
@@ -305,7 +305,7 @@ public List<Usuario> listarUsuarios(){
 		return listaU;
 	}
 
-public List<Nacionalidad> listarNacionalidades(){
+	public List<Nacionalidad> listarNacionalidades(){
 	
 	cn = new Conexion();
 	cn.Open();

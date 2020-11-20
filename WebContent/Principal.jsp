@@ -36,7 +36,7 @@
 		  <h1 class="display-4">Bienvenido a banco Sarasa!</h1>
 		  <p class="lead">Queremos ser tu banco. Un banco para tus ideas.</p>
 		  <hr class="my-4">
-		  <p>El mejor lugar donde pedir tus prestamos con los interes mas bajos y con muchas cuotas.</p>
+		  <p>El mejor lugar donde pedir tus préstamos con los interes mas bajos y con muchas cuotas.</p>
 		  <a class="btn btn-primary btn-lg" href="Login.jsp" role="button">Ingresar</a>
 		</div>
 		<hr />

@@ -60,5 +60,45 @@ public class PrestamoDaoImpl implements PrestamoDao
 		}
 		return listaP;
 	}
+
+	//METODO QUE APRUEBA EL PRESTAMO--> 
+	public boolean aceptarPrestamo(long id) 
+	{
+		boolean estado=true;
+		
+		cn = new Conexion();
+		cn.Open();
+		String query = "Update prestamos set idEstado=2 WHERE idPrestamo="+id;
+		
+		try 
+		{
+			estado=cn.execute(query);
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		return estado; 
+	}
+
+	//METODO QUE RECHAZA EL PRESTAMO--> 
+	public boolean rechazarPrestamo(long id) 
+	{
+		boolean estado=true;
+		
+		cn = new Conexion();
+		cn.Open();
+		String query = "Update prestamos set idEstado=0 WHERE idPrestamo="+id;
+		
+		try 
+		{
+			estado=cn.execute(query);
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		return estado; 
+	}
 	
 }

@@ -11,7 +11,7 @@ public class Prestamo
 	private double montoSolicitado;
 	private int cantidadMeses;
 	private double valorCuota;
-	private int estado;
+	private int estado; // si es 1, se encuentra pendiente. Si es 0, rechazado. Si es 2, aprobado
 	
 	public long getIdPrestamo()
 	{

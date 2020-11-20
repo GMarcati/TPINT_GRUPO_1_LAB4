@@ -66,7 +66,7 @@
 		<div>
 			<h2>ASIGNAR CUENTA A CLIENTE</h2><br></div>
 		<div>
-			<label>Id Cuenta:</label>
+			<label>Número cuenta:</label>
 	  		<select name="txtIdCuenta" class="form-control">
 	  		<% 
 		  	for(Cuenta cuenta : listaC){    
@@ -75,7 +75,7 @@
 		   	<%
 		   	} %>
 	  		</select><br>
-			<label>Id Cliente:</label>
+			<label>Usuario:</label>
 	  		<select name="txtIdCliente" class="form-control">
 	  		<% 
 		  	for(Usuario usuario : listaU){    
