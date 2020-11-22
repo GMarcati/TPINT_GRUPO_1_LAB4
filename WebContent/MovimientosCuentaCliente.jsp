@@ -56,7 +56,7 @@
 			listaMovimientos = (List<Movimientos>) request.getAttribute("listaMovimientosXCuenta");
 		}
 		%>
-
+		
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"  style="margin-bottom: 1em;">
 	        <div class="container">
 	
@@ -74,7 +74,7 @@
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="servletMovimientos?listarSelects">Transferencias</a> 
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="SolicitarPrestamo.jsp" >Solicitar préstamo</a> 
+								<a class="dropdown-item" href="servletCuenta?listaCuentasPrestamos" >Solicitar préstamo</a> 
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="ListaPrestamosCliente.jsp" >Ver préstamos adquiridos</a> 
 								<div class="dropdown-divider"></div>

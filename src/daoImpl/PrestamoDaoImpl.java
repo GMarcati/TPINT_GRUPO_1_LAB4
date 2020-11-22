@@ -7,6 +7,7 @@ import java.util.List;
 import com.sun.org.apache.xerces.internal.impl.dv.xs.DecimalDV;
 
 import dao.PrestamoDao;
+import entidad.Cuenta;
 import entidad.Localidad;
 import entidad.Nacionalidad;
 import entidad.Prestamo;
@@ -36,16 +37,17 @@ public class PrestamoDaoImpl implements PrestamoDao
 		    while(rs.next())
 			{
 		    	Prestamo pres = new Prestamo();
-		    	UsuarioDaoImpl usDaoImpl= new UsuarioDaoImpl();
 		    	
 		    	pres.setIdPrestamo(rs.getLong(0));
-		    	pres.setUsuario(usDaoImpl.obtenerUno(rs.getLong(1)));
+		    	Cuenta cuenta = new Cuenta();
+		    	cuenta.setIdCuenta(rs.getLong(1));
+		    	pres.setCuenta(cuenta);
 		    	pres.setImporteAdevolver(rs.getDouble(2));
 		    	pres.setFecha(rs.getDate(3));
 		    	pres.setMontoSolicitado(rs.getDouble(4));
 		    	pres.setCantidadMeses(rs.getInt(5));
 		    	pres.setValorCuota(rs.getDouble(6));
-		    	pres.setEstado(rs.getInt(7));
+		    	pres.setEstado(rs.getBoolean(7));
 				 
 				listaP.add(pres);
 			}
@@ -99,6 +101,28 @@ public class PrestamoDaoImpl implements PrestamoDao
 			e.printStackTrace();
 		}
 		return estado; 
+	}
+	
+	public boolean solicitudPrestamo(Prestamo prestamo) {
+		boolean estado=true;
+
+		cn = new Conexion();
+		cn.Open();	
+
+		String query = "Insert into prestamos (idCuenta, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstado) values ('"+prestamo.getCuenta().getIdCuenta()+"','"+prestamo.getImporteAdevolver()+"','"+prestamo.getFecha()+"','"+prestamo.getMontoSolicitado()+"', '"+prestamo.getCantidadMeses()+"', '"+prestamo.getValorCuota()+"', 2)";
+		try
+		 {
+			estado=cn.execute(query);
+		 }
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			cn.close();
+		}
+		return estado;
 	}
 	
 }

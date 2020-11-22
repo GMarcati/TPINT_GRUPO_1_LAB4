@@ -20,8 +20,31 @@ public class PrestamoNegImpl implements PrestamoNeg
 		this.prestamoDao = prestamoDao;
 	}
 	
+	
+	
+	public PrestamoNegImpl() {
+
+	}
+
+
+
 	public ArrayList<Prestamo> listarPrestamos() 
 	{
 		return (ArrayList<Prestamo>) prestamoDao.listarPrestamos();
+	}
+
+	public boolean aceptarPrestamo(long id) {
+
+		return prestamoDao.aceptarPrestamo(id);
+	}
+
+	public boolean rechazarPrestamo(long id) {
+
+		return prestamoDao.rechazarPrestamo(id);
+	}
+
+	public boolean solicitudPrestamo(Prestamo prestamo) {
+		
+		return prestamoDao.solicitudPrestamo(prestamo);
 	}
 }

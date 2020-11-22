@@ -5,13 +5,13 @@ import java.util.Date;
 public class Prestamo 
 {
 	private long idPrestamo;
-	private Usuario usuario;
+	private Cuenta cuenta;
 	private double importeAdevolver;
 	private Date fecha;
 	private double montoSolicitado;
 	private int cantidadMeses;
 	private double valorCuota;
-	private int estado; // si es 1, se encuentra pendiente. Si es 0, rechazado. Si es 2, aprobado
+	private boolean estado; // si es 1, se encuentra pendiente. Si es 0, rechazado. Si es 2, aprobado
 	
 	public long getIdPrestamo()
 	{
@@ -23,16 +23,15 @@ public class Prestamo
 		this.idPrestamo = idPrestamo;
 	}
 	
-	public Usuario getUsuario() 
-	{
-		return usuario;
-	}
 	
-	public void setUsuario(Usuario usuario) 
-	{
-		this.usuario = usuario;
+	public Cuenta getCuenta() {
+		return cuenta;
 	}
-	
+
+	public void setCuenta(Cuenta cuenta) {
+		this.cuenta = cuenta;
+	}
+
 	public double getImporteAdevolver() 
 	{
 		return importeAdevolver;
@@ -83,12 +82,12 @@ public class Prestamo
 		this.valorCuota = valorCuota;
 	}
 	
-	public int getEstado()
+	public boolean getEstado()
 	{
 		return estado;
 	}
 	
-	public void setEstado(int estado) 
+	public void setEstado(boolean estado) 
 	{
 		this.estado = estado;
 	}
@@ -98,12 +97,12 @@ public class Prestamo
 		
 	}
 
-	public Prestamo(long idPrestamo, Usuario usuario, float importeAdevolver, Date fecha, float montoSolicitado,
-			int cantidadMeses, float valorCuota, int estado) 
+	public Prestamo(long idPrestamo, Cuenta cuenta, float importeAdevolver, Date fecha, float montoSolicitado,
+			int cantidadMeses, float valorCuota, boolean estado) 
 	{
 		super();
 		this.idPrestamo = idPrestamo;
-		this.usuario = usuario;
+		this.cuenta = cuenta;
 		this.importeAdevolver = importeAdevolver;
 		this.fecha = fecha;
 		this.montoSolicitado = montoSolicitado;
@@ -115,7 +114,7 @@ public class Prestamo
 	@Override
 	public String toString() 
 	{
-		return "Prestamo [idPrestamo=" + idPrestamo + ", usuario=" + usuario + ", importeAdevolver=" + importeAdevolver
+		return "Prestamo [idPrestamo=" + idPrestamo + ", cuenta=" + cuenta + ", importeAdevolver=" + importeAdevolver
 				+ ", fecha=" + fecha + ", montoSolicitado=" + montoSolicitado + ", cantidadMeses=" + cantidadMeses
 				+ ", valorCuota=" + valorCuota + ", estado=" + estado + "]";
 	}

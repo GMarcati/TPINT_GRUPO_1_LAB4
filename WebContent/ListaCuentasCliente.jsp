@@ -66,7 +66,7 @@
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="servletMovimientos?listarSelects">Transferencias</a> 
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="SolicitarPrestamo.jsp" >Solicitar préstamo</a> 
+								<a class="dropdown-item" href="servletCuenta?listaCuentasPrestamos" >Solicitar préstamo</a> 
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="ListaPrestamosCliente.jsp" >Ver préstamos adquiridos</a> 
 								<div class="dropdown-divider"></div>

@@ -182,6 +182,17 @@ public class servletCuenta extends HttpServlet {
 			
 		}
 		
+		if(request.getParameter("listaCuentasPrestamos")!=null) {
+			
+			Usuario usuario = new Usuario();
+			usuario=(Usuario) request.getSession().getAttribute("Usuario");
+			request.setAttribute("listaCuentasPorUsuario", cuentaNeg.listarCuentasPorUsuario(usuario.getIdUsuario()));
+	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/SolicitarPrestamo.jsp");
+			dispatcher.forward(request, response);
+			
+			
+		}
+		
 			
 		}
 	

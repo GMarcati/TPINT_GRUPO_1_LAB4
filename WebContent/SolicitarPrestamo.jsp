@@ -1,3 +1,6 @@
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="entidad.Cuenta"%>
 <%@page import="entidad.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -11,6 +14,38 @@
 <body>
 <jsp:include page="MenuCliente.jsp"></jsp:include>
 
+
+		<%
+		List<Cuenta> listaCuentas = new ArrayList<Cuenta>();
+		if (request.getAttribute("listaCuentasPorUsuario") != null) {
+			listaCuentas = (List<Cuenta>) request.getAttribute("listaCuentasPorUsuario");
+		}
+		%>
+		
+		<%
+		boolean estado=false;
+		if(request.getAttribute("estadoPrestamo")!=null){
+			estado=(Boolean)request.getAttribute("estadoPrestamo");
+			
+			
+			if(estado==true){
+			%>
+				<script>swal("Prestamo solicitado con exito!", "", "success")</script>
+			<%
+			}else
+			{
+			%>
+				<script>swal("Error al solicitar el prestamo.", "", "error")</script>
+			<%
+			}
+			
+
+		}
+
+		%>
+
+
+	<form action="servletPrestamo">
 	<div class="container body-content" style="margin-top: 5em;"><br />
 		<div class="jumbotron jumbotron-fluid text-center rounded-pill">
 			<div class="container">
@@ -20,20 +55,38 @@
 		<hr />
 		<div class="form-group">
 			<label for="exampleInputEmail1">Monto</label> 
-			<input type="text" class="form-control small" Style="width: 500px">
+			<input required type="text" name="txtMontoSolicitado" class="form-control small" Style="width: 500px">
 		</div>
 		<div class="form-group">
-			<label for="exampleInputEmail1">Cantidad cuotas</label>
-			 <input type="text" class="form-control small" Style="width: 500px">
+				<label for="exampleInputEmail1">Cantidad cuotas:</label> 
+				<select name="selectCantidadCuotas" class="form-control small" Style="width: 500px">
+			  	<option value="3">3</option>
+			  	<option value="6">6</option>
+			  	<option value="12">12</option>
+			  	<option value="18">18</option>
+				<option value="24">24</option>
+		  		</select>
 		</div>
+
 		<div class="form-group">
-			<label for="exampleInputEmail1">Cuenta destino</label>
-			<input type="text" class="form-control small" Style="width: 500px">
+				<label for="exampleInputEmail1">Cuenta destino:</label> 
+				<select name="idCuentaDestino" class="form-control small" Style="width: 500px">
+		  		<% 
+			  		for(Cuenta cuenta: listaCuentas){    
+			 		 %>
+			  	<option value="<%=cuenta.getIdCuenta() %>"> <%=cuenta.getIdCuenta() %> - <%=cuenta.getNumeroCuenta() %> </option>
+			   	<%
+			   	} %>
+		  		</select>
+				
 		</div>
-		<a href="SolicitarPrestamo.jsp" class="btn btn-primary">Solicitar</a>
+		<input class="btn btn-primary" style="margin-bottom: 20px" type="submit" name="btnSolicitar" value="Solicitar">
 		<div>
 			<br/>
 		</div>
 	</div>
+	</form>
+	
+	
 </body>
 </html>
