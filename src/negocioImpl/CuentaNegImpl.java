@@ -12,29 +12,28 @@ public class CuentaNegImpl implements CuentaNeg {
 
 	private CuentaDao cuentaDao = new CuentaDaoImpl();
 	
-	public CuentaNegImpl(CuentaDao cuentaDao) 
-	{
+	public CuentaNegImpl(CuentaDao cuentaDao) {
+		
 		this.cuentaDao = cuentaDao;
 	}
 	
-	public CuentaNegImpl() 
-	{
+	public CuentaNegImpl() {
 		
 	}
 	
-	public boolean insertar(Cuenta cuenta) 
-	{
+	public boolean insertar(Cuenta cuenta) {
+		
 		return this.cuentaDao.insertar(cuenta);
+		
 	}
 	
-	public ArrayList<Cuenta> listarCuentas()
-	{
+
+	public ArrayList<Cuenta> listarCuentas() {
 		return (ArrayList<Cuenta>) cuentaDao.listarCuentas();
 	}
 
 	@Override
-	public Cuenta obtenerUno(long id) 
-	{
+	public Cuenta obtenerUno(long id) {
 		return cuentaDao.obtenerUno(id);
 	}
 

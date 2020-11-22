@@ -4,8 +4,8 @@ import java.util.List;
 
 import entidad.Cuenta;
 
-public interface CuentaNeg
-{
+public interface CuentaNeg {
+
 	public List<Cuenta> listarCuentas();
 	public List<Cuenta> listarNumeroCuentas();
 	public List<Cuenta> listarCuentasPorUsuario(long idUsuario);
@@ -15,4 +15,5 @@ public interface CuentaNeg
 	public boolean borrar(long id);
 	public boolean AsignarCuentaACliente(long idCuenta, long idUsuario);
 	public boolean ContCuentasPorCliente(long idUsuario);
+	
 }

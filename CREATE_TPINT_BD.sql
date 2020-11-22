@@ -100,7 +100,7 @@ CREATE TABLE prestamos(
     montoSolicitado decimal NOT NULL,
     cantidadMeses int NOT NULL,
     valorCuota decimal NOT NULL,
-    estado varchar(15) NOT NULL, -- cambio actualizacion 22/11 estados= pendiente, aprobado, rechazado
+    idEstado bit NOT NULL, -- si es 1, se encuentra pendiente. Si es 0, rechazado. Si es 2, aprobado
     primary key (idPrestamo),
     constraint foreign key (idCuenta) references cuentas (idCuenta) -- agregada ultima actualizacion
 );
@@ -229,10 +229,18 @@ insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cue
 insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (1, 1, '2020-06-25', 'blablablablablabla', 1000, 123456789);
 insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (5, 2, '2020-06-25', 'blablablablablabla', 5000, 123456789);
 insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (5, 3, '2020-06-25', 'blablablablablabla', 10000, 123456789);
-insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (5, 4, '2020-06-25', 'bla', 15000, 123456789);
+insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (1, 4, '2020-06-10', 'blasadasd', 11000, 55555555);
+insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (1, 4, '2020-06-23', 'bladsadasd', 10000, 44444444);
+insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (1, 4, '2020-06-29', 'blasdad', 18000, 22222222);
 
-insert into prestamos (idCuenta, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, estado) values(1,20000, '2020/10/21', 10000, 3, 10000, 'pendiente');
-insert into prestamos (idCuenta, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, estado) values(2, 40000, '2020/10/22', 20000, 6, 10000, 'pendiente');
-insert into prestamos (idCuenta, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, estado) values(3, 60000, '2020/10/23', 30000, 18, 10000, 'pendiente');
-insert into prestamos (idCuenta, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, estado) values(4, 80000, '2020/10/24', 40000, 12, 10000, 'pendiente');
-insert into prestamos (idCuenta, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, estado) values(5, 100000, '2020/10/25', 50000, 24, 10000, 'pendiente');
+insert into prestamos (idCuenta, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstado) values(1,20000, '2020/10/21', 10000, 3, 10000,1);
+insert into prestamos (idCuenta, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstado) values(2, 40000, '2020/10/22', 20000, 6, 10000,1);
+insert into prestamos (idCuenta, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstado) values(3, 60000, '2020/10/23', 30000, 18, 10000,1);
+insert into prestamos (idCuenta, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstado) values(4, 80000, '2020/10/24', 40000, 12, 10000,1);
+insert into prestamos (idCuenta, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstado) values(5, 100000, '2020/10/25', 50000, 24, 10000,1);
+
+
+select p.*, c.numeroCuenta from prestamos as p
+inner join cuentas as c on c.idCuenta= p.idCuenta;
+
+select * from cuentas;

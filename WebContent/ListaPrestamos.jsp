@@ -46,7 +46,7 @@
 	        </div>
 	    </nav>
 <div class="container-fluid" style="margin-top: 1em;">
-<div><h2>LISTADO DE PRESTAMOS</h2><br></div>
+<div><h2>LISTADO DE PRESTAMOS</h2><!-- Ingresar USUARIO SESION --><br></div>
 
 <label>Busqueda por IdCliente: </label> 	
 <div class="input-group mb-3">
