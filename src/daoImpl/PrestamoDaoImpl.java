@@ -38,16 +38,16 @@ public class PrestamoDaoImpl implements PrestamoDao
 			{
 		    	Prestamo pres = new Prestamo();
 		    	
-		    	pres.setIdPrestamo(rs.getLong(0));
+		    	pres.setIdPrestamo(rs.getLong(1));
 		    	Cuenta cuenta = new Cuenta();
-		    	cuenta.setIdCuenta(rs.getLong(1));
+		    	cuenta.setIdCuenta(rs.getLong(2));
 		    	pres.setCuenta(cuenta);
-		    	pres.setImporteAdevolver(rs.getDouble(2));
-		    	pres.setFecha(rs.getDate(3));
-		    	pres.setMontoSolicitado(rs.getDouble(4));
-		    	pres.setCantidadMeses(rs.getInt(5));
-		    	pres.setValorCuota(rs.getDouble(6));
-		    	pres.setEstado(rs.getBoolean(7));
+		    	pres.setImporteAdevolver(rs.getDouble(3));
+		    	pres.setFecha(rs.getDate(4));
+		    	pres.setMontoSolicitado(rs.getDouble(5));
+		    	pres.setCantidadMeses(rs.getInt(6));
+		    	pres.setValorCuota(rs.getDouble(7));
+		    	pres.setEstado(rs.getBoolean(8));
 				 
 				listaP.add(pres);
 			}

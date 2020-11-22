@@ -11,7 +11,7 @@ public class Prestamo
 	private double montoSolicitado;
 	private int cantidadMeses;
 	private double valorCuota;
-	private boolean estado; // si es 1, se encuentra pendiente. Si es 0, rechazado. Si es 2, aprobado
+	private String estado; 
 	
 	public long getIdPrestamo()
 	{
@@ -82,12 +82,12 @@ public class Prestamo
 		this.valorCuota = valorCuota;
 	}
 	
-	public boolean getEstado()
+	public String getEstado()
 	{
 		return estado;
 	}
 	
-	public void setEstado(boolean estado) 
+	public void setEstado(String estado) 
 	{
 		this.estado = estado;
 	}
@@ -98,7 +98,7 @@ public class Prestamo
 	}
 
 	public Prestamo(long idPrestamo, Cuenta cuenta, float importeAdevolver, Date fecha, float montoSolicitado,
-			int cantidadMeses, float valorCuota, boolean estado) 
+			int cantidadMeses, float valorCuota, String estado) 
 	{
 		super();
 		this.idPrestamo = idPrestamo;

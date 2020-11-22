@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import daoImpl.CuentaDaoImpl;
 import entidad.Cuenta;
 import entidad.Localidad;
 import entidad.Movimientos;
@@ -27,34 +28,25 @@ import negocioImpl.CuentaNegImpl;
 import negocioImpl.MovimientosNegImpl;
 import negocioImpl.UsuarioNegImpl;
 
-/**
- * Servlet implementation class servletMovimientos
- */
+
 @WebServlet("/servletMovimientos")
-public class servletMovimientos extends HttpServlet {
+public class servletMovimientos extends HttpServlet 
+{
 	private static final long serialVersionUID = 1L;
        
 	MovimientosNeg movimientoNeg = new MovimientosNegImpl();
 	CuentaNeg cuentaNeg = new CuentaNegImpl();
 	UsuarioNeg usuarioNeg = new UsuarioNegImpl();
 	
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public servletMovimientos() {
+    public servletMovimientos() 
+    {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
 		if(request.getParameter("listarSelects")!=null)
 		{
-			
-
 			Usuario usuario = new Usuario();
 			usuario=(Usuario) request.getSession().getAttribute("Usuario");
 			
@@ -72,7 +64,6 @@ public class servletMovimientos extends HttpServlet {
 			boolean estadoDescuentoSaldoDestino=true;
 			boolean estadoAumentoSaldoOrigen=true;
 			
-			
 			Movimientos movimientos = new Movimientos();
 	
 			movimientos.setIdCuenta(Long.parseLong(request.getParameter("CuentaUsuario")));
@@ -81,7 +72,10 @@ public class servletMovimientos extends HttpServlet {
 			tmovimiento.setIdTipoMovimiento(Integer.parseInt(request.getParameter("TipoMovimiento")));
 			movimientos.setTipoMovimiento(tmovimiento);
 			
-			movimientos.setCuentaDestino(Long.parseLong(request.getParameter("NumeroCuentaDestino")));
+			
+			CuentaDaoImpl cdi= new CuentaDaoImpl();//aca estoy
+			long cuentaDes=cdi.obtenerCuenta(Long.parseLong(request.getParameter("NumeroCuentaDestino")));
+			movimientos.setCuentaDestino(cuentaDes);
 			
 			LocalDate localDate = LocalDate.now();
 			movimientos.setFechaCreacion(java.sql.Date.valueOf(localDate));
@@ -105,12 +99,11 @@ public class servletMovimientos extends HttpServlet {
 			request.setAttribute("listaTipoMovimiento", movimientoNeg.listarTipoMovimiento());	
 	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/Transferir.jsp");
 			dispatcher.forward(request, response);
-			
 		}
 		
 		
-		if(request.getParameter("idCuenta")!=null) {
-			
+		if(request.getParameter("idCuenta")!=null)
+		{
 			int idCuenta = Integer.parseInt(request.getParameter("idCuenta"));
 			long numeroCuenta = Integer.parseInt(request.getParameter("numeroCuenta"));
 			request.setAttribute("listaMovimientosXCuenta", movimientoNeg.listarMovimientosPorCuenta(idCuenta));
@@ -120,20 +113,11 @@ public class servletMovimientos extends HttpServlet {
 		}
 		
 		
-		
-		
-		
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
-		
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
 		//doGet(request, response);
 	}
 

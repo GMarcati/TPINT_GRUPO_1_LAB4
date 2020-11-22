@@ -326,6 +326,32 @@ public class CuentaDaoImpl implements CuentaDao{
 		 return ListadoCuentaXUsuario;
 	}
 	
+	//metodo que obtiene el numero de la cuenta, en base a su id
+	public long obtenerCuenta (long id)
+	{
+		cn = new Conexion();
+		cn.Open();
+		
+		String query = "select c.numeroCuenta from cuentas as c where c.idCuenta="+id; 
+		long numCuenta=0;
+		
+		try
+		{
+			ResultSet rs = cn.query(query);
+			rs.next();
+			numCuenta= rs.getLong(1);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			cn.close();
+		}
+		return numCuenta;
+	}
+	
 	
 	
 }
