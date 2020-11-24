@@ -63,7 +63,7 @@
 
 <jsp:include page="MenuAdmin.jsp"></jsp:include>
 
-<form method="get" action="servletUsuario">
+<form method="post" action="servletUsuario">
 <div class="container body-content" style="margin-top: 5em;">
 <div><h2>MODIFICAR CLIENTE</h2><br></div>
 <div>
@@ -148,7 +148,7 @@
   <label>Direccion</label><input required type="text" name="txtDireccion" class="form-control" value="<%=usuario.getDireccion()%>"><br>
   <label>Mail: </label><input required type="email" name="txtMail" class="form-control"  value="<%=usuario.getMail()%>"><br>
   <label>Telefono: </label><input required type="number" name="txtTelefono" class="form-control" value="<%=usuario.getTelefono()%>"><br>
-  <input type="submit" name="btnModificar" value="Aceptar" class="btn btn-primary">
+  <input type="submit" name="btnModificarCliente" value="Aceptar" class="btn btn-primary">
  </div>
   </div>
   </form>

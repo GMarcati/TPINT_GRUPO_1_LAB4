@@ -28,7 +28,7 @@
 <div class="container body-content" style="margin-top: 1em;">
 <div><h2>MODIFICAR CUENTA</h2><br></div>
 <div>
- <form method="get" action="servletCuenta">
+ <form method="post" action="servletCuenta">
     
   <label>Id cuenta: </label> <input readonly="readonly" type="text" name="txtIdCuenta" class="form-control" value="<%=request.getAttribute("idModificar")%>"><br>
   <label>Numero de cuenta: </label><input required type="number" name="txtNumeroCuenta" class="form-control" value="<%=cuenta.getNumeroCuenta()%>"><br>
@@ -39,7 +39,7 @@
 					<option value="2">2 - Cuenta corriente </option> 
 </select> <br>
   <label>CBU: </label><input required type="number" name="txtCBU" class="form-control" value="<%=cuenta.getCBU()%>"><br>
-<input class="btn btn-primary" type="submit" name="btnModificar" value="Aceptar">
+<input class="btn btn-primary" type="submit" name="btnModificarCuenta" value="Aceptar">
 </form>
  </div>
   </div>

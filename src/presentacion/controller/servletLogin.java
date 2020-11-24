@@ -54,7 +54,9 @@ public class servletLogin extends HttpServlet
 				{
 					if(usuarioNeg.verificarTipoUsuario(usuario)==true)//funcion que selecciona tipo de usuario, si es true, es adm
 					{
+						//Se carga y enviar el usuario por session
 						request.getSession().setAttribute("Usuario", usuarioNeg.obtenerUsuarioPorNombreUsuario(usuario));
+						//Se envia el nombre de usuario por session
 						request.getSession().setAttribute("NombreUsuario", usuario);
 						request.setAttribute("estadoCuenta", estado);
 						RequestDispatcher rd= request.getRequestDispatcher("/PrincipalAdministrador.jsp");
@@ -62,8 +64,9 @@ public class servletLogin extends HttpServlet
 					}
 					else
 					{
-						
+						//Se carga y enviar el usuario por session
 						request.getSession().setAttribute("Usuario", usuarioNeg.obtenerUsuarioPorNombreUsuario(usuario));
+						//Se envia el nombre de usuario por session
 						request.getSession().setAttribute("NombreUsuario", usuario);
 						request.setAttribute("estadoCuenta", estado);
 						RequestDispatcher rd= request.getRequestDispatcher("/PrincipalCliente.jsp");
@@ -72,7 +75,6 @@ public class servletLogin extends HttpServlet
 				}
 				else
 				{
-					
 					
 					//Cuando no coincide el usuario y la contraseña
 					request.setAttribute("estadoLoginError", estado);

@@ -121,11 +121,11 @@
 		</div>
 		<br>
 		
-		
+		<%int cont=1; %>
 <table id="table_id" style="width:100%" class="table table-striped table-bordered " >
 <thead >
 		<tr class="text-center">
-			<th>ID PRESTAMO	</th>
+			<th>#</th>
 			<th>ID CUENTA</th>
 			<th>IMPORTE A DEVOLVER</th>
 			<th>FECHA CREACION</th>
@@ -143,7 +143,7 @@
 			for (Prestamo prestamo : listaP) {
 		%>
 		<tr>
-			<td><%=prestamo.getIdPrestamo()%></td>
+			<td><%=cont++%></td>
 			<td><%=prestamo.getCuenta().getIdCuenta()%></td>
 			<td><%=prestamo.getImporteAdevolver()%></td>
 			<td><%=prestamo.getFecha()%></td>

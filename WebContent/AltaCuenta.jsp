@@ -39,7 +39,7 @@
 		<h2>ALTA CUENTA</h2><br>
 	</div>
 
-	<form action="servletCuenta" method="get">
+	<form action="servletCuenta" method="post">
 		<div>
 
 		  	<label>Numero de cuenta: </label><input type="text" readonly="readonly" name="txtNumeroCuenta" class="form-control" placeholder="Se auto-generara un numero de cuenta"><br>
@@ -50,7 +50,7 @@
 					<option value="2">2 - Cuenta corriente </option> 
 				</select> <br>
 		  	<label>CBU: </label><input type="text" readonly="readonly" name="txtCBU" class="form-control" placeholder="Se auto-generara un numero de CBU"><br>
-			<input class="btn btn-primary" type="submit" name="btnAceptar" value="Aceptar">
+			<input class="btn btn-primary" type="submit" name="btnAltaCuenta" value="Aceptar">
 	 	</div>
  	</form>
  	

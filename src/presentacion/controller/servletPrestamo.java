@@ -43,35 +43,54 @@ public class servletPrestamo extends HttpServlet
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		/*
+		//Se valida que el usuario no sea null, de lo contrario redirecciona al jsp Login
 		Usuario usuarioLog = new Usuario();
 		usuarioLog=(Usuario) request.getSession().getAttribute("Usuario");
 		if(usuarioLog==null) {
 	    	 RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.jsp");
 	         dispatcher.forward(request, response);
 		}
-		*/
 		
-		if(request.getParameter("listadoP")!=null)
-		{
-			//request.setAttribute("listaPrestamo", prestamoNeg.listarPrestamos());	
-			//RequestDispatcher dispatcher = request.getRequestDispatcher("/ListaEliminarClientes.jsp");
-			//dispatcher.forward(request, response);
-		}
 		
+		//---------------------------------------------------CLIENTE------------------------------------------------------//
+		//Cuando se apreta el boton btnSolicitar del jsp SolicitarPrestamo
 		if(request.getParameter("btnSolicitar")!=null) {
 			
 			Prestamo prestamo = new Prestamo();
 			boolean estado=true;
+			double intereses=0;
 			Cuenta cuenta = new Cuenta();
 			Usuario usuario = new Usuario();
 			usuario=(Usuario) request.getSession().getAttribute("Usuario");
 			LocalDate localDate = LocalDate.now();
 			
+			//Depende de las cuotas que seleccione el interes va a variar
+			switch (Integer.parseInt(request.getParameter("selectCantidadCuotas"))) {
+			case 3:
+				intereses=0.30;
+				break;
+			case 6:
+				intereses=0.60;
+				break;
+			case 12:
+				intereses=1.20;
+				break;
+			case 18:
+				intereses=1.80;
+				break;
+			case 24:
+				intereses=2.40;
+				break;
+
+			default:
+				intereses=0.10;
+				break;
+			}
+			
 			cuenta.setIdCuenta(Integer.parseInt(request.getParameter("idCuentaDestino")));
 			prestamo.setCuenta(cuenta);
 			prestamo.setUsuario(usuario);
-			Double importeAdevolver = Double.parseDouble(request.getParameter("txtMontoSolicitado"))+Double.parseDouble(request.getParameter("txtMontoSolicitado"))*0.12;
+			Double importeAdevolver = Double.parseDouble(request.getParameter("txtMontoSolicitado"))+Double.parseDouble(request.getParameter("txtMontoSolicitado"))*intereses;
 			prestamo.setImporteAdevolver(importeAdevolver);
 			prestamo.setFecha(java.sql.Date.valueOf(localDate));
 			prestamo.setMontoSolicitado(Double.parseDouble(request.getParameter("txtMontoSolicitado")));
@@ -92,34 +111,39 @@ public class servletPrestamo extends HttpServlet
 			
 		}
 		
+		//Cuando desde el menu cliente se selecciona la opcion "Ver préstamos adquiridos" 
 		if(request.getParameter("listadoPrestamosPorUsuario")!=null) {
 			
 			Usuario usuario = new Usuario();
+			//Se obtiene el usuario por session
 			usuario=(Usuario) request.getSession().getAttribute("Usuario");
-			
-			request.setAttribute("listaCuentasPorUsuario", cuentaNeg.listarCuentasPorUsuario(usuario.getIdUsuario()));
+
+			//Se carga y envia el listado de prestamos por usuario al jsp ListaPrestamosCliente
 	    	request.setAttribute("listaPrestamos", prestamoNeg.listarPrestamosPorCliente(usuario.getIdUsuario()));
 	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/ListaPrestamosCliente.jsp");
 			dispatcher.forward(request, response);
 		}
 		
+		//Recibo el id del prestamo a pagar del jsp ListaPrestamosCliente
 		if(request.getParameter("idPrestamoCuota")!=null) {
 			
 			Usuario usuario = new Usuario();
+			//Se obtiene el usuario por session
 			usuario=(Usuario) request.getSession().getAttribute("Usuario");
 			long idPrestamo = Integer.parseInt(request.getParameter("idPrestamoCuota"));
 			long cuotas = Integer.parseInt(request.getParameter("CuotasAPagar"));
 			Prestamo prestamo = new Prestamo();
 			prestamo=prestamoNeg.obtenerPrestamoPorId(idPrestamo);
 			
+			//Se envian las cuotas a pagar, el prestamo, listado de cuentas por usuario y la lista de prestamo
 			request.setAttribute("cuotasApagar", cuotas);
 			request.setAttribute("prestamo", prestamo);
 			request.setAttribute("listaCuentasPorUsuario", cuentaNeg.listarCuentasPorUsuario(usuario.getIdUsuario()));
-	    	request.setAttribute("listaPrestamos", prestamoNeg.listarPrestamosPorCliente(usuario.getIdUsuario()));
 	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/PagarPrestamo.jsp");
 			dispatcher.forward(request, response);
 		}
 		
+		//Cuando se apreta el boton btnPagarCuota del jsp PagarPrestamo
 		if(request.getParameter("btnPagarCuota")!=null) {
 			
 			boolean estadoPrestamo=true;
@@ -148,6 +172,7 @@ public class servletPrestamo extends HttpServlet
 			movimiento.setImporte(Double.parseDouble(request.getParameter("txtCuota")));
 			movimiento.setCuentaDestino(1);
 			
+			//Se verifica si el saldo es mayor o igual al valor de la cuota a pagar del prestamo
 			if(saldo>=prestamo.getValorCuota()) {
 				
 				estadoPrestamo=prestamoNeg.pagarCuota(idPrestamo);
@@ -165,10 +190,11 @@ public class servletPrestamo extends HttpServlet
 			request.setAttribute("estadoPrestamo", estadoPrestamo);
 			request.setAttribute("listaCuentasPorUsuario", cuentaNeg.listarCuentasPorUsuario(usuario.getIdUsuario()));
 			request.setAttribute("listaPrestamos", prestamoNeg.listarPrestamosPorCliente(usuario.getIdUsuario()));
-	    	request.setAttribute("listaPrestamos", prestamoNeg.listarPrestamosPorCliente(usuario.getIdUsuario()));
 	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/ListaPrestamosCliente.jsp");
 			dispatcher.forward(request, response);
 		}
+		//----------------------------------------------------------------------------------------------------------------//
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 

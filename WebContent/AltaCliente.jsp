@@ -83,7 +83,7 @@
 		
 		
 
-	<form action="servletUsuario" method="get">
+	<form action="servletUsuario" method="post">
 		
 	
 		<div class="container body-content" style="margin-top: 5em;">
@@ -165,7 +165,7 @@
 			<input required type="email" name="txtMail" class="form-control" placeholder="Ej: pepitocibrian@gmail.com" aria-label="Ej: pepitocibrian@gmail.com" aria-describedby="basic-addon1"><br> 
 			<label>Teléfono:</label>
 			<input required type="number" name="txtTelefono" class="form-control" placeholder="Ej: 116620458578" aria-label="Ej: 116620458578" aria-describedby="basic-addon1"><br> 
-			<input class="btn btn-primary" style="margin-bottom: 20px" type="submit" name="btnAceptar" value="Aceptar">
+			<input class="btn btn-primary" style="margin-bottom: 20px" type="submit" name="btnAltaCliente" value="Aceptar">
 		</div>
 	</form>
 </body>

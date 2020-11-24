@@ -40,6 +40,7 @@ public class servletUsuario extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
+		//Se valida que el usuario no sea null, de lo contrario redirecciona al jsp Login
 		Usuario usuarioLog = new Usuario();
 		usuarioLog=(Usuario) request.getSession().getAttribute("Usuario");
 		if(usuarioLog==null) {
@@ -47,95 +48,20 @@ public class servletUsuario extends HttpServlet {
 	         dispatcher.forward(request, response);
 		}
 		
-		if(request.getParameter("listadoUCuenta")!=null) {
-			
-			
-		    request.setAttribute("listaUsuarios", usuarioNeg.listarUsuarios());
-	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/AltaCuenta.jsp");
-			dispatcher.forward(request, response);
-			
-		}
-		
+		//---------------------------------------------------ADMIN------------------------------------------------------//
+		//Cuando desde el menu admin se selecciona la opcion "Listar/Modificar/Dar de baja cliente"
 		if(request.getParameter("listadoU")!=null)
 		{
+			//Se envia el listado de los usuarios al jsp ListaEliminarClientes
 			request.setAttribute("listaUsuario", usuarioNeg.listarUsuarios());	
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/ListaEliminarClientes.jsp");
 			dispatcher.forward(request, response);
 		}
 		
-		if(request.getParameter("idModificar")!=null) 
-		{
-			int id = Integer.parseInt(request.getParameter("idModificar"));
-			
-			request.setAttribute("usuarioFiltrado", usuarioNeg.obtenerUno(id));	
-			request.setAttribute("idModificar", id);	
-			request.setAttribute("listaNacionalidad", usuarioNeg.listarNacionalidades());	
-			request.setAttribute("listaProvincia", usuarioNeg.listarProvincias());	
-			request.setAttribute("listaLocalidad", usuarioNeg.listarLocalidades());	
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/ModificarCliente.jsp");
-			dispatcher.forward(request, response);
-		}
-		
-		if(request.getParameter("btnModificar") != null) 
-		{
-			Usuario usuario= new Usuario();
-			boolean estado=true;
-			
-			usuario.setIdUsuario(Integer.parseInt((request.getParameter("txtIdUsuario"))));
-			usuario.setContrasenia(request.getParameter("txtContrasenia"));
-			usuario.setDni(request.getParameter("txtDni"));
-			usuario.setCuil(request.getParameter("txtCuil"));
-			usuario.setNombre(request.getParameter("txtNombre"));
-			usuario.setApellido(request.getParameter("txtApellido"));
-			usuario.setSexo(request.getParameter("gridRadios"));
-			
-			Nacionalidad nacionalidad = new Nacionalidad();
-			nacionalidad.setIdNacionalidad(Integer.parseInt(request.getParameter("nacionalidad")));
-		    usuario.setNacionalidad(nacionalidad);
-			
-			Provincia provincia = new Provincia();
-			provincia.setIdProvincia(Integer.parseInt(request.getParameter("provincia")));			
-		    usuario.setProvincia(provincia);
-		    
-			Localidad localidad = new Localidad();
-			localidad.setIdLocalidad(Integer.parseInt(request.getParameter("localidad")));			
-		    usuario.setLocalidad(localidad);
-		    
-		    
-
-		    try 
-		    {
-		    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-				usuario.setFechaNac(format.parse(request.getParameter("txtFechaNac")));
-			} 
-		    catch (ParseException e) 
-		    {
-				e.printStackTrace();
-			}
-
-		    usuario.setDireccion(request.getParameter("txtDireccion"));
-		    usuario.setMail(request.getParameter("txtMail"));
-		    usuario.setTelefono(request.getParameter("txtTelefono"));
-		    
-		    
-		    estado=usuarioNeg.modificar(usuario);
-		    
-		    request.setAttribute("estadoModificar", estado);
-		    request.setAttribute("listaUsuario", usuarioNeg.listarUsuarios());
-	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/ListaEliminarClientes.jsp");
-			dispatcher.forward(request, response);
-		}
-		
-		if(request.getParameter("idEliminar")!=null) 
-		{
-			request.setAttribute("usuarioEliminado", usuarioNeg.eliminar(Integer.parseInt(request.getParameter("idEliminar"))));			
-			request.setAttribute("listaUsuario", usuarioNeg.listarUsuarios());
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/ListaEliminarClientes.jsp");
-			dispatcher.forward(request, response);
-		}
-		
+		//Cuando desde el menu admin se selecciona la opcion "Alta Cliente"
 		if(request.getParameter("listarSelects")!=null)
 		{
+			//Se envian los listados de nacionalidades, provincias, localidades al jsp AltaCliente para cargar los select
 			request.setAttribute("listaNacionalidad", usuarioNeg.listarNacionalidades());	
 			request.setAttribute("listaProvincia", usuarioNeg.listarProvincias());	
 			request.setAttribute("listaLocalidad", usuarioNeg.listarLocalidades());	
@@ -143,7 +69,54 @@ public class servletUsuario extends HttpServlet {
 			dispatcher.forward(request, response);
 		}
 		
-		if(request.getParameter("btnAceptar")!=null)
+		//Recibo el id a modificar del jsp ListaEliminarClientes
+		if(request.getParameter("idModificar")!=null) 
+		{
+			//Recibo el id pasado por url
+			int id = Integer.parseInt(request.getParameter("idModificar"));
+			
+			//Con el id obtengo el usuario de la bd y se lo paso al jsp ModificarCliente
+			request.setAttribute("usuarioFiltrado", usuarioNeg.obtenerUno(id));	
+			//Envio el id al jsp ModificarCliente
+			request.setAttribute("idModificar", id);	
+			//Se envian los listados de nacionalidades, provincias, localidades al jsp ModificarCliente para cargar los select
+			request.setAttribute("listaNacionalidad", usuarioNeg.listarNacionalidades());	
+			request.setAttribute("listaProvincia", usuarioNeg.listarProvincias());	
+			request.setAttribute("listaLocalidad", usuarioNeg.listarLocalidades());	
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/ModificarCliente.jsp");
+			dispatcher.forward(request, response);
+		}
+		
+		//Se recibe el id del cliente a eliminar
+		if(request.getParameter("idEliminar")!=null) 
+		{
+			//Se elimina cliente de la bd
+			request.setAttribute("usuarioEliminado", usuarioNeg.eliminar(Integer.parseInt(request.getParameter("idEliminar"))));
+			//Se actualiza lista de clientes y se envia al jsp ListaEliminarClientes
+			request.setAttribute("listaUsuario", usuarioNeg.listarUsuarios());
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/ListaEliminarClientes.jsp");
+			dispatcher.forward(request, response);
+		}
+		//--------------------------------------------------------------------------------------------------------------//
+		
+		
+		
+		
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		//---------------------------------------------------ADMIN------------------------------------------------------//
+		//Se valida que el usuario no sea null, de lo contrario redirecciona al jsp Login
+		Usuario usuarioLog = new Usuario();
+		usuarioLog=(Usuario) request.getSession().getAttribute("Usuario");
+		if(usuarioLog==null) {
+	    	 RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.jsp");
+	         dispatcher.forward(request, response);
+		}
+		
+		//Cuando se apreta el boton btnAltaCliente del jsp AltaCliente
+		if(request.getParameter("btnAltaCliente")!=null)
 		{
 			boolean estado=true;
 			boolean estadoPass=true;
@@ -205,11 +178,57 @@ public class servletUsuario extends HttpServlet {
 			
 		}
 		
+		//Cuando se apreta el boton btnModificarCliente del jsp ModificarCliente
+		if(request.getParameter("btnModificarCliente") != null) 
+		{
+			Usuario usuario= new Usuario();
+			boolean estado=true;
+			
+			usuario.setIdUsuario(Integer.parseInt((request.getParameter("txtIdUsuario"))));
+			usuario.setContrasenia(request.getParameter("txtContrasenia"));
+			usuario.setDni(request.getParameter("txtDni"));
+			usuario.setCuil(request.getParameter("txtCuil"));
+			usuario.setNombre(request.getParameter("txtNombre"));
+			usuario.setApellido(request.getParameter("txtApellido"));
+			usuario.setSexo(request.getParameter("gridRadios"));
+			
+			Nacionalidad nacionalidad = new Nacionalidad();
+			nacionalidad.setIdNacionalidad(Integer.parseInt(request.getParameter("nacionalidad")));
+		    usuario.setNacionalidad(nacionalidad);
+			
+			Provincia provincia = new Provincia();
+			provincia.setIdProvincia(Integer.parseInt(request.getParameter("provincia")));			
+		    usuario.setProvincia(provincia);
+		    
+			Localidad localidad = new Localidad();
+			localidad.setIdLocalidad(Integer.parseInt(request.getParameter("localidad")));			
+		    usuario.setLocalidad(localidad);
+		    
+		    
+		    try 
+		    {
+		    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+				usuario.setFechaNac(format.parse(request.getParameter("txtFechaNac")));
+			} 
+		    catch (ParseException e) 
+		    {
+				e.printStackTrace();
+			}
+
+		    usuario.setDireccion(request.getParameter("txtDireccion"));
+		    usuario.setMail(request.getParameter("txtMail"));
+		    usuario.setTelefono(request.getParameter("txtTelefono"));
+		    
+		    
+		    estado=usuarioNeg.modificar(usuario);
+		    
+		    request.setAttribute("estadoModificar", estado);
+		    request.setAttribute("listaUsuario", usuarioNeg.listarUsuarios());
+	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/ListaEliminarClientes.jsp");
+			dispatcher.forward(request, response);
+		}
+		//--------------------------------------------------------------------------------------------------------------//
 		
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-	{
-
+		
 	}
 }

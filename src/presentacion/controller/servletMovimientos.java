@@ -51,6 +51,7 @@ public class servletMovimientos extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		//Se valida que el usuario no sea null, de lo contrario redirecciona al jsp Login
 		Usuario usuarioLog = new Usuario();
 		usuarioLog=(Usuario) request.getSession().getAttribute("Usuario");
 		if(usuarioLog==null) {
@@ -58,19 +59,55 @@ public class servletMovimientos extends HttpServlet {
 	         dispatcher.forward(request, response);
 		}
 		
+		//---------------------------------------------------CLIENTE------------------------------------------------------//
+		//Cuando desde el menu cliente se selecciona la opcion "Transferir"
 		if(request.getParameter("listarSelects")!=null)
 		{
 			
 			Usuario usuario = new Usuario();
+			//Se obtiene el usuario a traves de session
 			usuario=(Usuario) request.getSession().getAttribute("Usuario");
-			
-			request.setAttribute("listaNumeroCuentas", cuentaNeg.listarNumeroCuentas());	
+			//Se envian los listados de cuentas por usuario al jsp Transferir para cargar los select	
 			request.setAttribute("listaCuentasPorUsuario", cuentaNeg.listarCuentasPorUsuario(usuario.getIdUsuario()));
 	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/Transferir.jsp");
 			dispatcher.forward(request, response);
 		}
 		
-		////******** ACEPTAR TRANSFERENCIA *******/////
+		
+
+		//Cuando desde el jsp ListarCuentasCliente se selecciona el boton Movimientos y se envia el idCuenta & el numero de cuenta por url
+		if(request.getParameter("idCuenta")!=null) {
+			
+			int idCuenta = Integer.parseInt(request.getParameter("idCuenta"));
+			long numeroCuenta = Integer.parseInt(request.getParameter("numeroCuenta"));
+			//Se carga y envia el listado de movimiento por cuenta
+			request.setAttribute("listaMovimientosXCuenta", movimientoNeg.listarMovimientosPorCuenta(idCuenta));
+			//Se envia el numero de cuenta
+			request.setAttribute("numeroCuenta", numeroCuenta);
+	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/MovimientosCuentaCliente.jsp");
+			dispatcher.forward(request, response);
+		}
+		//----------------------------------------------------------------------------------------------------------------//
+		
+		
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		//Se valida que el usuario no sea null, de lo contrario redirecciona al jsp Login
+		Usuario usuarioLog = new Usuario();
+		usuarioLog=(Usuario) request.getSession().getAttribute("Usuario");
+		if(usuarioLog==null) {
+	    	 RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.jsp");
+	         dispatcher.forward(request, response);
+		}
+		
+	 	//---------------------------------------------------CLIENTE------------------------------------------------------//
+		//Cuando se apreta el boton btnTransferir del jsp Transferir
 		if(request.getParameter("btnTransferir")!=null)
 		{
 			boolean estado=true;
@@ -103,13 +140,13 @@ public class servletMovimientos extends HttpServlet {
 			movimientos.setImporte(Double.parseDouble(request.getParameter("txtMonto")));
 			
 			
-			
 			double importe = Double.parseDouble(request.getParameter("txtMonto"));
 			long idCuentaOrigen = Long.parseLong(request.getParameter("CuentaUsuario"));
 			
-			
+			//Se obtiene el saldo de la cuenta
 			saldo=cuentaNeg.obtenerSaldoPorIdCuenta(idCuentaOrigen);
 			
+			//Se verifica que tenga saldo disponible
 			if(saldo >= importe && cuentaDestino.getIdCuenta() != 0) {
 				
 				estadoDescuentoSaldoDestino = movimientoNeg.DescontarSaldoCuentaOrigen(idCuentaOrigen, importe);
@@ -121,45 +158,17 @@ public class servletMovimientos extends HttpServlet {
 				estado=false;
 			}
 			
-			
-	    	request.setAttribute("estadoMovimiento", estado);
-			request.setAttribute("listaNumeroCuentas", cuentaNeg.listarNumeroCuentas());	
+			//Se envia el estado para ver si se pudo realizar la transferencia
+	    	request.setAttribute("estadoTransferencia", estado);
+	    	//Se carga y envia el listado de cuentas por usuario al jsp Transferir
 			request.setAttribute("listaCuentasPorUsuario", cuentaNeg.listarCuentasPorUsuario(usuario.getIdUsuario()));
 	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/Transferir.jsp");
 			dispatcher.forward(request, response);
 			
 		}
+	 	//----------------------------------------------------------------------------------------------------------------//
 		
 		
-		if(request.getParameter("idCuenta")!=null) {
-			
-			int idCuenta = Integer.parseInt(request.getParameter("idCuenta"));
-			long numeroCuenta = Integer.parseInt(request.getParameter("numeroCuenta"));
-			request.setAttribute("listaMovimientosXCuenta", movimientoNeg.listarMovimientosPorCuenta(idCuenta));
-			request.setAttribute("numeroCuenta", numeroCuenta);
-	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/MovimientosCuentaCliente.jsp");
-			dispatcher.forward(request, response);
-		}
-		
-		
-		if(request.getParameter("")!=null) {
-			
-			
-		}
-		
-		
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
-		
-		
-		//doGet(request, response);
 	}
 
 }

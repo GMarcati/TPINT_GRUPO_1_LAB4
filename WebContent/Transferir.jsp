@@ -19,24 +19,11 @@
 			listaCuentaXUsuario = (List<Cuenta>) request.getAttribute("listaCuentasPorUsuario");
 		}
 		%>
-		<%
-		List<TipoMovimiento> listaTipoMoviento = new ArrayList<TipoMovimiento>();
-		if (request.getAttribute("listaTipoMovimiento") != null) {
-			listaTipoMoviento = (List<TipoMovimiento>) request.getAttribute("listaTipoMovimiento");
-		}
-		%>
-		<%
-		List<Cuenta> listaNroCuenta = new ArrayList<Cuenta>();
-		if (request.getAttribute("listaNumeroCuentas") != null) {
-			listaNroCuenta = (List<Cuenta>) request.getAttribute("listaNumeroCuentas");
-		}
-		%>
-
 		
 		<%
 		boolean estado=false;
-		if(request.getAttribute("estadoMovimiento")!=null){
-			estado=(Boolean)request.getAttribute("estadoMovimiento");
+		if(request.getAttribute("estadoTransferencia")!=null){
+			estado=(Boolean)request.getAttribute("estadoTransferencia");
 			
 			
 			if(estado==true){
@@ -59,7 +46,7 @@
 
 
 
-	<form action="servletMovimientos" method="get">
+	<form action="servletMovimientos" method="post">
 	
 		<div class="container body-content" style="margin-top: 5em;"><br />
 			<div class="jumbotron jumbotron-fluid text-center rounded-pill">
@@ -92,7 +79,7 @@
 			</div>
 			<div class="form-group">
 				<label for="exampleInputEmail1">Monto:</label> 
-				<input required type="number" name="txtMonto" class="form-control small" Style="width: 500px">
+				<input required type="number" name="txtMonto" class="form-control small" Style="width: 500px" min="1" step="any">
 			</div>
 			
 			<input class="btn btn-primary" style="margin-bottom: 20px" type="submit" name="btnTransferir" value="Aceptar">

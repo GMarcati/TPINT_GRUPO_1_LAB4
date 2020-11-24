@@ -61,7 +61,7 @@
 		
 
 
-<form method="get" action="servletCuenta">
+<form method="post" action="servletCuenta">
 	<div class="container body-content" style="margin-top: 5em;">
 		<div>
 			<h2>ASIGNAR CUENTA A CLIENTE</h2><br></div>
