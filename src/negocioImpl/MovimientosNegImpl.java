@@ -36,13 +36,13 @@ public class MovimientosNegImpl implements MovimientosNeg {
 	}
 
 	@Override
-	public boolean AumentarSaldoCuentaDestino(long id, double importe) {
-		return this.movimientoDao.AumentarSaldoCuentaDestino(id, importe);
+	public boolean AumentarSaldoCuentaDestino(long numeroCuentaDestino, double importe) {
+		return this.movimientoDao.AumentarSaldoCuentaDestino(numeroCuentaDestino, importe);
 	}
 
 	@Override
-	public boolean DescontarSaldoCuentaOrigen(long id, double importe) {
-		return this.movimientoDao.DescontarSaldoCuentaOrigen(id, importe);
+	public boolean DescontarSaldoCuentaOrigen(long idCuentaOrigen, double importe) {
+		return this.movimientoDao.DescontarSaldoCuentaOrigen(idCuentaOrigen, importe);
 	}
 
 }

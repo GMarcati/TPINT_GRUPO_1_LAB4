@@ -16,11 +16,15 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import entidad.Cuenta;
+import entidad.Movimientos;
 import entidad.TipoCuenta;
+import entidad.TipoMovimiento;
 import entidad.Usuario;
 import negocio.CuentaNeg;
+import negocio.MovimientosNeg;
 import negocio.UsuarioNeg;
 import negocioImpl.CuentaNegImpl;
+import negocioImpl.MovimientosNegImpl;
 import negocioImpl.UsuarioNegImpl;
 
 
@@ -33,6 +37,7 @@ public class servletCuenta extends HttpServlet {
 	
 	CuentaNeg cuentaNeg = new CuentaNegImpl();
 	UsuarioNeg usuarioNeg = new UsuarioNegImpl();
+	MovimientosNeg movimientosNeg = new MovimientosNegImpl();
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -46,6 +51,13 @@ public class servletCuenta extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		Usuario usuarioLog = new Usuario();
+		usuarioLog=(Usuario) request.getSession().getAttribute("Usuario");
+		if(usuarioLog==null) {
+	    	 RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.jsp");
+	         dispatcher.forward(request, response);
+		} 
 		
 		if(request.getParameter("AsignarCuenta") != null) {
 			
@@ -122,6 +134,22 @@ public class servletCuenta extends HttpServlet {
 				
 				
 				estado=cuentaNeg.insertar(cuenta);
+				
+				if(estado==true) {
+					Movimientos movimiento = new Movimientos();
+					Cuenta cuentaAux = new Cuenta();
+					cuentaAux = cuentaNeg.obtenerCuentaPorCBU(cuenta.getCBU());
+					
+					movimiento.setIdCuenta(cuentaAux.getIdCuenta());
+					TipoMovimiento tipoMovimiento = new TipoMovimiento();
+					tipoMovimiento.setIdTipoMovimiento(1);
+					movimiento.setTipoMovimiento(tipoMovimiento);
+					movimiento.setFechaCreacion(java.sql.Date.valueOf(localDate));
+					movimiento.setDetalle("Apertura de cuenta numero "+cuentaAux.getNumeroCuenta());
+					movimiento.setImporte(10000);
+					movimiento.setCuentaDestino(cuentaAux.getNumeroCuenta());
+					movimientosNeg.altaMovimento(movimiento);
+				}
 				
 		    	//request.setAttribute("listaCat", negCat.obtenerTodos());
 		    	request.setAttribute("estadoCuenta", estado);

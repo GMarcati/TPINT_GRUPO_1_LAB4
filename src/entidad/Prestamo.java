@@ -6,12 +6,14 @@ public class Prestamo
 {
 	private long idPrestamo;
 	private Cuenta cuenta;
+	private Usuario usuario;
 	private double importeAdevolver;
 	private Date fecha;
 	private double montoSolicitado;
 	private int cantidadMeses;
 	private double valorCuota;
-	private boolean estado; // si es 1, se encuentra pendiente. Si es 0, rechazado. Si es 2, aprobado
+	private EstadoPrestamo estadoPrestamo; // Si es 1, se encuentra pendiente. Si es 2, aprobado. Si es 3, rechazado. 
+	private boolean estado; 
 	
 	public long getIdPrestamo()
 	{
@@ -82,6 +84,14 @@ public class Prestamo
 		this.valorCuota = valorCuota;
 	}
 	
+	public EstadoPrestamo getEstadoPrestamo() {
+		return estadoPrestamo;
+	}
+
+	public void setEstadoPrestamo(EstadoPrestamo estadoPrestamo) {
+		this.estadoPrestamo = estadoPrestamo;
+	}
+	
 	public boolean getEstado()
 	{
 		return estado;
@@ -92,14 +102,22 @@ public class Prestamo
 		this.estado = estado;
 	}
 	
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
 	public Prestamo()
 	{
 		
 	}
 
-	public Prestamo(long idPrestamo, Cuenta cuenta, float importeAdevolver, Date fecha, float montoSolicitado,
-			int cantidadMeses, float valorCuota, boolean estado) 
-	{
+	public Prestamo(long idPrestamo, Cuenta cuenta, double importeAdevolver, Date fecha, double montoSolicitado,
+			int cantidadMeses, double valorCuota, EstadoPrestamo estadoPrestamo, boolean estado) {
 		super();
 		this.idPrestamo = idPrestamo;
 		this.cuenta = cuenta;
@@ -108,15 +126,19 @@ public class Prestamo
 		this.montoSolicitado = montoSolicitado;
 		this.cantidadMeses = cantidadMeses;
 		this.valorCuota = valorCuota;
+		this.estadoPrestamo = estadoPrestamo;
 		this.estado = estado;
 	}
 
 	@Override
-	public String toString() 
-	{
+	public String toString() {
 		return "Prestamo [idPrestamo=" + idPrestamo + ", cuenta=" + cuenta + ", importeAdevolver=" + importeAdevolver
 				+ ", fecha=" + fecha + ", montoSolicitado=" + montoSolicitado + ", cantidadMeses=" + cantidadMeses
-				+ ", valorCuota=" + valorCuota + ", estado=" + estado + "]";
+				+ ", valorCuota=" + valorCuota + ", estadoPrestamo=" + estadoPrestamo + ", estado=" + estado + "]";
 	}
+
+
+
+
 	
 }

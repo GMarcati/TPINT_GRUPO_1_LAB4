@@ -45,7 +45,7 @@
 		%>
 
 
-	<form action="servletPrestamo">
+	<form action="servletPrestamo" method="get">
 	<div class="container body-content" style="margin-top: 5em;"><br />
 		<div class="jumbotron jumbotron-fluid text-center rounded-pill">
 			<div class="container">
@@ -55,7 +55,7 @@
 		<hr />
 		<div class="form-group">
 			<label for="exampleInputEmail1">Monto</label> 
-			<input required type="text" name="txtMontoSolicitado" class="form-control small" Style="width: 500px">
+			<input required type="number" name="txtMontoSolicitado" class="form-control small" Style="width: 500px" min="1" step="any">
 		</div>
 		<div class="form-group">
 				<label for="exampleInputEmail1">Cantidad cuotas:</label> 

@@ -51,26 +51,35 @@ public class servletMovimientos extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		Usuario usuarioLog = new Usuario();
+		usuarioLog=(Usuario) request.getSession().getAttribute("Usuario");
+		if(usuarioLog==null) {
+	    	 RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.jsp");
+	         dispatcher.forward(request, response);
+		}
+		
 		if(request.getParameter("listarSelects")!=null)
 		{
 			
-
 			Usuario usuario = new Usuario();
 			usuario=(Usuario) request.getSession().getAttribute("Usuario");
 			
 			request.setAttribute("listaNumeroCuentas", cuentaNeg.listarNumeroCuentas());	
-			request.setAttribute("listaCuentasPorUsuario", cuentaNeg.listarCuentasPorUsuario(usuario.getIdUsuario()));//PARA PROBAR USE USUARIO 2 PASAR POR SESISON	
-			request.setAttribute("listaTipoMovimiento", movimientoNeg.listarTipoMovimiento());	
+			request.setAttribute("listaCuentasPorUsuario", cuentaNeg.listarCuentasPorUsuario(usuario.getIdUsuario()));
 	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/Transferir.jsp");
 			dispatcher.forward(request, response);
 		}
 		
 		////******** ACEPTAR TRANSFERENCIA *******/////
-		if(request.getParameter("btnAceptar")!=null)
+		if(request.getParameter("btnTransferir")!=null)
 		{
 			boolean estado=true;
 			boolean estadoDescuentoSaldoDestino=true;
 			boolean estadoAumentoSaldoOrigen=true;
+			double saldo = 0;
+			
+			Usuario usuario = new Usuario();
+			usuario=(Usuario) request.getSession().getAttribute("Usuario");
 			
 			
 			Movimientos movimientos = new Movimientos();
@@ -78,31 +87,44 @@ public class servletMovimientos extends HttpServlet {
 			movimientos.setIdCuenta(Long.parseLong(request.getParameter("CuentaUsuario")));
 			
 			TipoMovimiento tmovimiento = new TipoMovimiento();
-			tmovimiento.setIdTipoMovimiento(Integer.parseInt(request.getParameter("TipoMovimiento")));
+			tmovimiento.setIdTipoMovimiento(4);
 			movimientos.setTipoMovimiento(tmovimiento);
 			
-			movimientos.setCuentaDestino(Long.parseLong(request.getParameter("NumeroCuentaDestino")));
+			
+			long cbu=Long.parseLong(request.getParameter("txtCBU"));
+			Cuenta cuentaDestino= new Cuenta();
+			cuentaDestino = cuentaNeg.obtenerCuentaPorCBU(cbu);
+			movimientos.setCuentaDestino(cuentaDestino.getNumeroCuenta());
 			
 			LocalDate localDate = LocalDate.now();
 			movimientos.setFechaCreacion(java.sql.Date.valueOf(localDate));
 			movimientos.setDetalle(request.getParameter("txtDetalle"));
 			
-			movimientos.setImporte(Double.parseDouble(request.getParameter("txtMonto"))); //VER XQ PUSE INTEGER ES DECIMAL
+			movimientos.setImporte(Double.parseDouble(request.getParameter("txtMonto")));
 			
-			estado=movimientoNeg.altaMovimento(movimientos);
+			
 			
 			double importe = Double.parseDouble(request.getParameter("txtMonto"));
-			long cuentaOrigen = Long.parseLong(request.getParameter("CuentaUsuario"));
-			long cuentaDestino = Long.parseLong(request.getParameter("NumeroCuentaDestino"));
+			long idCuentaOrigen = Long.parseLong(request.getParameter("CuentaUsuario"));
 			
-			estadoDescuentoSaldoDestino = movimientoNeg.DescontarSaldoCuentaOrigen(cuentaOrigen, importe);
-			estadoAumentoSaldoOrigen = movimientoNeg.AumentarSaldoCuentaDestino(cuentaDestino, importe);
 			
-			//hay que agregar aca el mensaje de exito al agregar usuario
+			saldo=cuentaNeg.obtenerSaldoPorIdCuenta(idCuentaOrigen);
+			
+			if(saldo >= importe && cuentaDestino.getIdCuenta() != 0) {
+				
+				estadoDescuentoSaldoDestino = movimientoNeg.DescontarSaldoCuentaOrigen(idCuentaOrigen, importe);
+				estadoAumentoSaldoOrigen = movimientoNeg.AumentarSaldoCuentaDestino(cuentaDestino.getNumeroCuenta(), importe);
+				estado=movimientoNeg.altaMovimento(movimientos);
+			} else {
+				estadoDescuentoSaldoDestino=false;
+				estadoAumentoSaldoOrigen=false;
+				estado=false;
+			}
+			
+			
 	    	request.setAttribute("estadoMovimiento", estado);
 			request.setAttribute("listaNumeroCuentas", cuentaNeg.listarNumeroCuentas());	
-			request.setAttribute("listaCuentasPorUsuario", cuentaNeg.listarCuentasPorUsuario(2));//PARA PROBAR USE USUARIO 2 PASAR POR SESISON	
-			request.setAttribute("listaTipoMovimiento", movimientoNeg.listarTipoMovimiento());	
+			request.setAttribute("listaCuentasPorUsuario", cuentaNeg.listarCuentasPorUsuario(usuario.getIdUsuario()));
 	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/Transferir.jsp");
 			dispatcher.forward(request, response);
 			
@@ -120,7 +142,10 @@ public class servletMovimientos extends HttpServlet {
 		}
 		
 		
-		
+		if(request.getParameter("")!=null) {
+			
+			
+		}
 		
 		
 		//response.getWriter().append("Served at: ").append(request.getContextPath());

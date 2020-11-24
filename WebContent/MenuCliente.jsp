@@ -32,7 +32,7 @@
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="servletCuenta?listaCuentasPrestamos" >Solicitar préstamo</a> 
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="ListaPrestamosCliente.jsp" >Ver préstamos adquiridos</a> 
+								<a class="dropdown-item" href="servletPrestamo?listadoPrestamosPorUsuario" >Ver préstamos adquiridos</a> 
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="DatosPersonales.jsp" >Mis datos</a> 
 								<div class="dropdown-divider"></div>

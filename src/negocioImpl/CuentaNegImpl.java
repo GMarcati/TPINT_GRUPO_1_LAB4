@@ -66,5 +66,13 @@ public class CuentaNegImpl implements CuentaNeg {
 	public List<Cuenta> listarCuentasPorUsuario(long idUsuario) {
 		return (ArrayList<Cuenta>) cuentaDao.listarCuentasPorUsuario(idUsuario);
 	}
+	
+	public Cuenta obtenerCuentaPorCBU(long cbu) {
+		return cuentaDao.obtenerCuentaPorCBU(cbu);
+	}
+	
+	public double obtenerSaldoPorIdCuenta(long idCuenta) {
+		return cuentaDao.obtenerSaldoPorIdCuenta(idCuenta);
+	}
 
 }

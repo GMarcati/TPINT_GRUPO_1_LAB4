@@ -46,7 +46,7 @@
 			}else
 			{
 			%>
-				<script>swal("Error al realizar la Transferencia .", " XXXXXXXXXXXX ", "error")</script>
+				<script>swal("Error al realizar la transferencia.", "Saldo insuficiente o cbu inexistente.", "error")</script>
 			<%
 			}
 			
@@ -70,50 +70,32 @@
 			<hr />
 			<div class="form-group">
 				<label for="exampleInputEmail1">Transfiriendo desde:</label>
-				<select name="CuentaUsuario" class="form-control">
+				<select name="CuentaUsuario" class="form-control small" Style="width: 500px">
 		  		<% 
 			  		for(Cuenta cuentause: listaCuentaXUsuario){    
 			 		 %>
 			  	<option value="<%=cuentause.getIdCuenta() %>"> <%=cuentause.getIdCuenta() %> - <%=cuentause.getNumeroCuenta() %> </option>
 			   	<%
 			   	} %>
-		  		</select><br>
+		  		</select>
 		  		
 			</div>
-				<div class="form-group">
-				<label for="exampleInputEmail1">Tipo de Movimiento:</label> 
-				<select name="TipoMovimiento" class="form-control">
-		  		<% 
-			  		for(TipoMovimiento tmovimiento: listaTipoMoviento){    
-			 		 %>
-			  	<option value="<%=tmovimiento.getIdTipoMovimiento() %>"> <%=tmovimiento.getIdTipoMovimiento() %> - <%=tmovimiento.getDescripcion() %> </option>
-			   	<%
-			   	} %>
-		  		</select><br>
-			
 			
 			<div class="form-group">
-				<label for="exampleInputEmail1">CUENTA destino:</label> 
-				<select name="NumeroCuentaDestino" class="form-control">
-		  		<% 
-			  		for(Cuenta cuenta: listaNroCuenta){    
-			 		 %>
-			  	<option value="<%=cuenta.getIdCuenta() %>"> <%=cuenta.getIdCuenta() %> - <%=cuenta.getNumeroCuenta() %> </option>
-			   	<%
-			   	} %>
-		  		</select><br>
+				<label for="exampleInputEmail1">CBU destino:</label> 
+				<input required type="number" name="txtCBU" class="form-control small" Style="width: 500px">
 				
 			</div>			
 			<div class="form-group">
 				<label for="exampleInputEmail1">Detalle:</label> 
-				<input type="text" name="txtDetalle" class="form-control small" Style="width: 500px">
+				<input required type="text" name="txtDetalle" class="form-control small" Style="width: 500px">
 			</div>
 			<div class="form-group">
 				<label for="exampleInputEmail1">Monto:</label> 
-				<input type="text" name="txtMonto" class="form-control small" Style="width: 500px">
+				<input required type="number" name="txtMonto" class="form-control small" Style="width: 500px">
 			</div>
 			
-			<input class="btn btn-primary" style="margin-bottom: 20px" type="submit" name="btnAceptar" value="Aceptar">
+			<input class="btn btn-primary" style="margin-bottom: 20px" type="submit" name="btnTransferir" value="Aceptar">
 		</div>
 	</form>
 </body>

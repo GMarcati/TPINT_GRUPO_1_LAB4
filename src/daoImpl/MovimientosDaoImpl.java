@@ -106,7 +106,6 @@ public class MovimientosDaoImpl implements MovimientosDao {
 
 		cn = new Conexion();
 		cn.Open();	
-
 		String query = "INSERT INTO movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino)  VALUES ('"+movimiento.getIdCuenta()+"','"+movimiento.getTipoMovimiento().getIdTipoMovimiento()+"','"+movimiento.getFechaCreacion()+"','"+movimiento.getDetalle()+"','"+movimiento.getImporte()+"','"+movimiento.getCuentaDestino()+"')";
 		//La siguiente linea es para ver los datos de la query
 		//System.out.println(query);
@@ -125,14 +124,14 @@ public class MovimientosDaoImpl implements MovimientosDao {
 		return estado;
 	}
 	
-	public boolean AumentarSaldoCuentaDestino(long idCuenta, double importe) {
+	public boolean AumentarSaldoCuentaDestino(long numeroCuentaDestino, double importe) {
 		
 		boolean estado=true;
 
 		cn = new Conexion();
 		cn.Open();	
 
-		String query = "Update cuentas set saldo=saldo+"+importe+" where idCuenta="+idCuenta;
+		String query = "Update cuentas set saldo=saldo+"+importe+" where numeroCuenta="+numeroCuentaDestino;
 		try
 		 {
 			estado=cn.execute(query);
@@ -149,15 +148,14 @@ public class MovimientosDaoImpl implements MovimientosDao {
 		
 	}
 	
-	public boolean DescontarSaldoCuentaOrigen(long idCuenta, double importe) {
+	public boolean DescontarSaldoCuentaOrigen(long idCuentaOrigen, double importe) {
 		
 		boolean estado=true;
-		double importeNegativo = -importe;
 
 		cn = new Conexion();
 		cn.Open();	
 
-		String query = "Update cuentas set saldo=saldo"+importeNegativo+" where idCuenta="+idCuenta;
+		String query = "Update cuentas set saldo=saldo-"+importe+" where idCuenta="+idCuentaOrigen;
 		try
 		 {
 			estado=cn.execute(query);

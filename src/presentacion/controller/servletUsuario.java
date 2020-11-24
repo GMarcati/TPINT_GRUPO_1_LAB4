@@ -40,6 +40,12 @@ public class servletUsuario extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
+		Usuario usuarioLog = new Usuario();
+		usuarioLog=(Usuario) request.getSession().getAttribute("Usuario");
+		if(usuarioLog==null) {
+	    	 RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.jsp");
+	         dispatcher.forward(request, response);
+		}
 		
 		if(request.getParameter("listadoUCuenta")!=null) {
 			

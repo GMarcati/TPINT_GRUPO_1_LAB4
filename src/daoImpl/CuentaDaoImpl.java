@@ -326,6 +326,67 @@ public class CuentaDaoImpl implements CuentaDao{
 		 return ListadoCuentaXUsuario;
 	}
 	
+	public Cuenta obtenerCuentaPorCBU(long cbu){
+		cn = new Conexion();
+		cn.Open();
+		
+		Cuenta cuenta = new Cuenta();
+		 try
+		 {
+			 String query = "select c.idCuenta, c.idUsuario, c.numeroCuenta, tc.idTipoCuenta, tc.descripcion, c.fechaCreacion, c.saldo from cuentas as c inner join tipoCuentas as tc on c.idTipoCuenta=tc.idTipoCuenta where c.CBU="+cbu; 
+			 ResultSet rs = cn.query(query);
+			 while(rs.next())
+			 {
+				 	cuenta.setIdCuenta(rs.getLong("c.idCuenta"));
+				 	cuenta.setIdUsuario(rs.getLong("c.idUsuario"));
+				 	cuenta.setNumeroCuenta(rs.getLong("c.numeroCuenta"));
+				 	TipoCuenta tipoCuenta = new TipoCuenta();
+				 	tipoCuenta.setIdTipoCuenta(rs.getInt("tc.idTipoCuenta"));
+				 	tipoCuenta.setDescripcion(rs.getString("tc.descripcion"));
+				 	cuenta.setTipoCuenta(tipoCuenta);
+				 	cuenta.setFechaCreacion(rs.getDate("c.fechaCreacion"));
+				 	cuenta.setSaldo(rs.getDouble("c.saldo"));
+				 	
+			 }
+		 }
+		 catch(Exception e)
+		 {
+			 e.printStackTrace();
+		 }
+		 finally
+		 {
+			 cn.close();
+		 }
+		 return cuenta;
+	}
+	
+	public double obtenerSaldoPorIdCuenta(long idCuenta) {
+		cn = new Conexion();
+		cn.Open();
+		
+		double saldo = 0;
+		
+		 try
+		 {
+			 ResultSet rs = cn.query("select * from cuentas where idCuenta="+idCuenta);
+			 while(rs.next()) {
+				 saldo = rs.getDouble("saldo");
+			 }
+			 
+			
+			
+		 }
+		 catch(Exception e)
+		 {
+			 e.printStackTrace();
+		 }
+		 finally
+		 {
+			 cn.close();
+		 }
+		 return saldo;
+	}
+	
 	
 	
 }

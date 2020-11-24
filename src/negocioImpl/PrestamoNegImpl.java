@@ -32,6 +32,10 @@ public class PrestamoNegImpl implements PrestamoNeg
 	{
 		return (ArrayList<Prestamo>) prestamoDao.listarPrestamos();
 	}
+	
+	public List<Prestamo> listarPrestamosPorCliente(long idUsuario){
+		return (ArrayList<Prestamo>) prestamoDao.listarPrestamosPorCliente(idUsuario);
+	}
 
 	public boolean aceptarPrestamo(long id) {
 
@@ -47,4 +51,13 @@ public class PrestamoNegImpl implements PrestamoNeg
 		
 		return prestamoDao.solicitudPrestamo(prestamo);
 	}
+	
+	public boolean pagarCuota(long idPrestamo) {
+		return prestamoDao.pagarCuota(idPrestamo);
+	}
+	
+	public Prestamo obtenerPrestamoPorId(long idPrestamo) {
+		return prestamoDao.obtenerPrestamoPorId(idPrestamo);
+	}
+	
 }

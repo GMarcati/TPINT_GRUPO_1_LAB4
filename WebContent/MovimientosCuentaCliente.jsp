@@ -76,7 +76,7 @@
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="servletCuenta?listaCuentasPrestamos" >Solicitar préstamo</a> 
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="ListaPrestamosCliente.jsp" >Ver préstamos adquiridos</a> 
+								<a class="dropdown-item" href="servletPrestamo?listadoPrestamosPorUsuario" >Ver préstamos adquiridos</a> 
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="DatosPersonales.jsp" >Mis datos</a> 
 								<div class="dropdown-divider"></div>
@@ -95,6 +95,7 @@
 			<br>
 		</div>
 		<br>
+		<%int cont=1; %>
 <table id="table_id" style="width:100%" class="table table-striped table-bordered " >
 <thead >
 		<tr class="text-center">
@@ -113,7 +114,7 @@
 			for (Movimientos movimiento : listaMovimientos) {
 		%>
 		<tr class="text-center">
-			<td ><%=movimiento.getIdMovimiento()%></td>
+			<td ><%=cont++%></td>
 			<td><%=movimiento.getTipoMovimiento().getDescripcion()%></td>
 			<td><%=movimiento.getFechaCreacion()%></td>
 			<td><%=movimiento.getDetalle()%></td>

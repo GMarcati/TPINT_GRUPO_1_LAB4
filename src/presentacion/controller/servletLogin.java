@@ -54,7 +54,7 @@ public class servletLogin extends HttpServlet
 				{
 					if(usuarioNeg.verificarTipoUsuario(usuario)==true)//funcion que selecciona tipo de usuario, si es true, es adm
 					{
-						
+						request.getSession().setAttribute("Usuario", usuarioNeg.obtenerUsuarioPorNombreUsuario(usuario));
 						request.getSession().setAttribute("NombreUsuario", usuario);
 						request.setAttribute("estadoCuenta", estado);
 						RequestDispatcher rd= request.getRequestDispatcher("/PrincipalAdministrador.jsp");

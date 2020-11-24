@@ -43,7 +43,7 @@
 		<div>
 
 		  	<label>Numero de cuenta: </label><input type="text" readonly="readonly" name="txtNumeroCuenta" class="form-control" placeholder="Se auto-generara un numero de cuenta"><br>
-		  	<label>Saldo inicial: </label><input readonly="readonly" value="10000" type="text" name="txtMontoInicial" class="form-control" ><br>
+		  	<label>Saldo inicial: </label><input readonly="readonly" value="10000" type="number" name="txtMontoInicial" class="form-control" ><br>
 		  	<label>Tipo de cuenta</label> 
 				<select class="form-control" name="tipoCuenta">  
 					<option value="1">1 - Caja de ahorro </option>  
