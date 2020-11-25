@@ -53,11 +53,11 @@ $(document).ready(function () {
             <hr />
             <div class="form-group">
                 <label for="exampleInputEmail1">Usuario</label>
-                <input required type="text" name="txtUsuario" class="form-control small" Style="width: 500px">
+                <input required type="text" name="txtUsuario" maxlength="20" class="form-control small" Style="width: 500px">
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Contraseña</label>
-                <input required type="password" id="txtContra" name="txtContra" class="form-control" Style="width: 500px" >
+                <input required type="password" id="txtContra" name="txtContra" maxlength="20" class="form-control" Style="width: 500px" >
             <div style="margin-top:10px;">
           	<input style="margin-left:20px;" type="checkbox" id="mostrar_contrasena" title="Click para mostrar contraseña"/>
           	&nbsp;&nbsp;Mostrar contraseña

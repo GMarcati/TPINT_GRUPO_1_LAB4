@@ -1,6 +1,6 @@
-/dao/
-/daoImpl/
-/entidad/
+/excepciones/
+/presentacion/
 /negocio/
 /negocioImpl/
-/presentacion/
+/daoImpl/
+/dao/

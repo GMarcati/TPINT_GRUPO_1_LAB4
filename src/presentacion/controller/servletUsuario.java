@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -24,6 +25,7 @@ import entidad.Localidad;
 import entidad.Nacionalidad;
 import entidad.Provincia;
 import entidad.Usuario;
+import excepciones.MayorEdadException;
 import negocio.UsuarioNeg;
 import negocioImpl.UsuarioNegImpl;
 
@@ -148,9 +150,16 @@ public class servletUsuario extends HttpServlet {
 
 				Date date= formatter.parse(request.getParameter("txtFechaNac"));
 
-				usuario.setFechaNac(date);
+				if(usuarioNeg.verificarMayorEdad(request.getParameter("txtFechaNac"))==true)
+				{
+					usuario.setFechaNac(date);
+				}
+				else
+				{
+					//aca hay que manejar la excepcion, porque el cliente es menor de edad
+				}
 			} 
-			catch (ParseException e) 
+			catch (ParseException | MayorEdadException e) 
 			{
 				e.printStackTrace();
 			}

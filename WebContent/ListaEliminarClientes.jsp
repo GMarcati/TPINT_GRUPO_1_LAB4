@@ -148,7 +148,7 @@
 <table id="table_id" style="width:100%" class="table table-striped table-bordered " >
 <thead >
 		<tr class="text-center">
-			<th>ID USUARIO	</th>
+			<th>#	</th>
 			<th>USUARIO</th>
 			<th>DNI</th>
 			<th>CUIL</th>

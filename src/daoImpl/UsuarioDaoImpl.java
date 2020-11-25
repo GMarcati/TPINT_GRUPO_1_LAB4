@@ -6,7 +6,10 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+
+import com.sun.xml.internal.fastinfoset.algorithm.BooleanEncodingAlgorithm;
 
 import dao.UsuarioDao;
 import entidad.Localidad;
@@ -14,6 +17,7 @@ import entidad.Nacionalidad;
 import entidad.Provincia;
 import entidad.TipoUsuario;
 import entidad.Usuario;
+import excepciones.MayorEdadException;
 
 
 public class UsuarioDaoImpl implements UsuarioDao {
@@ -23,6 +27,31 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	public UsuarioDaoImpl()
 	{
 		
+	}
+	
+	//metodo que verifica que el futuro usuario sea mayor de edad. Si devuelve true, lo es
+	public boolean verificarMayorEdad(String fechaNac) throws MayorEdadException
+	{
+		Boolean opc=false;
+		
+		Calendar c = Calendar.getInstance();//se instancia Calendar, con la fecha del sistema
+		int anioActual = c.get(Calendar.YEAR);//variable donde se va a guardar año del sistema
+
+		String anioSub=fechaNac.substring(0, 4);//capturo de la fecha ingresada por parametro, el año de nacimiento
+		int anio=Integer.parseInt(anioSub); // se parsea a entero
+		int edad= anioActual- anio;
+	
+		if(edad<18)
+		{
+			MayorEdadException exc1= new MayorEdadException();
+			opc=false;
+			throw exc1;
+		}
+		else
+		{
+			opc=true;
+		}
+		return opc;
 	}
 		
 	//METODO QUE VERIFICA QUE EL USUARIO Y LA CONTRASEÑA INGRESADOS, ESTEN EN LA DB --> 100%

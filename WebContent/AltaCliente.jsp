@@ -15,7 +15,8 @@
 
 
 <script>
-  function mostrarContrasena(){
+  function mostrarContrasena()
+  {
       var tipo = document.getElementById("txtPass");
       var tipoAux = document.getElementById("txtPassConfirm");
       if(tipo.type == "password" || tipoAux.type == "password"){
@@ -26,6 +27,7 @@
           tipoAux.type = "password";
       }
   }
+  
 </script>
 
 </head>
@@ -92,20 +94,20 @@
 			</div>
 							
 			<label>Usuario: </label>
-			<input required type="text" name="txtUsuario" class="form-control" placeholder="Ej: THerrera " aria-label="Ej: THerrera" aria-describedby="basic-addon1"><br>
+			<input required type="text" name="txtUsuario" class="form-control" maxlength="20" placeholder="Ej: THerrera " aria-label="Ej: THerrera" aria-describedby="basic-addon1"><br>
 			<label>Contraseña: </label>
-			<input required type="password" id="txtPass" name="txtPass" class="form-control" placeholder="Ej: b4nc0s4r4s4 " aria-label="Ej: b4nc0s4r4s4" aria-describedby="basic-addon1"><br>
+			<input required type="password" id="txtPass" name="txtPass" class="form-control" maxlength="20" placeholder="Ej: b4nc0s4r4s4 " aria-label="Ej: b4nc0s4r4s4" aria-describedby="basic-addon1"><br>
 			<label>Confirmar contraseña: </label>
-			<input required type="password" id="txtPassConfirm" name="txtPassConfirm" class="form-control" placeholder="Ej: b4nc0s4r4s4 " aria-label="Ej: b4nc0s4r4s4" aria-describedby="basic-addon1"><br>
+			<input required type="password" id="txtPassConfirm" name="txtPassConfirm" maxlength="20" class="form-control" placeholder="Ej: b4nc0s4r4s4 " aria-label="Ej: b4nc0s4r4s4" aria-describedby="basic-addon1"><br>
 			<button class="btn btn-info" type="button" onclick="mostrarContrasena()">Mostrar Contraseña</button><br><br>
 			<label>DNI: </label>
-			<input required	 type="number" min="11111111" max="99999999" name="txtDni" class="form-control" placeholder="Ej: 25358754 - ingrese el dni 8 digitos " aria-label="Ej: 25358754 - ingrese el dni sin puntos" aria-describedby="basic-addon1"><br>
+			<input required	 type="number" min="11111111" max="99999999" name="txtDni" maxlength="8" class="form-control" placeholder="Ej: 25358754 - ingrese el dni 8 digitos " aria-label="Ej: 25358754 - ingrese el dni sin puntos" aria-describedby="basic-addon1"><br>
 			<label>CUIL:</label>
-			<input required type="number" min="11111111111" max="99999999999" name="txtCuil" class="form-control" placeholder="Ej: 30253587542 - ingreso el CUIL sin barra y de 11 digitos " aria-label="Ej: 30253587542 - ingreso el CUIL sin barra" aria-describedby="basic-addon1"><br>
+			<input required type="number" min="11111111111" max="99999999999" maxlength="11" name="txtCuil" class="form-control" placeholder="Ej: 30253587542 - ingreso el CUIL sin barra y de 11 digitos " aria-label="Ej: 30253587542 - ingreso el CUIL sin barra" aria-describedby="basic-addon1"><br>
 			<label>Nombre:</label>
-			<input required type="text" name="txtNombre" class="form-control" placeholder="Ej: Pepito" aria-label="Ej: Pepito" aria-describedby="basic-addon1"><br>
+			<input required type="text" name="txtNombre" class="form-control" maxlength="40" placeholder="Ej: Pepito" aria-label="Ej: Pepito" aria-describedby="basic-addon1"><br>
 			<label>Apellido:</label>
-			<input required type="text" name="txtApellido" class="form-control" placeholder="Ej: Cibrian" aria-label="Ej: Cibrian" aria-describedby="basic-addon1"><br>
+			<input required type="text" name="txtApellido" class="form-control" maxlength="40" placeholder="Ej: Cibrian" aria-label="Ej: Cibrian" aria-describedby="basic-addon1"><br>
 	
 			<fieldset class="form-group">
 				<div class="row">
@@ -160,11 +162,11 @@
 			<label>Fecha de Nacimiento</label><input required type="date" name="txtFechaNac" class="form-control" placeholder="Ej: 20/05/1890" aria-label="Ej: 20/05/1890" aria-describedby="basic-addon1"><br>
 				
 			<label>Dirección</label>
-			<input required type="text" name="txtDireccion" class="form-control" placeholder="Ej: Av. Libertador 2254" aria-label="Ej: Av. Libertador 2254" aria-describedby="basic-addon1"><br>
+			<input required type="text" name="txtDireccion" class="form-control" maxlength="40" placeholder="Ej: Av. Libertador 2254" aria-label="Ej: Av. Libertador 2254" aria-describedby="basic-addon1"><br>
 			<label>Mail: </label>
-			<input required type="email" name="txtMail" class="form-control" placeholder="Ej: pepitocibrian@gmail.com" aria-label="Ej: pepitocibrian@gmail.com" aria-describedby="basic-addon1"><br> 
+			<input required type="email" name="txtMail" class="form-control" maxlength="40" placeholder="Ej: pepitocibrian@gmail.com" aria-label="Ej: pepitocibrian@gmail.com" aria-describedby="basic-addon1"><br> 
 			<label>Teléfono:</label>
-			<input required type="number" name="txtTelefono" class="form-control" placeholder="Ej: 116620458578" aria-label="Ej: 116620458578" aria-describedby="basic-addon1"><br> 
+			<input required type="number" name="txtTelefono" class="form-control" maxlength="20" placeholder="Ej: 116620458578" aria-label="Ej: 116620458578" aria-describedby="basic-addon1"><br> 
 			<input class="btn btn-primary" style="margin-bottom: 20px" type="submit" name="btnAltaCliente" value="Aceptar">
 		</div>
 	</form>

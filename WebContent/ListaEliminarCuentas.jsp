@@ -147,7 +147,7 @@
 <table id="table_id" style="width:100%" class="table table-striped table-bordered " >
 <thead >
 		<tr class="text-center">
-			<th>ID CUENTA	</th>
+			<th>#</th>
 			<th>NRO CUENTA</th>
 			<th>TIPO CUENTA</th>
 			<th>FECHA CREACION</th>

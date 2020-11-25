@@ -8,11 +8,13 @@ import entidad.Localidad;
 import entidad.Nacionalidad;
 import entidad.Provincia;
 import entidad.Usuario;
+import excepciones.MayorEdadException;
 
 public interface UsuarioNeg 
 {
 	public boolean verificarLogin(String nombre, String apellido);
 	public boolean verificarTipoUsuario(String usuario);
+	public boolean verificarMayorEdad(String fechaNac) throws MayorEdadException;
 	public boolean altaUsuario(Usuario usuario);
 	public boolean modificar(Usuario usuario);
 	public boolean eliminar(int id);
