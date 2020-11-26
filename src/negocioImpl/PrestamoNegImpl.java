@@ -1,6 +1,7 @@
 package negocioImpl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import dao.PrestamoDao;
@@ -58,6 +59,20 @@ public class PrestamoNegImpl implements PrestamoNeg
 	
 	public Prestamo obtenerPrestamoPorId(long idPrestamo) {
 		return prestamoDao.obtenerPrestamoPorId(idPrestamo);
+	}
+
+
+
+	@Override
+	public int obtenerCantPrestamosSolicitadoPorFecha(Date fechaIni, Date fechaFin) {
+		return prestamoDao.obtenerCantPrestamosSolicitadoPorFecha(fechaIni,fechaFin);
+	}
+
+
+
+	@Override
+	public double obtenerTotalMontoSolicitadoPorFecha(Date fechaIni, Date fechaFin) {
+		return prestamoDao.obtenerTotalMontoSolicitadoPorFecha(fechaIni,fechaFin);
 	}
 	
 }

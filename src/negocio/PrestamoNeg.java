@@ -1,5 +1,6 @@
 package negocio;
 
+import java.util.Date;
 import java.util.List;
 import entidad.Prestamo;
 
@@ -12,4 +13,8 @@ public interface PrestamoNeg
 	public boolean solicitudPrestamo(Prestamo prestamo);
 	public boolean pagarCuota(long idPrestamo);
 	public Prestamo obtenerPrestamoPorId(long idPrestamo);
+	///********* PARA EL REPORTE ************//
+	public int obtenerCantPrestamosSolicitadoPorFecha(Date fechaIni, Date fechaFin);
+	public double obtenerTotalMontoSolicitadoPorFecha(Date fechaIni, Date fechaFin);
+	
 }

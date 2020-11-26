@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.Date;
 import java.util.List;
 
 import entidad.Localidad;
@@ -22,4 +23,5 @@ public interface UsuarioDao
 	public List<Provincia> listarProvincias();
 	public List<Localidad> listarLocalidades();
 	public boolean verificarMayorEdad(String fechaNac) throws MayorEdadException;
+	
 }

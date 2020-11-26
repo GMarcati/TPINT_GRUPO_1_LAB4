@@ -1,6 +1,6 @@
 package daoImpl;
 
-import java.sql.Date;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,6 +8,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
@@ -385,6 +386,72 @@ public class CuentaDaoImpl implements CuentaDao{
 			 cn.close();
 		 }
 		 return saldo;
+	}
+
+	@Override
+	public int obtenerCantCuentasCreadasPorFecha(Date fechaIni, Date fechaFin) {
+		cn = new Conexion();
+		cn.Open();
+		
+		int cant = 0;
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		String dateString1 = format.format(fechaIni);
+		String dateString2 = format.format(fechaFin);
+		
+		 try
+		 {
+			 ResultSet rs = cn.query("SELECT count(*) as CantCuenta FROM cuentas WHERE fechaCreacion BETWEEN '" + dateString1 + "' AND '" + dateString2 + "'");
+			 //System.out.print(rs);
+			 while(rs.next()) {
+				 cant = rs.getInt("CantCuenta");
+				 //System.out.print(cant);
+			 }
+	
+			
+		 }
+		 catch(Exception e)
+		 {
+			 e.printStackTrace();
+		 }
+		 finally
+		 {
+			 cn.close();
+		 }
+		 return cant;
+	}
+
+	@Override
+	public double obtenerTotalSaldoCuentasPorFecha(Date fechaIni, Date fechaFin) {
+		cn = new Conexion();
+		cn.Open();
+		
+		double saldoTot = 0;
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		String dateString1 = format.format(fechaIni);
+		String dateString2 = format.format(fechaFin);
+		
+		 try
+		 {
+			 ResultSet rs = cn.query("SELECT SUM(saldo) as TotSaldo FROM cuentas WHERE fechaCreacion BETWEEN '" + dateString1 + "' AND '" + dateString2 + "'");
+			 //System.out.print(rs);
+			 while(rs.next()) {
+				 saldoTot = rs.getDouble("TotSaldo");
+				 //System.out.print(saldoTot);
+			 }
+	
+			
+		 }
+		 catch(Exception e)
+		 {
+			 e.printStackTrace();
+		 }
+		 finally
+		 {
+			 cn.close();
+		 }
+		 return saldoTot;
 	}
 	
 	

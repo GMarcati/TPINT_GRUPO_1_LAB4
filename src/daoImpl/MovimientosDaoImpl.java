@@ -2,6 +2,7 @@ package daoImpl;
 
 import java.sql.Date;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -170,6 +171,72 @@ public class MovimientosDaoImpl implements MovimientosDao {
 		}
 		return estado;
 		
+	}
+
+	@Override
+	public int obtenerCantMovientosPorFecha(java.util.Date fechaIni, java.util.Date fechaFin) {
+		cn = new Conexion();
+		cn.Open();
+		
+		int cant = 0;
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		String dateString1 = format.format(fechaIni);
+		String dateString2 = format.format(fechaFin);
+		
+		 try
+		 {
+			 ResultSet rs = cn.query("SELECT count(*) as CantMovimento FROM movimientos WHERE fecha BETWEEN '" + dateString1 + "' AND '" + dateString2 + "'");
+			 //System.out.print(rs);
+			 while(rs.next()) {
+				 cant = rs.getInt("CantMovimento");
+				 //System.out.print(cant);
+			 }
+	
+			
+		 }
+		 catch(Exception e)
+		 {
+			 e.printStackTrace();
+		 }
+		 finally
+		 {
+			 cn.close();
+		 }
+		 return cant;
+	}
+
+	@Override
+	public double obtenerTotalImportesMovimientosPorFecha(java.util.Date fechaIni, java.util.Date fechaFin) {
+		cn = new Conexion();
+		cn.Open();
+		
+		double importeTot = 0;
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		String dateString1 = format.format(fechaIni);
+		String dateString2 = format.format(fechaFin);
+		
+		 try
+		 {
+			 ResultSet rs = cn.query("SELECT SUM(importe) as TotImporte FROM movimientos WHERE fecha BETWEEN '" + dateString1 + "' AND '" + dateString2 + "'");
+			 //System.out.print(rs);
+			 while(rs.next()) {
+				 importeTot = rs.getDouble("TotImporte");
+				 //System.out.print(importeTot);
+			 }
+	
+			
+		 }
+		 catch(Exception e)
+		 {
+			 e.printStackTrace();
+		 }
+		 finally
+		 {
+			 cn.close();
+		 }
+		 return importeTot;
 	}
 	
 

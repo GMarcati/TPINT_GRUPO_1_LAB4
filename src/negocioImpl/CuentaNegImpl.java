@@ -1,6 +1,9 @@
 package negocioImpl;
 
+
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import dao.CuentaDao;
@@ -73,6 +76,16 @@ public class CuentaNegImpl implements CuentaNeg {
 	
 	public double obtenerSaldoPorIdCuenta(long idCuenta) {
 		return cuentaDao.obtenerSaldoPorIdCuenta(idCuenta);
+	}
+
+	@Override
+	public int obtenerCantCuentasCreadasPorFecha(Date fechaIni, Date fechaFin) {
+		return cuentaDao.obtenerCantCuentasCreadasPorFecha(fechaIni,fechaFin);
+	}
+
+	@Override
+	public double obtenerTotalSaldoCuentasPorFecha(Date fechaIni, Date fechaFin) {
+		return cuentaDao.obtenerTotalSaldoCuentasPorFecha(fechaIni,fechaFin);
 	}
 
 }

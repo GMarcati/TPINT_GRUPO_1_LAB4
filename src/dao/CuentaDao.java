@@ -1,6 +1,8 @@
 package dao;
 
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import entidad.Cuenta;
@@ -19,5 +21,8 @@ public interface CuentaDao {
 	public boolean ContCuentasPorCliente(long idUsuario);
 	public Cuenta obtenerCuentaPorCBU(long cbu);
 	public double obtenerSaldoPorIdCuenta(long idCuenta);
+	///********* PARA EL REPORTE ************//
+	public int obtenerCantCuentasCreadasPorFecha(Date fechaIni, Date fechaFin);
+	public double obtenerTotalSaldoCuentasPorFecha(Date fechaIni, Date fechaFin);
 	
 }

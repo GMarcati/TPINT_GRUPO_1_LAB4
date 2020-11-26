@@ -82,44 +82,58 @@
         </div>
 
     </nav>
-<div class="container-fluid" style="margin-top: 5em;">
+    
+<form action="servletInforme" method="get">
+		<div class="container body-content" style="margin-top: 5em;">
+			<div>
+				<h2>INFORMES POR FECHA</h2> <br>
+			</div>
+			<label>Fecha de Inicio</label>
+			<input required type="date" name="txtFechaInicio" class="form-control" placeholder="Ej: 20/05/1890" aria-label="Ej: 20/05/1890" aria-describedby="basic-addon1"><br>
+			<label>Fecha de Fin</label>
+			<input required type="date" name="txtFechaFin" class="form-control" placeholder="Ej: 20/05/1890" aria-label="Ej: 20/05/1890" aria-describedby="basic-addon1"><br>
+			<input class="btn btn-primary" style="margin-bottom: 20px" type="submit" name="btnAceptar" value="Aceptar">
+		</div>
+		
+		<%
+		int CantidadCuenta = 0;
+		if (request.getAttribute("CantCuenta") != null) {
+			CantidadCuenta = (int) request.getAttribute("CantCuenta");
+		}
+		double TotalSaldoCuenta = 0;
+		if (request.getAttribute("TotSaldoCuenta") != null) {
+			TotalSaldoCuenta = (double) request.getAttribute("TotSaldoCuenta");
+		}
+		int CantidadMovimientos = 0;
+		if (request.getAttribute("CantMovimientos") != null) {
+			CantidadMovimientos = (int) request.getAttribute("CantMovimientos");
+		}
+		double TotalImporteMovimiento = 0;
+		if (request.getAttribute("TotImporteMovimientos") != null) {
+			TotalImporteMovimiento = (double) request.getAttribute("TotImporteMovimientos");
+		}
+		int CantidadPrestamoSolicitado = 0;
+		if (request.getAttribute("CantPrestamoSolicitado") != null) {
+			CantidadPrestamoSolicitado = (int) request.getAttribute("CantPrestamoSolicitado");
+		}
+		double TotalImportePrestamoSolicitado = 0;
+		if (request.getAttribute("TotImportePrestamoSolicitado") != null) {
+			TotalImportePrestamoSolicitado = (double) request.getAttribute("TotImportePrestamoSolicitado");
+		}
+		
 
-<h2>Préstamos por cuenta en estado aceptados</h2>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">IdPrestamo</th>
-      <th scope="col">IdCuenta</th>
-      <th scope="col">Numero de cuenta</th>
-      <th scope="col">Tipo de cuenta</th>
-      <th scope="col">CBU</th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>4</td>
-      <td>Cuenta Corriente</td>
-      <td>102525896478</td>
-      <td>0056423114542635784752</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>6</td>
-      <td>Cuenta Sueldo</td>
-      <td>202525252578</td>
-      <td>0056423758942156345752</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>4</td>
-      <td>Cuenta Fondo Desempleo</td>
-      <td>282525752579</td>
-      <td>0056423114542156345752</td>
-    </tr>
-  </tbody>
-</table>
-</div>
+		
+		%>
+		
+		
+		<label>Cantidad de Cuenta creadas: <%=CantidadCuenta%></label><br>
+		<label>Total Saldo cuenta: $ <%=TotalSaldoCuenta%></label><br>
+		<label>Cantidad de Movimientos realizados: <%=CantidadMovimientos%></label><br>
+		<label>Total Importe de Movimientos realizados: $ <%=TotalImporteMovimiento%></label><br>
+		<label>Cantidad de Prestamos solicitados: <%=CantidadPrestamoSolicitado%></label><br>
+		<label>Total Importe de Prestamos solicitados: $ <%=TotalImportePrestamoSolicitado%></label><br>
+		
+		
+</form>
 </body>
 </html>

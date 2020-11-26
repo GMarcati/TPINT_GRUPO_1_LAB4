@@ -1,7 +1,9 @@
 package daoImpl;
 
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.sun.org.apache.xerces.internal.impl.dv.xs.DecimalDV;
@@ -231,5 +233,72 @@ public class PrestamoDaoImpl implements PrestamoDao
 		return prestamo;
 		
 	}
+	
+	@Override
+	public int obtenerCantPrestamosSolicitadoPorFecha(Date fechaIni, Date fechaFin) {
+		cn = new Conexion();
+		cn.Open();
+		
+		int cant = 0;
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		String dateString1 = format.format(fechaIni);
+		String dateString2 = format.format(fechaFin);
+		
+		 try
+		 {
+			 ResultSet rs = cn.query("SELECT count(*) as cantprestamo FROM prestamos WHERE fecha BETWEEN '" + dateString1 + "' AND '" + dateString2 + "'");
+			 //System.out.print(rs);
+			 while(rs.next()) {
+				 cant = rs.getInt("cantprestamo");
+				 //System.out.print(cant);
+			 }
+	
+			
+		 }
+		 catch(Exception e)
+		 {
+			 e.printStackTrace();
+		 }
+		 finally
+		 {
+			 cn.close();
+		 }
+		 return cant;
+	}
+
+	@Override
+	public double obtenerTotalMontoSolicitadoPorFecha(Date fechaIni, Date fechaFin) {
+		cn = new Conexion();
+		cn.Open();
+		
+		double TotImporteSolicitado = 0;
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		String dateString1 = format.format(fechaIni);
+		String dateString2 = format.format(fechaFin);
+		
+		 try
+		 {
+			 ResultSet rs = cn.query("SELECT SUM(montoSolicitado) as TotImporteSolicitado FROM prestamos WHERE fecha BETWEEN '" + dateString1 + "' AND '" + dateString2 + "'");
+			 //System.out.print(rs);
+			 while(rs.next()) {
+				 TotImporteSolicitado = rs.getDouble("TotImporteSolicitado");
+				 //System.out.print(saldoTot);
+			 }
+	
+			
+		 }
+		 catch(Exception e)
+		 {
+			 e.printStackTrace();
+		 }
+		 finally
+		 {
+			 cn.close();
+		 }
+		 return TotImporteSolicitado;
+	}
+
 	
 }

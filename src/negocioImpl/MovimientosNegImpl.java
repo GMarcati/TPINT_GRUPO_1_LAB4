@@ -1,6 +1,7 @@
 package negocioImpl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import dao.MovimientosDao;
@@ -43,6 +44,16 @@ public class MovimientosNegImpl implements MovimientosNeg {
 	@Override
 	public boolean DescontarSaldoCuentaOrigen(long idCuentaOrigen, double importe) {
 		return this.movimientoDao.DescontarSaldoCuentaOrigen(idCuentaOrigen, importe);
+	}
+
+	@Override
+	public int obtenerCantMovimientosPorFecha(Date fechaIni, Date fechaFin) {
+		return movimientoDao.obtenerCantMovientosPorFecha(fechaIni,fechaFin);
+	}
+
+	@Override
+	public double obtenerTotalImporteMovimientosPorFecha(Date fechaIni, Date fechaFin) {
+		return movimientoDao.obtenerTotalImportesMovimientosPorFecha(fechaIni,fechaFin);
 	}
 
 }
