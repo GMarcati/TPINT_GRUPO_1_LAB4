@@ -17,6 +17,8 @@ public interface PrestamoNeg
 	public boolean generarCuotas(CuotasPrestamo cuotasPrestamo);
 	public List<CuotasPrestamo> listarCuotas(long idPrestamo);
 	public boolean pagarCuota(long idPrestamo, long cuota);
+	public boolean prestamoFinalizado(long idPrestamo);
+	public int obtenerCuotasEnEstadoInactivo(long idPrestamo);
 	///********* PARA EL REPORTE ************//
 	public int obtenerCantPrestamosSolicitadoPorFecha(Date fechaIni, Date fechaFin);
 	public double obtenerTotalMontoSolicitadoPorFecha(Date fechaIni, Date fechaFin);

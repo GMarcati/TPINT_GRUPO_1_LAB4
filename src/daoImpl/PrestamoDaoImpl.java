@@ -364,5 +364,50 @@ public class PrestamoDaoImpl implements PrestamoDao
 		
 	}
 
+	public boolean prestamoFinalizado(long idPrestamo) {
+		boolean estado=true;
+		
+		cn = new Conexion();
+		cn.Open();
+		String query = "update prestamos set idEstado=0 where idPrestamo="+idPrestamo;
+		//System.out.println(query);
+		try 
+		{
+			estado=cn.execute(query);
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		return estado; 
+	}
+	
+	public int obtenerCuotasEnEstadoInactivo(long idPrestamo) {
+		cn = new Conexion();
+		cn.Open();
+		
+		int cant = 0;
+		
+		 try
+		 {
+			 ResultSet rs = cn.query("select count(idEstado) as cantEstadosF FROM cuotasPrestamo where idEstado=0 and idPrestamo="+idPrestamo);
+			 while(rs.next()) {
+				 cant = rs.getInt("cantEstadosF");
+			 }
+	
+			
+		 }
+		 catch(Exception e)
+		 {
+			 e.printStackTrace();
+		 }
+		 finally
+		 {
+			 cn.close();
+		 }
+		 return cant;
+		
+	}
+	
 	
 }

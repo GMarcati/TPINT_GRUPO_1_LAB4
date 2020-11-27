@@ -65,6 +65,7 @@ public class servletPrestamo extends HttpServlet
 			usuario=(Usuario) request.getSession().getAttribute("Usuario");
 
 			//Se carga y envia el listado de prestamos por usuario al jsp ListaPrestamosCliente
+			request.setAttribute("listaCuentasPorUsuario", cuentaNeg.listarCuentasPorUsuario(usuario.getIdUsuario()));			
 	    	request.setAttribute("listaPrestamos", prestamoNeg.listarPrestamosPorCliente(usuario.getIdUsuario()));
 	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/ListaPrestamosCliente.jsp");
 			dispatcher.forward(request, response);
@@ -76,17 +77,98 @@ public class servletPrestamo extends HttpServlet
 			Usuario usuario = new Usuario();
 			//Se obtiene el usuario por session
 			usuario=(Usuario) request.getSession().getAttribute("Usuario");
-			long idPrestamo = Integer.parseInt(request.getParameter("idPrestamoCuota"));
+			request.getSession().setAttribute("idPrestamo", request.getParameter("idPrestamoCuota"));
+
+			request.setAttribute("listaCuentasPorUsuario", cuentaNeg.listarCuentasPorUsuario(usuario.getIdUsuario()));
+	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/SeleccionarCuentaPrestamo.jsp");
+			dispatcher.forward(request, response);
+		}
+		
+		if(request.getParameter("btnSeleccionarCuenta")!=null) {
 			
+			Usuario usuario = new Usuario();
+			//Se obtiene el usuario por session
+			usuario=(Usuario) request.getSession().getAttribute("Usuario");		
+			long idPrestamo=Integer.parseInt((String) request.getSession().getAttribute("idPrestamo"));
+			
+			long idCuenta = Integer.parseInt(request.getParameter("CuentaUsuario"));
+			//long idPrestamo = Integer.parseInt(request.getParameter("idPrestamoCuota"));			
+			Prestamo prestamo = new Prestamo();
+			prestamo=prestamoNeg.obtenerPrestamoPorId(idPrestamo);
+			request.setAttribute("prestamo", prestamo);
+			request.setAttribute("listaCuotas", prestamoNeg.listarCuotas(idPrestamo));
+			request.setAttribute("idCuenta", idCuenta);
+			
+	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/PagarPrestamo.jsp");
+			dispatcher.forward(request, response);
+		}
+		
+		//Cuando se apreta el boton btnPagarCuota del jsp PagarPrestamo
+		if(request.getParameter("idCuota")!=null) {
+			
+			
+			boolean estadoPrestamo=true;
+			boolean estadoMovimiento=true;
+			boolean estadoDescuentoSaldoDestino=true;
+			double saldo = 0;
+			Usuario usuario = new Usuario();
+			usuario=(Usuario) request.getSession().getAttribute("Usuario");
+			
+			long idPrestamo=Integer.parseInt((String) request.getSession().getAttribute("idPrestamo"));
+			int idCuentaOrigen = Integer.parseInt(request.getParameter("idCuenta"));
+			int idCuota = Integer.parseInt(request.getParameter("idCuota"));
+			saldo=cuentaNeg.obtenerSaldoPorIdCuenta(idCuentaOrigen);
 			
 			Prestamo prestamo = new Prestamo();
 			prestamo=prestamoNeg.obtenerPrestamoPorId(idPrestamo);
 			
-			//Se envian las cuotas a pagar, el prestamo, listado de cuentas por usuario y la lista de prestamo
-			request.setAttribute("prestamo", prestamo);
-			request.setAttribute("listaCuotas", prestamoNeg.listarCuotas(idPrestamo));
+			Movimientos movimiento = new Movimientos();
+			Cuenta cuenta = new Cuenta();
+			cuenta.setIdCuenta(idCuentaOrigen);
+			movimiento.setCuenta(cuenta);
+			TipoMovimiento tmovimiento = new TipoMovimiento();
+			tmovimiento.setIdTipoMovimiento(3);
+			movimiento.setTipoMovimiento(tmovimiento);
+			LocalDate localDate = LocalDate.now();
+			movimiento.setFechaCreacion(java.sql.Date.valueOf(localDate));
+			movimiento.setDetalle("Pago de cuota");
+			movimiento.setImporte(prestamo.getValorCuota());
+			movimiento.setCuentaDestino(1);
+			//Se verifica si el saldo es mayor o igual al valor de la cuota a pagar del prestamo
+			if(saldo>=prestamo.getValorCuota()) {
+				estadoPrestamo=prestamoNeg.pagarCuota(idPrestamo, idCuota);
+				
+				if(estadoPrestamo==true) {
+					if(prestamoNeg.obtenerCuotasEnEstadoInactivo(idPrestamo)==prestamo.getCantidadMeses()) {
+						
+						prestamoNeg.prestamoFinalizado(idPrestamo);
+						
+					}
+					
+					estadoDescuentoSaldoDestino = movimientoNeg.DescontarSaldoCuentaOrigen(idCuentaOrigen, prestamo.getValorCuota());
+					estadoMovimiento=movimientoNeg.altaMovimento(movimiento);
+					
+				} else {
+					estadoPrestamo=false;
+					estadoDescuentoSaldoDestino=false;
+					
+				}
+				
+				
+
+				
+				
+			} else {
+				
+				estadoPrestamo=false;
+				estadoDescuentoSaldoDestino=false;
+			}
+			
+			
+			request.setAttribute("estadoPrestamo", estadoPrestamo);
 			request.setAttribute("listaCuentasPorUsuario", cuentaNeg.listarCuentasPorUsuario(usuario.getIdUsuario()));
-	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/PagarPrestamo.jsp");
+			request.setAttribute("listaPrestamos", prestamoNeg.listarPrestamosPorCliente(usuario.getIdUsuario()));
+	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/ListaPrestamosCliente.jsp");
 			dispatcher.forward(request, response);
 		}
 		
@@ -175,59 +257,7 @@ public class servletPrestamo extends HttpServlet
 		//---------------------------------------------------CLIENTE------------------------------------------------------//
 
 		
-		//Cuando se apreta el boton btnPagarCuota del jsp PagarPrestamo
-		if(request.getParameter("btnPagarCuota")!=null) {
-			
-			
-			boolean estadoPrestamo=true;
-			boolean estadoMovimiento=true;
-			boolean estadoDescuentoSaldoDestino=true;
-			double saldo = 0;
-			Usuario usuario = new Usuario();
-			usuario=(Usuario) request.getSession().getAttribute("Usuario");
-			
-			int idPrestamo = Integer.parseInt(request.getParameter("txtIdPrestamo"));
-			int idCuentaOrigen = Integer.parseInt(request.getParameter("CuentaUsuario"));
-			int idCuota = Integer.parseInt(request.getParameter("idCuota"));
-			//System.out.println(idCuota+" - "+request.getParameter("idCuota")+" - "+ idCuentaOrigen);
-			saldo=cuentaNeg.obtenerSaldoPorIdCuenta(idCuentaOrigen);
-			
-			Prestamo prestamo = new Prestamo();
-			prestamo=prestamoNeg.obtenerPrestamoPorId(idPrestamo);
-			
-			Movimientos movimiento = new Movimientos();
-			Cuenta cuenta = new Cuenta();
-			cuenta.setIdCuenta(idCuentaOrigen);
-			movimiento.setCuenta(cuenta);
-			TipoMovimiento tmovimiento = new TipoMovimiento();
-			tmovimiento.setIdTipoMovimiento(3);
-			movimiento.setTipoMovimiento(tmovimiento);
-			LocalDate localDate = LocalDate.now();
-			movimiento.setFechaCreacion(java.sql.Date.valueOf(localDate));
-			movimiento.setDetalle("Pago de cuota");
-			movimiento.setImporte(Double.parseDouble(request.getParameter("txtValorCuota")));
-			movimiento.setCuentaDestino(1);
-			//Se verifica si el saldo es mayor o igual al valor de la cuota a pagar del prestamo
-			if(saldo>=prestamo.getValorCuota()) {
-				estadoPrestamo=prestamoNeg.pagarCuota(idPrestamo, idCuota);
-				
-				estadoDescuentoSaldoDestino = movimientoNeg.DescontarSaldoCuentaOrigen(idCuentaOrigen, prestamo.getValorCuota());
-				estadoMovimiento=movimientoNeg.altaMovimento(movimiento);
-				
-				
-			} else {
-				
-				estadoPrestamo=false;
-				estadoDescuentoSaldoDestino=false;
-			}
-			
-			
-			request.setAttribute("estadoPrestamo", estadoPrestamo);
-			request.setAttribute("listaCuentasPorUsuario", cuentaNeg.listarCuentasPorUsuario(usuario.getIdUsuario()));
-			request.setAttribute("listaPrestamos", prestamoNeg.listarPrestamosPorCliente(usuario.getIdUsuario()));
-	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/ListaPrestamosCliente.jsp");
-			dispatcher.forward(request, response);
-		}
+
 		
 		//Cuando se apreta el boton btnSolicitar del jsp SolicitarPrestamo
 		if(request.getParameter("btnSolicitar")!=null) {

@@ -83,12 +83,7 @@
 	        </div>
 	    </nav>
 
-	    <%
-		List<Cuenta> listaCuentaXUsuario = new ArrayList<Cuenta>();
-		if (request.getAttribute("listaCuentasPorUsuario") != null) {
-			listaCuentaXUsuario = (List<Cuenta>) request.getAttribute("listaCuentasPorUsuario");
-		}
-		%>
+
 		
 		
 		<%
@@ -105,31 +100,25 @@
 		}
 		%>
 		
+		<%
+		long idCuenta = 0;
+		if (request.getAttribute("idCuenta") != null) {
+			idCuenta= (long)request.getAttribute("idCuenta") ;
+		}
+		%>
+		
+		
+		
+
 
 
 <form action="servletPrestamo" method="post">
 <div class="container body-content " style="margin-top: 5em;">	
 	<h2> PAGAR PRESTAMO</h2>
-	<div class="m-3">
-		<div class=form-group">
-		<label for="exampleInputEmail1">Id prestamo:</label>
-		<input readonly="readonly" type="text" name="txtIdPrestamo" class="form-control small" Style="width: 500px" value="<%=prestamo.getIdPrestamo()%>" ><br>
-		
-		</div>
+
+
 
 		<div class="form-group" >
-		<label for="exampleInputEmail1">Pagar desde la cuenta:</label>
-		<select name="CuentaUsuario" class="form-control small" Style="width: 500px">
-		<% 
-			for(Cuenta cuentause: listaCuentaXUsuario){    
-		 %>
-		<option value="<%=cuentause.getIdCuenta() %>"> <%=cuentause.getIdCuenta() %> - <%=cuentause.getNumeroCuenta() %> </option>
-		<%
-		} %>
-		</select>
-		</div>
-		<div class="form-group" >
-		<%int cont=1; %>
 <table id="table_id" style="width:100%" class="table table-striped table-bordered " >
 <thead >
 		<tr class="text-center">
@@ -148,7 +137,7 @@
 		%>
 		<tr>
 
-			<td><%=cont++%><input type="hidden" name="idCuota" value="<%=cont%>"></td>
+			<td><%=cuotasPrestamo.getCuota()%><input type="hidden" name="idCuota" value="<%=cuotasPrestamo.getCuota()%>"></td>
 			<td><%=prestamo.getValorCuota()%><input type="hidden" name="txtValorCuota" value="<%=prestamo.getValorCuota()%>" ></td>
 			<td><%=cuotasPrestamo.getFechaPago()%></td>
 			<td>
@@ -169,7 +158,8 @@
 			<%
 			if(cuotasPrestamo.getEstado()==true){
 			%>	
-				<input class="btn btn-success" type="submit" name="btnPagarCuota" value="Pagar">
+
+				<a href="servletPrestamo?idCuota=<%=cuotasPrestamo.getCuota()%>&idCuenta=<%=idCuenta %>" class="btn btn-secondary btn-sm" style="width: 80px;">Pagar</a>
 				
 			<% 
 			} else{

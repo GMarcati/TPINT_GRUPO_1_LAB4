@@ -116,12 +116,16 @@
 		%>
 		
 
+		
+
 <div class="container-fluid" style="margin-top: 5em;">
 		<div>
 			<h2>LISTADO DE PRESTAMOS</h2>
 			<br>
 		</div>
 		<br>
+		
+
 		
 		<%int cont=1; %>
 <table id="table_id" style="width:100%" class="table table-striped table-bordered " >

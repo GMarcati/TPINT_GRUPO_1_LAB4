@@ -260,14 +260,80 @@ insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cue
 insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (1, 4, '2020-06-23', 'bladsadasd', 10000, 44444444);
 insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (1, 4, '2020-06-29', 'blasdad', 18000, 22222222);
 
-insert into prestamos (idCuenta, idUsuario, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstadoPrestamo, idEstado) values(1,2,20000, '2020/10/21', 10000, 3, 10000,1,1);
-insert into prestamos (idCuenta, idUsuario, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstadoPrestamo, idEstado) values(2,2, 40000, '2020/10/22', 20000, 6, 10000,1,1);
-insert into prestamos (idCuenta, idUsuario, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstadoPrestamo, idEstado) values(3,2, 60000, '2020/10/23', 30000, 18, 10000,1,1);
-insert into prestamos (idCuenta, idUsuario, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstadoPrestamo, idEstado) values(4,2, 80000, '2020/10/24', 40000, 12, 10000,1,1);
-insert into prestamos (idCuenta, idUsuario, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstadoPrestamo, idEstado) values(5,5, 100000, '2020/10/25', 50000, 24, 10000,1,1);
-insert into prestamos (idCuenta, idUsuario, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstadoPrestamo, idEstado) values(1,2, 150000, '2020/10/25', 50000, 24, 10000,2,1);
-insert into prestamos (idCuenta, idUsuario, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstadoPrestamo, idEstado) values(5,5, 100000, '2020/10/25', 50000, 24, 10000,2,1);
+/*Movimientos del alta de prestamos*/
+insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (1, 2, '2020/10/21', 'prestamo', 10000, 11111111);
+insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (2, 2, '2020/10/22', 'prestamo', 20000, 22222222);
+insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (3, 2, '2020/10/23', 'prestamo', 30000, 33333333);
+insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (4, 2, '2020/10/24', 'prestamo', 40000, 44444444);
+insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (5, 2, '2020/10/25', 'prestamo', 50000, 55555555);
+insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (1, 2, '2020/10/25', 'prestamo', 50000, 11111111);
+insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (5, 2, '2020/10/25', 'prestamo', 50000, 55555555);
+insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (1, 2, '2020/10/25', 'prestamo', 9500, 11111111);
+
+insert into prestamos (idCuenta, idUsuario, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstadoPrestamo, idEstado) values(1,2,20000, '2020/10/21', 10000, 3, 10000,2,1);
+insert into prestamos (idCuenta, idUsuario, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstadoPrestamo, idEstado) values(2,2, 40000, '2020/10/22', 20000, 6, 10000,2,1);
+insert into prestamos (idCuenta, idUsuario, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstadoPrestamo, idEstado) values(3,2, 60000, '2020/10/23', 30000, 6, 10000,2,1);
+insert into prestamos (idCuenta, idUsuario, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstadoPrestamo, idEstado) values(4,2, 80000, '2020/10/24', 40000, 3, 10000,2,1);
+insert into prestamos (idCuenta, idUsuario, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstadoPrestamo, idEstado) values(5,5, 100000, '2020/10/25', 50000, 3, 10000,2,1);
+insert into prestamos (idCuenta, idUsuario, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstadoPrestamo, idEstado) values(1,2, 150000, '2020/10/25', 50000, 3, 10000,2,1);
+insert into prestamos (idCuenta, idUsuario, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstadoPrestamo, idEstado) values(5,5, 100000, '2020/10/25', 50000, 12, 10000,2,1);
 insert into prestamos (idCuenta, idUsuario, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstadoPrestamo, idEstado) values(1,2, 10000, '2020/10/25', 9500, 3, 3333.33,2,1);
+
+insert into prestamos (idCuenta, idUsuario, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstadoPrestamo, idEstado) values(4,4, 10000, '2020/10/25', 9500, 3, 3333.33,1,1);
+insert into prestamos (idCuenta, idUsuario, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstadoPrestamo, idEstado) values(4,4, 10000, '2020/10/25', 9500, 3, 3333.33,1,1);
+insert into prestamos (idCuenta, idUsuario, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstadoPrestamo, idEstado) values(5,5, 10000, '2020/10/25', 9500, 3, 3333.33,1,1);
+insert into prestamos (idCuenta, idUsuario, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstadoPrestamo, idEstado) values(5,5, 10000, '2020/10/25', 9500, 3, 3333.33,1,1);
+insert into prestamos (idCuenta, idUsuario, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstadoPrestamo, idEstado) values(3,3, 10000, '2020/10/25', 9500, 3, 3333.33,3,1);
+insert into prestamos (idCuenta, idUsuario, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstadoPrestamo, idEstado) values(4,4, 10000, '2020/10/25', 9500, 3, 3333.33,3,1);
+insert into prestamos (idCuenta, idUsuario, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstadoPrestamo, idEstado) values(5,5, 10000, '2020/10/25', 9500, 3, 3333.33,3,1);
+
+/*Se generan las cuotas de los prestamos*/
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (1,1,'2020/11/21',1);
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (2,1,'2020/12/21',1);
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (3,1,'2021/01/21',1);
+
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (1,2,'2020/11/22',1);
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (2,2,'2020/12/22',1);
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (3,2,'2021/01/22',1);
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (4,2,'2021/02/22',1);
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (5,2,'2021/03/22',1);
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (6,2,'2021/04/22',1);
+
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (1,3,'2020/11/23',1);
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (2,3,'2020/12/23',1);
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (3,3,'2021/01/23',1);
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (4,3,'2021/02/23',1);
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (5,3,'2021/03/23',1);
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (6,3,'2021/04/23',1);
+
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (1,4,'2020/11/24',1);
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (2,4,'2020/12/24',1);
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (3,4,'2021/01/24',1);
+
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (1,5,'2020/11/25',1);
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (2,5,'2020/12/25',1);
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (3,5,'2021/01/25',1);
+
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (1,6,'2020/11/25',1);
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (2,6,'2020/12/25',1);
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (3,6,'2021/01/25',1);
+
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (1,7,'2020/11/25',1);
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (2,7,'2020/12/25',1);
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (3,7,'2021/01/25',1);
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (4,7,'2021/02/25',1);
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (5,7,'2021/03/25',1);
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (6,7,'2021/04/25',1);
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (7,7,'2021/05/25',1);
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (8,7,'2021/06/25',1);
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (9,7,'2021/07/25',1);
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (10,7,'2021/08/25',1);
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (11,7,'2021/09/25',1);
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (12,7,'2021/10/25',1);
+
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (1,8,'2020/11/25',1);
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (2,8,'2020/12/25',1);
+Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values (3,8,'2021/01/25',1);
 
 select p.*, c.numeroCuenta from prestamos as p
 inner join cuentas as c on c.idCuenta= p.idCuenta;

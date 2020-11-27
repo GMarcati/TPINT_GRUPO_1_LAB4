@@ -87,4 +87,11 @@ public class PrestamoNegImpl implements PrestamoNeg
 		return prestamoDao.pagarCuota(idPrestamo, cuota);
 	}
 	
+	public boolean prestamoFinalizado(long idPrestamo){
+		return prestamoDao.prestamoFinalizado(idPrestamo);
+	}
+	
+	public int obtenerCuotasEnEstadoInactivo(long idPrestamo) {
+		return prestamoDao.obtenerCuotasEnEstadoInactivo(idPrestamo);
+	}
 }
