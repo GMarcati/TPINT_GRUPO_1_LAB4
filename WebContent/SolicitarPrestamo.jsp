@@ -35,7 +35,7 @@
 			}else
 			{
 			%>
-				<script>swal("Error al solicitar el prestamo.", "", "error")</script>
+				<script>swal("Error al solicitar el prestamo.", "No existen prestamos para ese monto.", "error")</script>
 			<%
 			}
 			
@@ -45,7 +45,7 @@
 		%>
 
 
-	<form action="servletPrestamo" method="get">
+	<form action="servletPrestamo" method="post">
 	<div class="container body-content" style="margin-top: 5em;"><br />
 		<div class="jumbotron jumbotron-fluid text-center rounded-pill">
 			<div class="container">
@@ -60,11 +60,11 @@
 		<div class="form-group">
 				<label for="exampleInputEmail1">Cantidad cuotas:</label> 
 				<select name="selectCantidadCuotas" class="form-control small" Style="width: 500px">
-			  	<option value="3">3</option>
-			  	<option value="6">6</option>
-			  	<option value="12">12</option>
-			  	<option value="18">18</option>
-				<option value="24">24</option>
+			  	<option value="3">3 (Tasa 0.30%)</option>
+			  	<option value="6">6 (Tasa 0.60%)</option>
+			  	<option value="12">12 (Tasa 1.20%)</option>
+			  	<option value="18">18 (Tasa 1.80%)</option>
+				<option value="24">24 (Tasa 2.40%)</option>
 		  		</select>
 		</div>
 

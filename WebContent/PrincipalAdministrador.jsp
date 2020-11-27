@@ -39,8 +39,7 @@
 			<a href="AltaCuenta.jsp" class="btn btn-outline-primary" style="width: 450px; margin:10px">Alta cuenta</a> <br>
 			<a href="servletCuenta?listadoC" class="btn btn-outline-primary" style="width: 450px; margin:10px">Listar/Modificar/Dar de baja cuenta</a> <br>
 			<a href="servletCuenta?AsignarCuenta" class="btn btn-outline-primary" style="width: 450px; margin:10px">Asignar cuenta a cliente</a> <br>
-			<a href="ListaPrestamos.jsp" class="btn btn-outline-primary" style="width: 450px; margin:10px">Autorizar préstamos</a> <br>
-			<!--  <a href="servletPrestamo?listadoP" class="btn btn-outline-primary" style="width: 450px; margin:10px">Autorizar préstamos</a> <br>-->
+			<a href="servletPrestamo?listadoPrestamosxAutorizar" class="btn btn-outline-primary" style="width: 450px; margin:10px">Autorizar préstamos</a> <br>
 			<a href="VerInformes.jsp" class="btn btn-outline-primary" style="width: 450px; margin:10px">Ver informes</a> <br>
 		</div>
 	</div>

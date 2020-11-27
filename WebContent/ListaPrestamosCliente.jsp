@@ -72,7 +72,7 @@
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="servletCuenta?listaCuentasPrestamos" >Solicitar préstamo</a> 
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="ListaPrestamosCliente.jsp" >Ver préstamos adquiridos</a> 
+								<a class="dropdown-item" href="servletPrestamo?listadoPrestamosPorUsuario" >Ver préstamos adquiridos</a> 
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="DatosPersonales.jsp" >Mis datos</a> 
 								<div class="dropdown-divider"></div>
@@ -101,12 +101,12 @@
 			
 			if(estado==true){
 			%>
-				<script>swal("Prestamo pagado con exito!", "", "success")</script>
+				<script>swal("Cuota pagada con exito!", "", "success")</script>
 			<%
 			}else
 			{
 			%>
-				<script>swal("Error al pagar el prestamo.", "Saldo insuficiente.", "error")</script>
+				<script>swal("Error al pagar la cuota.", "Saldo insuficiente.", "error")</script>
 			<%
 			}
 			
@@ -114,6 +114,8 @@
 		}
 
 		%>
+		
+
 <div class="container-fluid" style="margin-top: 5em;">
 		<div>
 			<h2>LISTADO DE PRESTAMOS</h2>
@@ -126,11 +128,11 @@
 <thead >
 		<tr class="text-center">
 			<th>#</th>
-			<th>ID CUENTA</th>
+			<th>NUMERO CUENTA DESTINO</th>
 			<th>IMPORTE A DEVOLVER</th>
 			<th>FECHA CREACION</th>
 			<th>MONTO SOLICITADO</th>
-			<th>MESES RESTANTES</th>
+			<th>MESES</th>
 			<th>VALOR CUOTA	</th>	
 			<th>ESTADO</th>
 			<th>ACCION</th>
@@ -144,7 +146,7 @@
 		%>
 		<tr>
 			<td><%=cont++%></td>
-			<td><%=prestamo.getCuenta().getIdCuenta()%></td>
+			<td><%=prestamo.getCuenta().getNumeroCuenta()%></td>
 			<td><%=prestamo.getImporteAdevolver()%></td>
 			<td><%=prestamo.getFecha()%></td>
 			<td><%=prestamo.getMontoSolicitado()%></td>
@@ -167,7 +169,7 @@
 			<%
 			if(prestamo.getEstado()==true){
 			%>	
-			<a href="servletPrestamo?idPrestamoCuota=<%=prestamo.getIdPrestamo()%>&CuotasAPagar=<%=prestamo.getCantidadMeses() %>" class="btn btn-secondary btn-sm" style="width: 105px;">Pagar cuota</a><br><br> 
+			<a href="servletPrestamo?idPrestamoCuota=<%=prestamo.getIdPrestamo()%>" class="btn btn-secondary btn-sm" style="width: 105px;">Pagar cuota</a><br><br> 
 			<%
 			}
 			%>

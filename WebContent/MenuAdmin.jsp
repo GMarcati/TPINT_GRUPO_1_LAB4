@@ -38,7 +38,7 @@
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="servletCuenta?AsignarCuenta">Asignar cuenta a cliente</a> 
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="ListaPrestamos.jsp">Autorizar préstamos</a> 
+								<a class="dropdown-item" href="servletPrestamo?listadoPrestamosxAutorizar">Autorizar préstamos</a> 
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="VerInformes.jsp" >Ver informes</a> 
 								<div class="dropdown-divider"></div>

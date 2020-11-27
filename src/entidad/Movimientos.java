@@ -5,18 +5,18 @@ import java.sql.Date;
 public class Movimientos {
 	
 	private long idMovimiento;
-	private long idCuenta; //VER SI USAR CLASE "CUENTA"
+	private Cuenta cuenta; //VER SI USAR CLASE "CUENTA"
 	private TipoMovimiento tipoMovimiento;
 	private Date fechaCreacion;
 	private String detalle;
 	private double importe;
 	private long cuentaDestino;
 	
-	public Movimientos(long idMovimiento, long idCuenta, TipoMovimiento tipoMovimiento, Date fechaCreacion,
+	public Movimientos(long idMovimiento, Cuenta cuenta, TipoMovimiento tipoMovimiento, Date fechaCreacion,
 			String detalle, double importe, long cuentaDestino) {
 		super();
 		this.idMovimiento = idMovimiento;
-		this.idCuenta = idCuenta;
+		this.cuenta = cuenta;
 		this.tipoMovimiento = tipoMovimiento;
 		this.fechaCreacion = fechaCreacion;
 		this.detalle = detalle;
@@ -36,12 +36,12 @@ public class Movimientos {
 		this.idMovimiento = idMovimiento;
 	}
 
-	public long getIdCuenta() {
-		return idCuenta;
+	public Cuenta getCuenta() {
+		return cuenta;
 	}
 
-	public void setIdCuenta(long idCuenta) {
-		this.idCuenta = idCuenta;
+	public void setCuenta(Cuenta idCuenta) {
+		this.cuenta = idCuenta;
 	}
 
 	public TipoMovimiento getTipoMovimiento() {

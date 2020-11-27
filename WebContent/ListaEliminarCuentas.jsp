@@ -121,7 +121,7 @@
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="servletCuenta?AsignarCuenta">Asignar cuenta a cliente</a> 
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="ListaPrestamos.jsp">Autorizar préstamos</a> 
+						<a class="dropdown-item" href="servletPrestamo?listadoPrestamosxAutorizar">Autorizar préstamos</a> 
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="VerInformes.jsp" >Ver informes</a> 
 						<div class="dropdown-divider"></div>
@@ -143,7 +143,7 @@
 <div class="container-fluid" style="margin-top: 5em;">
 	<div><h2>LISTADO DE CUENTAS</h2><br></div>
 	
-	
+	<%int cont=1; %>
 <table id="table_id" style="width:100%" class="table table-striped table-bordered " >
 <thead >
 		<tr class="text-center">
@@ -163,7 +163,7 @@
 			for (Cuenta c : listaC) {
 		%>
 		<tr>
-			<td><%=c.getIdCuenta()%></td>
+			<td><%=cont++%></td>
 			<td><%=c.getNumeroCuenta()%></td>
 			<td><%=c.getTipoCuenta().getDescripcion()%></td>
 			<td><%=c.getFechaCreacion()%></td>

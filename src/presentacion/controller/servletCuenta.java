@@ -195,7 +195,7 @@ public class servletCuenta extends HttpServlet {
 					Cuenta cuentaAux = new Cuenta();
 					cuentaAux = cuentaNeg.obtenerCuentaPorCBU(cuenta.getCBU());
 					
-					movimiento.setIdCuenta(cuentaAux.getIdCuenta());
+					movimiento.setCuenta(cuentaAux);
 					TipoMovimiento tipoMovimiento = new TipoMovimiento();
 					tipoMovimiento.setIdTipoMovimiento(1);
 					movimiento.setTipoMovimiento(tipoMovimiento);
@@ -203,6 +203,10 @@ public class servletCuenta extends HttpServlet {
 					movimiento.setDetalle("Apertura de cuenta numero "+cuentaAux.getNumeroCuenta());
 					movimiento.setImporte(10000);
 					movimiento.setCuentaDestino(cuentaAux.getNumeroCuenta());
+					
+					
+					
+					
 					movimientosNeg.altaMovimento(movimiento);
 				}
 				
@@ -219,9 +223,9 @@ public class servletCuenta extends HttpServlet {
 			boolean estado=true;
 			
 			cuenta.setIdCuenta(Integer.parseInt(request.getParameter("txtIdCuenta")));
-			cuenta.setNumeroCuenta(Integer.parseInt(request.getParameter("txtNumeroCuenta")));
+			cuenta.setNumeroCuenta(Long.parseLong(request.getParameter("txtNumeroCuenta")));
 			cuenta.setSaldo(Double.parseDouble(request.getParameter("txtSaldo")));
-			cuenta.setCBU(Integer.parseInt(request.getParameter("txtCBU")));
+			cuenta.setCBU(Long.parseLong(request.getParameter("txtCBU")));
 			TipoCuenta tipoCuenta = new TipoCuenta();
 			tipoCuenta.setIdTipoCuenta(Integer.parseInt(request.getParameter("tipoCuenta")));
 			cuenta.setTipoCuenta(tipoCuenta);

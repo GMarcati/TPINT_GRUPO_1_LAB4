@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.MovimientosDao;
+import entidad.Cuenta;
 import entidad.Movimientos;
 import entidad.TipoMovimiento;
 
@@ -38,8 +39,9 @@ public class MovimientosDaoImpl implements MovimientosDao {
 				 
 				 Movimientos movimientos = new Movimientos();
 				 movimientos.setIdMovimiento(rs.getLong("m.idMovimiento"));
-				 movimientos.setIdCuenta(rs.getLong("m.idCuenta"));
-				 
+				 Cuenta cuenta = new Cuenta();
+				 cuenta.setIdCuenta(rs.getLong("m.idCuenta"));
+				 movimientos.setCuenta(cuenta);
 				 TipoMovimiento tmovimiento = new TipoMovimiento(); 
 				 tmovimiento.setIdTipoMovimiento(rs.getInt("m.idTipoMovimiento"));
 				 tmovimiento.setDescripcion(rs.getString("tm.descripcion"));
@@ -107,7 +109,7 @@ public class MovimientosDaoImpl implements MovimientosDao {
 
 		cn = new Conexion();
 		cn.Open();	
-		String query = "INSERT INTO movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino)  VALUES ('"+movimiento.getIdCuenta()+"','"+movimiento.getTipoMovimiento().getIdTipoMovimiento()+"','"+movimiento.getFechaCreacion()+"','"+movimiento.getDetalle()+"','"+movimiento.getImporte()+"','"+movimiento.getCuentaDestino()+"')";
+		String query = "INSERT INTO movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino)  VALUES ('"+movimiento.getCuenta().getIdCuenta()+"','"+movimiento.getTipoMovimiento().getIdTipoMovimiento()+"','"+movimiento.getFechaCreacion()+"','"+movimiento.getDetalle()+"','"+movimiento.getImporte()+"','"+movimiento.getCuentaDestino()+"')";
 		//La siguiente linea es para ver los datos de la query
 		//System.out.println(query);
 		try

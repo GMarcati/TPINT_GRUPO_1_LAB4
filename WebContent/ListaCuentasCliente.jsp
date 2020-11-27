@@ -95,6 +95,7 @@
 			<br>
 		</div>
 		<br>
+		<%int cont=1; %>
 <table id="table_id" style="width:100%" class="table table-striped table-bordered " >
 <thead >
 		<tr class="text-center">
@@ -114,7 +115,7 @@
 			for (Cuenta cuenta : listaCuentaXUsuario) {
 		%>
 		<tr>
-			<td><%=cuenta.getIdCuenta()%></td>
+			<td><%=cont++%></td>
 			<td><%=cuenta.getNumeroCuenta()%></td>
 			<td><%=cuenta.getTipoCuenta().getDescripcion()%></td>
 			<td><%=cuenta.getFechaCreacion()%></td>

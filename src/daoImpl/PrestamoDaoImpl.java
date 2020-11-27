@@ -10,6 +10,7 @@ import com.sun.org.apache.xerces.internal.impl.dv.xs.DecimalDV;
 
 import dao.PrestamoDao;
 import entidad.Cuenta;
+import entidad.CuotasPrestamo;
 import entidad.EstadoPrestamo;
 import entidad.Localidad;
 import entidad.Nacionalidad;
@@ -37,7 +38,7 @@ public class PrestamoDaoImpl implements PrestamoDao
 		
 		try
 		{
-			ResultSet rs= cn.query("select p.idPrestamo, p.idCuenta, p.importeAdevolver, p.fecha, p.montoSolicitado, p.cantidadMeses, p.valorCuota, ep.idEstadoPrestamo, ep.descripcion, p.idEstado from prestamos as p inner join estadosPrestamos as ep on p.idEstadoPrestamo=ep.idEstadoPrestamo");
+			ResultSet rs= cn.query("select p.idPrestamo, p.idCuenta, p.idUsuario, c.numeroCuenta, u.usuario, p.importeAdevolver, p.fecha, p.montoSolicitado, p.cantidadMeses, p.valorCuota, ep.idEstadoPrestamo, ep.descripcion, p.idEstado from prestamos as p inner join estadosPrestamos as ep on p.idEstadoPrestamo=ep.idEstadoPrestamo inner join cuentas as c on c.idCuenta=p.idCuenta inner join usuarios as u on u.idUsuario=p.idUsuario");
 		    while(rs.next())
 			{
 		    	Prestamo pres = new Prestamo();
@@ -45,17 +46,22 @@ public class PrestamoDaoImpl implements PrestamoDao
 		    	pres.setIdPrestamo(rs.getLong(1));
 		    	Cuenta cuenta = new Cuenta();
 		    	cuenta.setIdCuenta(rs.getLong(2));
+		    	Usuario usuario = new Usuario();
+		    	usuario.setIdUsuario(rs.getLong(3));
+		    	cuenta.setNumeroCuenta(rs.getLong(4));
+		    	usuario.setUsuario(rs.getString(5));
 		    	pres.setCuenta(cuenta);
-		    	pres.setImporteAdevolver(rs.getDouble(3));
-		    	pres.setFecha(rs.getDate(4));
-		    	pres.setMontoSolicitado(rs.getDouble(5));
-		    	pres.setCantidadMeses(rs.getInt(6));
-		    	pres.setValorCuota(rs.getDouble(7));
+		    	pres.setUsuario(usuario);
+		    	pres.setImporteAdevolver(rs.getDouble(6));
+		    	pres.setFecha(rs.getDate(7));
+		    	pres.setMontoSolicitado(rs.getDouble(8));
+		    	pres.setCantidadMeses(rs.getInt(9));
+		    	pres.setValorCuota(rs.getDouble(10));
 		    	EstadoPrestamo estadoPrestamo = new EstadoPrestamo();
-		    	estadoPrestamo.setIdEstadoPrestamo(rs.getInt(8));
-		    	estadoPrestamo.setDescripcion(rs.getString(9));
+		    	estadoPrestamo.setIdEstadoPrestamo(rs.getInt(11));
+		    	estadoPrestamo.setDescripcion(rs.getString(12));
 		    	pres.setEstadoPrestamo(estadoPrestamo);
-		    	pres.setEstado(rs.getBoolean(10));
+		    	pres.setEstado(rs.getBoolean(13));
 				 
 				listaP.add(pres);
 			}
@@ -78,7 +84,7 @@ public class PrestamoDaoImpl implements PrestamoDao
 		
 		cn = new Conexion();
 		cn.Open();
-		String query = "Update prestamos set idEstado=2 WHERE idPrestamo="+id;
+		String query = "Update prestamos set idEstadoPrestamo=2 WHERE idPrestamo="+id;
 		
 		try 
 		{
@@ -98,7 +104,7 @@ public class PrestamoDaoImpl implements PrestamoDao
 		
 		cn = new Conexion();
 		cn.Open();
-		String query = "Update prestamos set idEstado=0 WHERE idPrestamo="+id;
+		String query = "Update prestamos set idEstadoPrestamo=3 WHERE idPrestamo="+id;
 		
 		try 
 		{
@@ -176,24 +182,6 @@ public class PrestamoDaoImpl implements PrestamoDao
 		
 	}
 	
-	public boolean pagarCuota(long idPrestamo)
-	{
-		boolean estado=true;
-		
-		cn = new Conexion();
-		cn.Open();
-		String query = "update prestamos set cantidadMeses=cantidadMeses-1 where idPrestamo="+idPrestamo;
-		
-		try 
-		{
-			estado=cn.execute(query);
-		} 
-		catch (Exception e) 
-		{
-			e.printStackTrace();
-		}
-		return estado; 
-	}
 	
 	public Prestamo obtenerPrestamoPorId(long idPrestamo) {
 		cn = new Conexion();
@@ -298,6 +286,82 @@ public class PrestamoDaoImpl implements PrestamoDao
 			 cn.close();
 		 }
 		 return TotImporteSolicitado;
+	}
+	
+	public boolean generarCuotas(CuotasPrestamo cuotasPrestamo) {
+		boolean estado=true;
+
+		cn = new Conexion();
+		cn.Open();	
+		String query = "Insert into cuotasPrestamo (cuota, idPrestamo, fechaPago, idEstado) values ('"+cuotasPrestamo.getCuota()+"', '"+cuotasPrestamo.getPrestamo().getIdPrestamo()+"' ,'"+cuotasPrestamo.getFechaPago()+"',"+1+")";
+		try
+		 {
+			estado=cn.execute(query);
+		 }
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			cn.close();
+		}
+		return estado;
+		
+	}
+	
+	public List<CuotasPrestamo> listarCuotas(long idPrestamo) {
+		
+		cn = new Conexion();
+		cn.Open();
+		
+		List<CuotasPrestamo> listaCuotas = new ArrayList<CuotasPrestamo>();
+		
+		try
+		{
+			ResultSet rs= cn.query("select cp.cuota, cp.idPrestamo, cp.fechaPago, cp.idEstado from cuotasPrestamo as cp where cp.idPrestamo="+idPrestamo);
+		    while(rs.next())
+			{
+		    	CuotasPrestamo cuotasPrestamo = new CuotasPrestamo();
+		    	cuotasPrestamo.setCuota(rs.getLong("cp.cuota"));
+		    	Prestamo prestamo = new Prestamo();
+		    	prestamo.setIdPrestamo(idPrestamo);
+		    	cuotasPrestamo.setPrestamo(prestamo);
+		    	cuotasPrestamo.setFechaPago(rs.getDate("cp.fechaPago").toLocalDate());
+		    	cuotasPrestamo.setEstado(rs.getBoolean("cp.idEstado"));
+
+		    	listaCuotas.add(cuotasPrestamo);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			cn.close();
+		}
+		return listaCuotas;
+		
+	}
+	
+	public boolean pagarCuota(long idPrestamo, long cuota) {
+		boolean estado=true;
+		
+		cn = new Conexion();
+		cn.Open();
+		String query = "update cuotasPrestamo set idEstado=0 where idPrestamo="+idPrestamo+" and cuota="+cuota;
+		System.out.println(query);
+		try 
+		{
+			estado=cn.execute(query);
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		return estado; 
+		
 	}
 
 	

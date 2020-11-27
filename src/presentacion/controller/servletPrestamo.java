@@ -2,6 +2,7 @@ package presentacion.controller;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.PrestamoDao;
 import entidad.Cuenta;
+import entidad.CuotasPrestamo;
 import entidad.EstadoPrestamo;
 import entidad.Movimientos;
 import entidad.Prestamo;
@@ -53,6 +55,180 @@ public class servletPrestamo extends HttpServlet
 		
 		
 		//---------------------------------------------------CLIENTE------------------------------------------------------//
+
+		
+		//Cuando desde el menu cliente se selecciona la opcion "Ver préstamos adquiridos" 
+		if(request.getParameter("listadoPrestamosPorUsuario")!=null) {
+			
+			Usuario usuario = new Usuario();
+			//Se obtiene el usuario por session
+			usuario=(Usuario) request.getSession().getAttribute("Usuario");
+
+			//Se carga y envia el listado de prestamos por usuario al jsp ListaPrestamosCliente
+	    	request.setAttribute("listaPrestamos", prestamoNeg.listarPrestamosPorCliente(usuario.getIdUsuario()));
+	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/ListaPrestamosCliente.jsp");
+			dispatcher.forward(request, response);
+		}
+		
+		//Recibo el id del prestamo a pagar del jsp ListaPrestamosCliente
+		if(request.getParameter("idPrestamoCuota")!=null) {
+			
+			Usuario usuario = new Usuario();
+			//Se obtiene el usuario por session
+			usuario=(Usuario) request.getSession().getAttribute("Usuario");
+			long idPrestamo = Integer.parseInt(request.getParameter("idPrestamoCuota"));
+			
+			
+			Prestamo prestamo = new Prestamo();
+			prestamo=prestamoNeg.obtenerPrestamoPorId(idPrestamo);
+			
+			//Se envian las cuotas a pagar, el prestamo, listado de cuentas por usuario y la lista de prestamo
+			request.setAttribute("prestamo", prestamo);
+			request.setAttribute("listaCuotas", prestamoNeg.listarCuotas(idPrestamo));
+			request.setAttribute("listaCuentasPorUsuario", cuentaNeg.listarCuentasPorUsuario(usuario.getIdUsuario()));
+	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/PagarPrestamo.jsp");
+			dispatcher.forward(request, response);
+		}
+		
+
+		
+		//----------------------------------------------------------------------------------------------------------------//
+		
+		//---------------------------------------------------ADMIN------------------------------------------------------//
+		if(request.getParameter("listadoPrestamosxAutorizar")!=null) {
+			
+			
+			request.setAttribute("listaPrestamos", prestamoNeg.listarPrestamos());
+	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/ListaPrestamos.jsp");
+			dispatcher.forward(request, response);
+		}
+		
+		
+		//Cuando se apreta el boton para aprobar el prestamo
+		if(request.getParameter("idPrestamoAprobar")!=null) {
+			
+			long idPrestamo = Integer.parseInt(request.getParameter("idPrestamoAprobar"));
+			long idCuenta = Integer.parseInt(request.getParameter("idCuentaAprobada"));
+			boolean estadoAprobar=true;
+			
+			estadoAprobar=prestamoNeg.aceptarPrestamo(idPrestamo);
+			
+			if(estadoAprobar==true) {
+				Movimientos movimiento = new Movimientos();
+				LocalDate localDate = LocalDate.now();
+				Prestamo prestamo = new Prestamo();
+				prestamo=prestamoNeg.obtenerPrestamoPorId(idPrestamo);
+				Cuenta cuenta = new Cuenta();
+				cuenta=cuentaNeg.obtenerUno(idCuenta);
+				
+				movimiento.setCuenta(cuenta);
+				TipoMovimiento tipoMovimiento = new TipoMovimiento();
+				long meses = prestamo.getCantidadMeses();
+				int cuota=1;
+				//Se generan las cuotas
+				while (meses!=0) {
+					CuotasPrestamo cuotasPrestamo = new CuotasPrestamo();
+					cuotasPrestamo.setCuota(cuota);
+					cuotasPrestamo.setPrestamo(prestamo);
+					cuotasPrestamo.setFechaPago(localDate.plusMonths(cuota));
+					prestamoNeg.generarCuotas(cuotasPrestamo);
+					cuota++;
+					meses--;
+				}
+				
+				tipoMovimiento.setIdTipoMovimiento(2);
+				movimiento.setTipoMovimiento(tipoMovimiento);
+				movimiento.setFechaCreacion(java.sql.Date.valueOf(localDate));
+				movimiento.setDetalle("Importe a devolver con intereses: "+prestamo.getImporteAdevolver());
+				movimiento.setImporte(prestamo.getMontoSolicitado());
+				movimiento.setCuentaDestino(cuenta.getNumeroCuenta());
+				movimientoNeg.AumentarSaldoCuentaDestino(cuenta.getNumeroCuenta(), prestamo.getMontoSolicitado());
+				movimientoNeg.altaMovimento(movimiento);
+			}
+			
+			request.setAttribute("estadoAprobar", estadoAprobar);
+			request.setAttribute("listaPrestamos", prestamoNeg.listarPrestamos());
+	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/ListaPrestamos.jsp");
+			dispatcher.forward(request, response);
+		}
+		
+		//Cuando se apreta el boton para rechazar el prestamo
+		if(request.getParameter("idPrestamoRechazar")!=null) {
+			
+			long idPrestamo = Integer.parseInt(request.getParameter("idPrestamoRechazar"));
+			boolean estadoRechazar=true;
+			estadoRechazar=prestamoNeg.rechazarPrestamo(idPrestamo);
+			request.setAttribute("estadoRechazar", estadoRechazar);
+			request.setAttribute("listaPrestamos", prestamoNeg.listarPrestamos());
+	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/ListaPrestamos.jsp");
+			dispatcher.forward(request, response);
+		}
+		
+		//----------------------------------------------------------------------------------------------------------------//
+		
+		
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+		
+		//---------------------------------------------------CLIENTE------------------------------------------------------//
+
+		
+		//Cuando se apreta el boton btnPagarCuota del jsp PagarPrestamo
+		if(request.getParameter("btnPagarCuota")!=null) {
+			
+			
+			boolean estadoPrestamo=true;
+			boolean estadoMovimiento=true;
+			boolean estadoDescuentoSaldoDestino=true;
+			double saldo = 0;
+			Usuario usuario = new Usuario();
+			usuario=(Usuario) request.getSession().getAttribute("Usuario");
+			
+			int idPrestamo = Integer.parseInt(request.getParameter("txtIdPrestamo"));
+			int idCuentaOrigen = Integer.parseInt(request.getParameter("CuentaUsuario"));
+			int idCuota = Integer.parseInt(request.getParameter("idCuota"));
+			//System.out.println(idCuota+" - "+request.getParameter("idCuota")+" - "+ idCuentaOrigen);
+			saldo=cuentaNeg.obtenerSaldoPorIdCuenta(idCuentaOrigen);
+			
+			Prestamo prestamo = new Prestamo();
+			prestamo=prestamoNeg.obtenerPrestamoPorId(idPrestamo);
+			
+			Movimientos movimiento = new Movimientos();
+			Cuenta cuenta = new Cuenta();
+			cuenta.setIdCuenta(idCuentaOrigen);
+			movimiento.setCuenta(cuenta);
+			TipoMovimiento tmovimiento = new TipoMovimiento();
+			tmovimiento.setIdTipoMovimiento(3);
+			movimiento.setTipoMovimiento(tmovimiento);
+			LocalDate localDate = LocalDate.now();
+			movimiento.setFechaCreacion(java.sql.Date.valueOf(localDate));
+			movimiento.setDetalle("Pago de cuota");
+			movimiento.setImporte(Double.parseDouble(request.getParameter("txtValorCuota")));
+			movimiento.setCuentaDestino(1);
+			//Se verifica si el saldo es mayor o igual al valor de la cuota a pagar del prestamo
+			if(saldo>=prestamo.getValorCuota()) {
+				estadoPrestamo=prestamoNeg.pagarCuota(idPrestamo, idCuota);
+				
+				estadoDescuentoSaldoDestino = movimientoNeg.DescontarSaldoCuentaOrigen(idCuentaOrigen, prestamo.getValorCuota());
+				estadoMovimiento=movimientoNeg.altaMovimento(movimiento);
+				
+				
+			} else {
+				
+				estadoPrestamo=false;
+				estadoDescuentoSaldoDestino=false;
+			}
+			
+			
+			request.setAttribute("estadoPrestamo", estadoPrestamo);
+			request.setAttribute("listaCuentasPorUsuario", cuentaNeg.listarCuentasPorUsuario(usuario.getIdUsuario()));
+			request.setAttribute("listaPrestamos", prestamoNeg.listarPrestamosPorCliente(usuario.getIdUsuario()));
+	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/ListaPrestamosCliente.jsp");
+			dispatcher.forward(request, response);
+		}
+		
 		//Cuando se apreta el boton btnSolicitar del jsp SolicitarPrestamo
 		if(request.getParameter("btnSolicitar")!=null) {
 			
@@ -111,94 +287,10 @@ public class servletPrestamo extends HttpServlet
 			
 		}
 		
-		//Cuando desde el menu cliente se selecciona la opcion "Ver préstamos adquiridos" 
-		if(request.getParameter("listadoPrestamosPorUsuario")!=null) {
-			
-			Usuario usuario = new Usuario();
-			//Se obtiene el usuario por session
-			usuario=(Usuario) request.getSession().getAttribute("Usuario");
-
-			//Se carga y envia el listado de prestamos por usuario al jsp ListaPrestamosCliente
-	    	request.setAttribute("listaPrestamos", prestamoNeg.listarPrestamosPorCliente(usuario.getIdUsuario()));
-	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/ListaPrestamosCliente.jsp");
-			dispatcher.forward(request, response);
-		}
-		
-		//Recibo el id del prestamo a pagar del jsp ListaPrestamosCliente
-		if(request.getParameter("idPrestamoCuota")!=null) {
-			
-			Usuario usuario = new Usuario();
-			//Se obtiene el usuario por session
-			usuario=(Usuario) request.getSession().getAttribute("Usuario");
-			long idPrestamo = Integer.parseInt(request.getParameter("idPrestamoCuota"));
-			long cuotas = Integer.parseInt(request.getParameter("CuotasAPagar"));
-			Prestamo prestamo = new Prestamo();
-			prestamo=prestamoNeg.obtenerPrestamoPorId(idPrestamo);
-			
-			//Se envian las cuotas a pagar, el prestamo, listado de cuentas por usuario y la lista de prestamo
-			request.setAttribute("cuotasApagar", cuotas);
-			request.setAttribute("prestamo", prestamo);
-			request.setAttribute("listaCuentasPorUsuario", cuentaNeg.listarCuentasPorUsuario(usuario.getIdUsuario()));
-	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/PagarPrestamo.jsp");
-			dispatcher.forward(request, response);
-		}
-		
-		//Cuando se apreta el boton btnPagarCuota del jsp PagarPrestamo
-		if(request.getParameter("btnPagarCuota")!=null) {
-			
-			boolean estadoPrestamo=true;
-			boolean estadoMovimiento=true;
-			boolean estadoDescuentoSaldoDestino=true;
-			double saldo = 0;
-			Usuario usuario = new Usuario();
-			usuario=(Usuario) request.getSession().getAttribute("Usuario");
-			
-			long idPrestamo = Long.parseLong(request.getParameter("txtIdPrestamo"));
-			long idCuentaOrigen = Long.parseLong(request.getParameter("CuentaUsuario"));
-			
-			saldo=cuentaNeg.obtenerSaldoPorIdCuenta(idCuentaOrigen);
-			
-			Prestamo prestamo = new Prestamo();
-			prestamo=prestamoNeg.obtenerPrestamoPorId(idPrestamo);
-			
-			Movimientos movimiento = new Movimientos();
-			movimiento.setIdCuenta(idCuentaOrigen);
-			TipoMovimiento tmovimiento = new TipoMovimiento();
-			tmovimiento.setIdTipoMovimiento(3);
-			movimiento.setTipoMovimiento(tmovimiento);
-			LocalDate localDate = LocalDate.now();
-			movimiento.setFechaCreacion(java.sql.Date.valueOf(localDate));
-			movimiento.setDetalle("Pago de cuota");
-			movimiento.setImporte(Double.parseDouble(request.getParameter("txtCuota")));
-			movimiento.setCuentaDestino(1);
-			
-			//Se verifica si el saldo es mayor o igual al valor de la cuota a pagar del prestamo
-			if(saldo>=prestamo.getValorCuota()) {
-				
-				estadoPrestamo=prestamoNeg.pagarCuota(idPrestamo);
-				estadoDescuentoSaldoDestino = movimientoNeg.DescontarSaldoCuentaOrigen(idCuentaOrigen, prestamo.getValorCuota());
-				estadoMovimiento=movimientoNeg.altaMovimento(movimiento);
-				
-				
-			} else {
-				
-				estadoPrestamo=false;
-				estadoDescuentoSaldoDestino=false;
-			}
-			
-			
-			request.setAttribute("estadoPrestamo", estadoPrestamo);
-			request.setAttribute("listaCuentasPorUsuario", cuentaNeg.listarCuentasPorUsuario(usuario.getIdUsuario()));
-			request.setAttribute("listaPrestamos", prestamoNeg.listarPrestamosPorCliente(usuario.getIdUsuario()));
-	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/ListaPrestamosCliente.jsp");
-			dispatcher.forward(request, response);
-		}
 		//----------------------------------------------------------------------------------------------------------------//
 		
-	}
+		
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
-	{
 		
 	}
 

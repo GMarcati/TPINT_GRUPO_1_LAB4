@@ -8,6 +8,7 @@ import dao.PrestamoDao;
 import dao.UsuarioDao;
 import daoImpl.PrestamoDaoImpl;
 import daoImpl.UsuarioDaoImpl;
+import entidad.CuotasPrestamo;
 import entidad.Prestamo;
 import entidad.Usuario;
 import negocio.PrestamoNeg;
@@ -53,9 +54,6 @@ public class PrestamoNegImpl implements PrestamoNeg
 		return prestamoDao.solicitudPrestamo(prestamo);
 	}
 	
-	public boolean pagarCuota(long idPrestamo) {
-		return prestamoDao.pagarCuota(idPrestamo);
-	}
 	
 	public Prestamo obtenerPrestamoPorId(long idPrestamo) {
 		return prestamoDao.obtenerPrestamoPorId(idPrestamo);
@@ -73,6 +71,20 @@ public class PrestamoNegImpl implements PrestamoNeg
 	@Override
 	public double obtenerTotalMontoSolicitadoPorFecha(Date fechaIni, Date fechaFin) {
 		return prestamoDao.obtenerTotalMontoSolicitadoPorFecha(fechaIni,fechaFin);
+	}
+
+
+
+	public boolean generarCuotas(CuotasPrestamo cuotasPrestamo) {
+		return prestamoDao.generarCuotas(cuotasPrestamo);
+	}
+	
+	public List<CuotasPrestamo> listarCuotas(long idPrestamo){
+		return prestamoDao.listarCuotas(idPrestamo);
+	}
+	
+	public boolean pagarCuota(long idPrestamo, long cuota) {
+		return prestamoDao.pagarCuota(idPrestamo, cuota);
 	}
 	
 }

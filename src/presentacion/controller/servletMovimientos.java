@@ -120,8 +120,9 @@ public class servletMovimientos extends HttpServlet {
 			
 			
 			Movimientos movimientos = new Movimientos();
-	
-			movimientos.setIdCuenta(Long.parseLong(request.getParameter("CuentaUsuario")));
+			Cuenta cuenta = new Cuenta();
+			cuenta.setIdCuenta(Long.parseLong(request.getParameter("CuentaUsuario")));
+			movimientos.setCuenta(cuenta);
 			
 			TipoMovimiento tmovimiento = new TipoMovimiento();
 			tmovimiento.setIdTipoMovimiento(4);

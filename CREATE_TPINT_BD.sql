@@ -102,7 +102,7 @@ CREATE TABLE prestamos(
 	idPrestamo bigint NOT NULL auto_increment,
     idCuenta bigint not null, -- agregada ultima actualizacion
     idUsuario bigint not null, -- para el listado de prestamos
-    importeAdevolver decimal NOT NULL,
+    importeAdevolver decimal(10,2) NOT NULL,
     fecha date NOT NULL,
     montoSolicitado decimal(10,2) NOT NULL,
     cantidadMeses int NOT NULL,
@@ -113,6 +113,15 @@ CREATE TABLE prestamos(
     constraint foreign key (idCuenta) references cuentas (idCuenta), -- agregada ultima actualizacion
 	constraint foreign key (idUsuario) references usuarios (idUsuario),
     constraint foreign key (idEstadoPrestamo) references estadosPrestamos(idEstadoPrestamo)
+);
+
+CREATE TABLE cuotasPrestamo(
+    cuota bigint not null,
+	idPrestamo bigint not null,
+    fechaPago date,
+    idEstado bit not null,
+    primary key(cuota,idPrestamo),
+    constraint foreign key (idPrestamo) references prestamos (idPrestamo)
 );
 
 /* ------------------------------------------
@@ -126,7 +135,7 @@ insert into tipoCuentas (descripcion) values ('Caja de ahorro');
 insert into tipoCuentas (descripcion) values ('Cuenta corriente');
 
 insert into estadosPrestamos (descripcion) values ('Pendiente');
-insert into estadosPrestamos (descripcion) values ('Aceptado');
+insert into estadosPrestamos (descripcion) values ('Aprobado');
 insert into estadosPrestamos (descripcion) values ('Rechazado');
 
 insert into tipoMovimientos(descripcion) values ('Alta de cuenta');
@@ -186,7 +195,7 @@ insert into usuarios (usuario, contrasenia, idTipoUsuario, DNI, CUIL, nombre, ap
 values('admin', 'admin', 1, '11111111', '20111111111', 'admin', 'admin', 'Indefinido', '1980-12-10', 'calleadmin', 1, 1, 1, 'admin@gmail.com', '44444',1);
 
 insert into usuarios (usuario, contrasenia, idTipoUsuario, DNI, CUIL, nombre, apellido, sexo, fechaNacimiento, direccion, idLocalidad, idNacionalidad, idProvincia, mail, telefono, idEstado) 
-values ('usu', '123', 2, '222', '2222', 'nombreUsuario', 'apellidoUsuario', 'masculino', '1980-12-10', 'calleFalsa', 1, 1, 1, 'mailfake@gmail.com', '44556677',1);
+values ('usu', '123', 2, '22222222', '22222222222', 'nombreUsuario', 'apellidoUsuario', 'masculino', '1980-12-10', 'calleFalsa', 1, 1, 1, 'mailfake@gmail.com', '44556677',1);
 
 INSERT into usuarios(usuario,contrasenia,idTipoUsuario,DNI,CUIL,nombre,apellido,sexo,fechaNacimiento,direccion,idLocalidad,idNacionalidad,idProvincia,mail,telefono,idEstado) 
 VALUES ('MFernandez','MFernandez',2,30115594,20301155949,'Maximiliano','Fernandez','Masculino','1980-12-10','Alvear 123',1,1,1,'mfernandez@gmail.com',4283959844,1);
@@ -230,17 +239,21 @@ VALUES ('MJackson','MJackson',2,37225555,20372255556,'Michael','Jackson','Mascul
 INSERT into usuarios(usuario,contrasenia,idTipoUsuario,DNI,CUIL,nombre,apellido,sexo,fechaNacimiento,direccion,idLocalidad,idNacionalidad,idProvincia,mail,telefono,idEstado) 
 VALUES ('WBlanco','WBlanco',2,36119999,2036119991,'Walter','Blanco','Masculino','1969-11-07','Peron 100',15,12,10,'elraton666@gmail.com',3650567222,1);
 
-insert into cuentas (idUsuario, numeroCuenta, idTipoCuenta, fechaCreacion, CBU, saldo, idEstado) values (2, 11111111, 1, '2020/10/21', 11111111, 10000 ,1);
-insert into cuentas (idUsuario, numeroCuenta, idTipoCuenta, fechaCreacion, CBU, saldo, idEstado) values (3, 22222222, 1, '2020/10/22', 22222222, 10000 ,1);
-insert into cuentas (idUsuario, numeroCuenta, idTipoCuenta, fechaCreacion, CBU, saldo, idEstado) values (3, 33333333, 1, '2020/10/23', 33333333, 10000 ,1);
-insert into cuentas (idUsuario, numeroCuenta, idTipoCuenta, fechaCreacion, CBU, saldo, idEstado) values (4, 44444444, 1, '2020/10/24', 44444444, 10000 ,1);
-insert into cuentas (idUsuario, numeroCuenta, idTipoCuenta, fechaCreacion, CBU, saldo, idEstado) values (2, 55555555, 1, '2020/10/25', 55555555, 10000 ,1);
+insert into cuentas (idUsuario, numeroCuenta, idTipoCuenta, fechaCreacion, CBU, saldo, idEstado) values (2, 11111111, 1, '2020/10/21', 11111111111, 10000 ,1);
+insert into cuentas (idUsuario, numeroCuenta, idTipoCuenta, fechaCreacion, CBU, saldo, idEstado) values (2, 22222222, 1, '2020/10/22', 22222222222, 10000 ,1);
+insert into cuentas (idUsuario, numeroCuenta, idTipoCuenta, fechaCreacion, CBU, saldo, idEstado) values (3, 33333333, 1, '2020/10/23', 33333333333, 10000 ,1);
+insert into cuentas (idUsuario, numeroCuenta, idTipoCuenta, fechaCreacion, CBU, saldo, idEstado) values (4, 44444444, 1, '2020/10/24', 44444444444, 10000 ,1);
+insert into cuentas (idUsuario, numeroCuenta, idTipoCuenta, fechaCreacion, CBU, saldo, idEstado) values (5, 55555555, 1, '2020/10/25', 55555555555, 10000 ,1);
 
-insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (2, 1, '2020-10-21', 'blablablablablabla', 5000, 123456789);
-insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (1, 2, '2020-09-22', 'blablablablablabla', 4000, 123456789);
+
+insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (1, 1, '2020-09-21', 'Apertura de cuenta', 10000, 11111111);
+insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (2, 1, '2020-10-22', 'Apertura de cuenta', 10000, 22222222);
+insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (3, 1, '2020-10-23', 'Apertura de cuenta', 10000, 33333333);
+insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (4, 1, '2020-10-24', 'Apertura de cuenta', 10000, 44444444);
+insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (5, 1, '2020-10-25', 'Apertura de cuenta', 10000, 55555555);
 insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (2, 3, '2020-08-23', 'blablabla', 3000, 123456789);
 insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (2, 4, '2020-07-24', 'blablablablablablablablablablablabla', 2000, 123456789);
-insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (1, 1, '2020-06-25', 'blablablablablabla', 1000, 123456789);
+insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (1, 4, '2020-06-25', 'blablablablablabla', 1000, 123456789);
 insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (5, 2, '2020-06-25', 'blablablablablabla', 5000, 123456789);
 insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (5, 3, '2020-06-25', 'blablablablablabla', 10000, 123456789);
 insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (1, 4, '2020-06-10', 'blasadasd', 11000, 55555555);
@@ -251,10 +264,10 @@ insert into prestamos (idCuenta, idUsuario, importeAdevolver, fecha, montoSolici
 insert into prestamos (idCuenta, idUsuario, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstadoPrestamo, idEstado) values(2,2, 40000, '2020/10/22', 20000, 6, 10000,1,1);
 insert into prestamos (idCuenta, idUsuario, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstadoPrestamo, idEstado) values(3,2, 60000, '2020/10/23', 30000, 18, 10000,1,1);
 insert into prestamos (idCuenta, idUsuario, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstadoPrestamo, idEstado) values(4,2, 80000, '2020/10/24', 40000, 12, 10000,1,1);
-insert into prestamos (idCuenta, idUsuario, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstadoPrestamo, idEstado) values(5,2, 100000, '2020/10/25', 50000, 24, 10000,1,1);
+insert into prestamos (idCuenta, idUsuario, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstadoPrestamo, idEstado) values(5,5, 100000, '2020/10/25', 50000, 24, 10000,1,1);
 insert into prestamos (idCuenta, idUsuario, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstadoPrestamo, idEstado) values(1,2, 150000, '2020/10/25', 50000, 24, 10000,2,1);
-insert into prestamos (idCuenta, idUsuario, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstadoPrestamo, idEstado) values(5,2, 100000, '2020/10/25', 50000, 24, 10000,2,1);
-insert into prestamos (idCuenta, idUsuario, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstadoPrestamo, idEstado) values(1,2, 10000, '2020/10/25', 9500, 0, 833.33,2,0);
+insert into prestamos (idCuenta, idUsuario, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstadoPrestamo, idEstado) values(5,5, 100000, '2020/10/25', 50000, 24, 10000,2,1);
+insert into prestamos (idCuenta, idUsuario, importeAdevolver, fecha, montoSolicitado, cantidadMeses, valorCuota, idEstadoPrestamo, idEstado) values(1,2, 10000, '2020/10/25', 9500, 3, 3333.33,2,1);
 
 select p.*, c.numeroCuenta from prestamos as p
 inner join cuentas as c on c.idCuenta= p.idCuenta;

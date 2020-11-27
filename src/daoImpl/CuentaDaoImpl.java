@@ -16,6 +16,7 @@ import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 import dao.CuentaDao;
 import entidad.Cuenta;
 import entidad.TipoCuenta;
+import entidad.Usuario;
 
 public class CuentaDaoImpl implements CuentaDao{
 
@@ -339,7 +340,9 @@ public class CuentaDaoImpl implements CuentaDao{
 			 while(rs.next())
 			 {
 				 	cuenta.setIdCuenta(rs.getLong("c.idCuenta"));
-				 	cuenta.setIdUsuario(rs.getLong("c.idUsuario"));
+				 	Usuario usuario = new Usuario();
+				 	usuario.setIdUsuario(rs.getLong("c.idUsuario"));
+				 	cuenta.setUsuario(usuario);
 				 	cuenta.setNumeroCuenta(rs.getLong("c.numeroCuenta"));
 				 	TipoCuenta tipoCuenta = new TipoCuenta();
 				 	tipoCuenta.setIdTipoCuenta(rs.getInt("tc.idTipoCuenta"));
