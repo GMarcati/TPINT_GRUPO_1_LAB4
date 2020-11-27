@@ -129,7 +129,7 @@
 		</select>
 		</div>
 		<div class="form-group" >
-
+		<%int cont=1; %>
 <table id="table_id" style="width:100%" class="table table-striped table-bordered " >
 <thead >
 		<tr class="text-center">
@@ -148,7 +148,7 @@
 		%>
 		<tr>
 
-			<td><%=cuotasPrestamo.getCuota()%><input type="hidden" name="idCuota" value="<%=cuotasPrestamo.getCuota()%>"></td>
+			<td><%=cont++%><input type="hidden" name="idCuota" value="<%=cont%>"></td>
 			<td><%=prestamo.getValorCuota()%><input type="hidden" name="txtValorCuota" value="<%=prestamo.getValorCuota()%>" ></td>
 			<td><%=cuotasPrestamo.getFechaPago()%></td>
 			<td>

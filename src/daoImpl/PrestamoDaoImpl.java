@@ -351,7 +351,7 @@ public class PrestamoDaoImpl implements PrestamoDao
 		cn = new Conexion();
 		cn.Open();
 		String query = "update cuotasPrestamo set idEstado=0 where idPrestamo="+idPrestamo+" and cuota="+cuota;
-		System.out.println(query);
+		//System.out.println(query);
 		try 
 		{
 			estado=cn.execute(query);
