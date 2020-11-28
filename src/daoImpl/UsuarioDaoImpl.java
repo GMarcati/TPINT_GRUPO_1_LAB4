@@ -18,6 +18,7 @@ import entidad.Nacionalidad;
 import entidad.Provincia;
 import entidad.TipoUsuario;
 import entidad.Usuario;
+import excepciones.AnioValidoException;
 import excepciones.MayorEdadException;
 
 
@@ -45,6 +46,32 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		if(edad<18)
 		{
 			MayorEdadException exc1= new MayorEdadException();
+			opc=false;
+			throw exc1;
+		}
+		else
+		{
+			opc=true;
+		}
+		return opc;
+	}
+	
+	//metodo que verifica que el futuro usuario ingrese un año de nacimiento menor al actual y mayor 
+	// a 100 años para atras
+	public boolean verificarAnioIngresado(String fechaNac) throws AnioValidoException
+	{
+		Boolean opc=false;
+		
+		Calendar c = Calendar.getInstance();//se instancia Calendar, con la fecha del sistema
+		int anioActual = c.get(Calendar.YEAR);//variable donde se va a guardar año del sistema
+
+		String anioIngresado=fechaNac.substring(0, 4);//capturo de la fecha ingresada por parametro, el año de nacimiento
+		int anio=Integer.parseInt(anioIngresado); // se parsea a entero
+		int maximaEdadPermitida= anioActual - 100; 
+	
+		if(anio> anioActual || anio<maximaEdadPermitida)
+		{
+			AnioValidoException exc1= new AnioValidoException();
 			opc=false;
 			throw exc1;
 		}

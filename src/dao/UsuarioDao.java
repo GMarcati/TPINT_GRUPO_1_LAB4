@@ -7,6 +7,7 @@ import entidad.Localidad;
 import entidad.Nacionalidad;
 import entidad.Provincia;
 import entidad.Usuario;
+import excepciones.AnioValidoException;
 import excepciones.MayorEdadException;
 
 public interface UsuarioDao 
@@ -23,5 +24,5 @@ public interface UsuarioDao
 	public List<Provincia> listarProvincias();
 	public List<Localidad> listarLocalidades();
 	public boolean verificarMayorEdad(String fechaNac) throws MayorEdadException;
-	
+	public boolean verificarAnioIngresado(String fechaNac) throws AnioValidoException;
 }

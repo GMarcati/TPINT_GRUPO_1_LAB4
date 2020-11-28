@@ -25,6 +25,7 @@ import entidad.Localidad;
 import entidad.Nacionalidad;
 import entidad.Provincia;
 import entidad.Usuario;
+import excepciones.AnioValidoException;
 import excepciones.MayorEdadException;
 import negocio.UsuarioNeg;
 import negocioImpl.UsuarioNegImpl;
@@ -150,16 +151,31 @@ public class servletUsuario extends HttpServlet {
 
 				Date date= formatter.parse(request.getParameter("txtFechaNac"));
 
-				if(usuarioNeg.verificarMayorEdad(request.getParameter("txtFechaNac"))==true)
+				
+				if(usuarioNeg.verificarAnioIngresado(request.getParameter("txtFechaNac"))==true)
 				{
-					usuario.setFechaNac(date);
+					if(usuarioNeg.verificarMayorEdad(request.getParameter("txtFechaNac"))==true)
+					{
+						usuario.setFechaNac(date);
+					}
+					else
+					{
+						//aca hay que manejar la excepcion, porque el cliente es menor de edad
+//						request.setAttribute("estadoLoginError", estado);
+//						RequestDispatcher rd= request.getRequestDispatcher("/Login.jsp");
+//						rd.forward(request, response);
+					}
 				}
 				else
 				{
-					//aca hay que manejar la excepcion, porque el cliente es menor de edad
+					//aca hay que manejar la AnioValidoException
+//					request.setAttribute("estadoLoginError", estado);
+//					RequestDispatcher rd= request.getRequestDispatcher("/Login.jsp");
+//					rd.forward(request, response);
 				}
+				usuario.setFechaNac(date);
 			} 
-			catch (ParseException | MayorEdadException e) 
+			catch (ParseException | MayorEdadException | AnioValidoException e) 
 			{
 				e.printStackTrace();
 			}

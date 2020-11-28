@@ -8,6 +8,7 @@ import entidad.Localidad;
 import entidad.Nacionalidad;
 import entidad.Provincia;
 import entidad.Usuario;
+import excepciones.AnioValidoException;
 import excepciones.MayorEdadException;
 import negocio.UsuarioNeg;
 
@@ -29,6 +30,11 @@ public class UsuarioNegImpl implements UsuarioNeg{
 	public boolean verificarMayorEdad(String fechaNac) throws MayorEdadException 
 	{
 		return usuarioDao.verificarMayorEdad(fechaNac);
+	}
+	
+	public boolean verificarAnioIngresado(String fechaNac) throws AnioValidoException
+	{
+		return usuarioDao.verificarAnioIngresado(fechaNac);
 	}
 	
 	public boolean verificarLogin(String nombre, String apellido) 
