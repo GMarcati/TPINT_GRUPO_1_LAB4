@@ -138,7 +138,7 @@
 		<tr>
 
 			<td><%=cuotasPrestamo.getCuota()%><input type="hidden" name="idCuota" value="<%=cuotasPrestamo.getCuota()%>"></td>
-			<td><%=prestamo.getValorCuota()%><input type="hidden" name="txtValorCuota" value="<%=prestamo.getValorCuota()%>" ></td>
+			<td>$<%=prestamo.getValorCuota()%><input type="hidden" name="txtValorCuota" value="<%=prestamo.getValorCuota()%>" ></td>
 			<td><%=cuotasPrestamo.getFechaPago()%></td>
 			<td>
 			<%

@@ -122,6 +122,8 @@ public class servletUsuario extends HttpServlet {
 		if(request.getParameter("btnAltaCliente")!=null)
 		{
 			boolean estado=true;
+			boolean estadoEx1=true;
+			boolean estadoEx2=true;
 			boolean estadoPass=true;
 			Usuario usuario = new Usuario();
 			
@@ -160,24 +162,32 @@ public class servletUsuario extends HttpServlet {
 					}
 					else
 					{
-						//aca hay que manejar la excepcion, porque el cliente es menor de edad
-//						request.setAttribute("estadoLoginError", estado);
-//						RequestDispatcher rd= request.getRequestDispatcher("/Login.jsp");
-//						rd.forward(request, response);
+						//el cliente es menor de edad se pone el estadoEx1 en false
+						estadoEx1=false;
 					}
 				}
 				else
 				{
-					//aca hay que manejar la AnioValidoException
-//					request.setAttribute("estadoLoginError", estado);
-//					RequestDispatcher rd= request.getRequestDispatcher("/Login.jsp");
-//					rd.forward(request, response);
+					//si el año es invalido se pone el estadoEx2 en false
+					estadoEx2=false;
 				}
 				usuario.setFechaNac(date);
 			} 
-			catch (ParseException | MayorEdadException | AnioValidoException e) 
+			catch (ParseException e) 
 			{
 				e.printStackTrace();
+			}
+			catch (MayorEdadException e) 
+			{
+				request.setAttribute("estadoMayorEdadException", estadoEx1);
+				RequestDispatcher rd= request.getRequestDispatcher("/AltaCliente.jsp");
+				rd.forward(request, response);
+			}
+			catch (AnioValidoException e) 
+			{
+				request.setAttribute("estadoAnioValidoException", estadoEx2);
+				RequestDispatcher rd= request.getRequestDispatcher("/AltaCliente.jsp");
+				rd.forward(request, response);
 			}
 			
 			usuario.setDireccion(request.getParameter("txtDireccion"));

@@ -60,12 +60,12 @@
 			
 			if(estado==true){
 			%>
-				<script>swal("Prestamo dado de alta con exito!", "", "success")</script>
+				<script>swal("Prestamo aprobado con exito!", "", "success")</script>
 			<%
 			}else
 			{
 			%>
-				<script>swal("Error al dar de alta el prestamo.", "", "error")</script>
+				<script>swal("Error al aprobar el prestamo.", "", "error")</script>
 			<%
 			}
 			
@@ -144,7 +144,7 @@
 		<tr class="text-center">
 			<th>#	</th>
 			<th>NUMERO CUENTA DESTINO</th>
-			<th>CLIENTE SOLICITANTE</th>
+			<th>USUARIO CLIENTE SOLICITANTE</th>
 			<th>IMPORTE A DEVOLVER</th>
 			<th>FECHA CREACION</th>
 			<th>MONTO SOLICITADO</th>
@@ -164,11 +164,11 @@
 			<td><%=cont++%></td>
 			<td><%=prestamo.getCuenta().getNumeroCuenta()%></td>
 			<td><%=prestamo.getUsuario().getUsuario()%></td>
-			<td><%=prestamo.getImporteAdevolver()%></td>
+			<td>$<%=prestamo.getImporteAdevolver()%></td>
 			<td><%=prestamo.getFecha()%></td>
-			<td><%=prestamo.getMontoSolicitado()%></td>
+			<td>$<%=prestamo.getMontoSolicitado()%></td>
 			<td><%=prestamo.getCantidadMeses()%></td>
-			<td><%=prestamo.getValorCuota()%></td>
+			<td>$<%=prestamo.getValorCuota()%></td>
 			<td><%=prestamo.getEstadoPrestamo().getDescripcion()%></td>
 			<td class="text-center">
 			<%

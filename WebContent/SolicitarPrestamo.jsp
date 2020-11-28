@@ -67,14 +67,14 @@
 				<option value="24">24 (Tasa 2.40%)</option>
 		  		</select>
 		</div>
-
+		<%int cont=1; %>
 		<div class="form-group">
 				<label for="exampleInputEmail1">Cuenta destino:</label> 
 				<select name="idCuentaDestino" class="form-control small" Style="width: 500px">
 		  		<% 
 			  		for(Cuenta cuenta: listaCuentas){    
 			 		 %>
-			  	<option value="<%=cuenta.getIdCuenta() %>"> <%=cuenta.getIdCuenta() %> - <%=cuenta.getNumeroCuenta() %> </option>
+			  	<option value="<%=cuenta.getIdCuenta() %>"> <%=cont++ %> - <%=cuenta.getNumeroCuenta() %> </option>
 			   	<%
 			   	} %>
 		  		</select>

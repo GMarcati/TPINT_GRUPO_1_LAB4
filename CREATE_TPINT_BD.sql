@@ -239,11 +239,21 @@ VALUES ('MJackson','MJackson',2,37225555,20372255556,'Michael','Jackson','Mascul
 INSERT into usuarios(usuario,contrasenia,idTipoUsuario,DNI,CUIL,nombre,apellido,sexo,fechaNacimiento,direccion,idLocalidad,idNacionalidad,idProvincia,mail,telefono,idEstado) 
 VALUES ('WBlanco','WBlanco',2,36119999,2036119991,'Walter','Blanco','Masculino','1969-11-07','Peron 100',15,12,10,'elraton666@gmail.com',3650567222,1);
 
-insert into cuentas (idUsuario, numeroCuenta, idTipoCuenta, fechaCreacion, CBU, saldo, idEstado) values (2, 11111111, 1, '2020/10/21', 11111111111, 10000 ,1);
-insert into cuentas (idUsuario, numeroCuenta, idTipoCuenta, fechaCreacion, CBU, saldo, idEstado) values (2, 22222222, 1, '2020/10/22', 22222222222, 10000 ,1);
-insert into cuentas (idUsuario, numeroCuenta, idTipoCuenta, fechaCreacion, CBU, saldo, idEstado) values (3, 33333333, 1, '2020/10/23', 33333333333, 10000 ,1);
-insert into cuentas (idUsuario, numeroCuenta, idTipoCuenta, fechaCreacion, CBU, saldo, idEstado) values (4, 44444444, 1, '2020/10/24', 44444444444, 10000 ,1);
-insert into cuentas (idUsuario, numeroCuenta, idTipoCuenta, fechaCreacion, CBU, saldo, idEstado) values (5, 55555555, 1, '2020/10/25', 55555555555, 10000 ,1);
+insert into cuentas (idUsuario, numeroCuenta, idTipoCuenta, fechaCreacion, CBU, saldo, idEstado) values (2, 111111111, 1, '2020/10/21', 111111111, 10000 ,1);
+insert into cuentas (idUsuario, numeroCuenta, idTipoCuenta, fechaCreacion, CBU, saldo, idEstado) values (2, 222222222, 1, '2020/10/22', 222222222, 10000 ,1);
+insert into cuentas (idUsuario, numeroCuenta, idTipoCuenta, fechaCreacion, CBU, saldo, idEstado) values (3, 333333333, 1, '2020/10/23', 333333333, 10000 ,1);
+insert into cuentas (idUsuario, numeroCuenta, idTipoCuenta, fechaCreacion, CBU, saldo, idEstado) values (4, 444444444, 2, '2020/10/24', 444444444, 10000 ,1);
+insert into cuentas (idUsuario, numeroCuenta, idTipoCuenta, fechaCreacion, CBU, saldo, idEstado) values (5, 555555555, 1, '2020/10/25', 555555555, 10000 ,1);
+insert into cuentas (idUsuario, numeroCuenta, idTipoCuenta, fechaCreacion, CBU, saldo, idEstado) values (6, 666666666, 2, '2020/10/25', 666666666, 10000 ,1);
+insert into cuentas (idUsuario, numeroCuenta, idTipoCuenta, fechaCreacion, CBU, saldo, idEstado) values (7, 777777777, 1, '2020/10/25', 777777777, 10000 ,1);
+insert into cuentas (idUsuario, numeroCuenta, idTipoCuenta, fechaCreacion, CBU, saldo, idEstado) values (8, 888888888, 1, '2020/10/25', 888888888, 10000 ,1);
+insert into cuentas (idUsuario, numeroCuenta, idTipoCuenta, fechaCreacion, CBU, saldo, idEstado) values (9, 999999999, 1, '2020/10/25', 999999999, 10000 ,1);
+insert into cuentas (idUsuario, numeroCuenta, idTipoCuenta, fechaCreacion, CBU, saldo, idEstado) values (10, 100000000, 2, '2020/10/25', 100000000, 10000 ,1);
+insert into cuentas (idUsuario, numeroCuenta, idTipoCuenta, fechaCreacion, CBU, saldo, idEstado) values (11, 110000000, 2, '2020/10/25', 110000000, 10000 ,1);
+insert into cuentas (idUsuario, numeroCuenta, idTipoCuenta, fechaCreacion, CBU, saldo, idEstado) values (12, 120000000, 1, '2020/10/25', 120000000, 10000 ,1);
+insert into cuentas (idUsuario, numeroCuenta, idTipoCuenta, fechaCreacion, CBU, saldo, idEstado) values (13, 130000000, 2, '2020/10/25', 130000000, 10000 ,1);
+insert into cuentas (idUsuario, numeroCuenta, idTipoCuenta, fechaCreacion, CBU, saldo, idEstado) values (14, 140000000, 1, '2020/10/25', 140000000, 10000 ,1);
+insert into cuentas (idUsuario, numeroCuenta, idTipoCuenta, fechaCreacion, CBU, saldo, idEstado) values (15, 150000000, 1, '2020/10/25', 150000000, 10000 ,1);
 
 
 insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (1, 1, '2020-09-21', 'Apertura de cuenta', 10000, 11111111);
@@ -251,6 +261,16 @@ insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cue
 insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (3, 1, '2020-10-23', 'Apertura de cuenta', 10000, 33333333);
 insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (4, 1, '2020-10-24', 'Apertura de cuenta', 10000, 44444444);
 insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (5, 1, '2020-10-25', 'Apertura de cuenta', 10000, 55555555);
+insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (6, 1, '2020-10-25', 'Apertura de cuenta', 10000, 666666666);
+insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (7, 1, '2020-10-25', 'Apertura de cuenta', 10000, 777777777);
+insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (8, 1, '2020-10-25', 'Apertura de cuenta', 10000, 888888888);
+insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (9, 1, '2020-10-25', 'Apertura de cuenta', 10000, 999999999);
+insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (10, 1, '2020-10-25', 'Apertura de cuenta', 10000, 100000000);
+insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (11, 1, '2020-10-25', 'Apertura de cuenta', 10000, 110000000);
+insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (12, 1, '2020-10-25', 'Apertura de cuenta', 10000, 120000000);
+insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (13, 1, '2020-10-25', 'Apertura de cuenta', 10000, 130000000);
+insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (14, 1, '2020-10-25', 'Apertura de cuenta', 10000, 140000000);
+insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (15, 1, '2020-10-25', 'Apertura de cuenta', 10000, 150000000);
 insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (2, 3, '2020-08-23', 'blablabla', 3000, 123456789);
 insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (2, 4, '2020-07-24', 'blablablablablablablablablablablabla', 2000, 123456789);
 insert into movimientos(idCuenta, idTipoMovimiento, fecha, detalle, importe, cuentaDestino) values (1, 4, '2020-06-25', 'blablablablablabla', 1000, 123456789);

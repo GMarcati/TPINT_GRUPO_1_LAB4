@@ -55,13 +55,14 @@
 				</div>
 			</div>
 			<hr />
+			<%int cont=1; %>
 			<div class="form-group">
 				<label for="exampleInputEmail1">Transfiriendo desde:</label>
 				<select name="CuentaUsuario" class="form-control small" Style="width: 500px">
 		  		<% 
 			  		for(Cuenta cuentause: listaCuentaXUsuario){    
 			 		 %>
-			  	<option value="<%=cuentause.getIdCuenta() %>"> <%=cuentause.getIdCuenta() %> - <%=cuentause.getNumeroCuenta() %> </option>
+			  	<option value="<%=cuentause.getIdCuenta() %>"> <%=cont++ %> - <%=cuentause.getNumeroCuenta() %> </option>
 			   	<%
 			   	} %>
 		  		</select>

@@ -63,18 +63,18 @@
 			
 			if(estado==true && estadoPass==true){
 			%>
-				<script>swal("Usuario agregado con exito!", "", "success")</script>
+				<script>swal("Cliente agregado con exito!", "", "success")</script>
 			<%
 			} else if(estadoPass==false)
 			{
 			%>
-				<script>swal("Error al agregar el usuario.", "La contraseña no coincide.", "error")</script>
+				<script>swal("Error al agregar el cliente.", "La contraseña no coincide.", "error")</script>
 			<% 
 			}
 			else
 			{
 			%>
-				<script>swal("Error al agregar el usuario.", "El usuario y/o mail ingresado ya existe!", "error")</script>
+				<script>swal("Error al agregar el cliente.", "El usuario y/o mail ingresado ya existe!", "error")</script>
 			<%
 			}
 			
@@ -82,6 +82,28 @@
 		}
 
 		%>
+		
+		<%
+		if(request.getAttribute("estadoMayorEdadException")!=null){
+		%>
+		<script>swal("Error al agregar el cliente.", "Debe ser mayor de 18 años para poder ser cliente.", "error")</script>
+		<%
+		}
+
+		%>
+		
+				<%
+		if(request.getAttribute("estadoAnioValidoException")!=null){
+		%>
+		<script>swal("Error al agregar el cliente.", "El año ingresado es invalido.", "error")</script>
+		<%
+		}
+
+		%>
+		
+		
+		
+		
 		
 		
 

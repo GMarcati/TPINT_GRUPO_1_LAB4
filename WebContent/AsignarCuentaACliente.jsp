@@ -75,7 +75,7 @@
 		   	<%
 		   	} %>
 	  		</select><br>
-			<label>Usuario:</label>
+			<label>Usuario del cliente</label>
 	  		<select name="txtIdCliente" class="form-control">
 	  		<% 
 		  	for(Usuario usuario : listaU){    

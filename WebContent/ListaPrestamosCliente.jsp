@@ -151,11 +151,11 @@
 		<tr>
 			<td><%=cont++%></td>
 			<td><%=prestamo.getCuenta().getNumeroCuenta()%></td>
-			<td><%=prestamo.getImporteAdevolver()%></td>
+			<td>$<%=prestamo.getImporteAdevolver()%></td>
 			<td><%=prestamo.getFecha()%></td>
-			<td><%=prestamo.getMontoSolicitado()%></td>
+			<td>$<%=prestamo.getMontoSolicitado()%></td>
 			<td><%=prestamo.getCantidadMeses()%></td>
-			<td><%=prestamo.getValorCuota()%></td>
+			<td>$<%=prestamo.getValorCuota()%></td>
 			<td>
 			<%
 			if(prestamo.getEstado()==true){

@@ -81,12 +81,12 @@
 			
 			if(estado==true){
 			%>
-				<script>swal("Usuario modificado con exito!", "", "success")</script>
+				<script>swal("Cliente modificado con exito!", "", "success")</script>
 			<%
 			}else
 			{
 			%>
-				<script>swal("Error al modificar el usuario.", "El dni/mail ingresado ya existe!", "error")</script>
+				<script>swal("Error al modificar el cliente.", "El dni/mail ingresado ya existe!", "error")</script>
 			<%
 			}
 			
